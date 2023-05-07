@@ -5,6 +5,7 @@ import Checkbox from '@mui/material/Checkbox'
 import { Link } from 'react-router-dom'
 import { authThunks } from '../../auth.slice'
 import { useAppDispatch } from '../../../../app/hooks'
+import { EmailInput } from '../../../../common/components/input/EmailInput'
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -25,7 +26,9 @@ export const Login = () => {
             btnTitle={'Sign in'}
             description={"Don't have an account?"}
             link={{ to: '/register', title: 'Sign up' }}
-            onClick={loginHandler}>
+            onClick={loginHandler}
+            marginBottom={'69px'}>
+            <EmailInput />
             <PasswordInput label="Password" />
             <FormControlLabel
                 label={'Remember me'}

@@ -11,6 +11,8 @@ import { theme } from './common/constants/theme'
 import { Register } from './features/auth/components/register/Register'
 import { Login } from './features/auth/components/login/Login'
 import { ForgotPassword } from './features/auth/components/forgot_password/ForgotPassword'
+import { CheckEmail } from './features/auth/components/check_email/CheckEmail'
+import { NewPassword } from './features/auth/components/new_password/NewPassword'
 
 const router = createHashRouter([
     {
@@ -29,6 +31,14 @@ const router = createHashRouter([
                 path: '/forgot_password',
                 element: <ForgotPassword />,
             },
+            {
+                path: '/check_email',
+                element: <CheckEmail />,
+            },
+            {
+                path: '/new_password',
+                element: <NewPassword />,
+            }
         ],
     },
 ])
