@@ -1,9 +1,6 @@
 import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
-    typography: {
-        fontFamily: 'Montserrat, sans-serif',
-    },
     components: {
         MuiFormControlLabel: {
             styleOverrides: {
@@ -14,6 +11,17 @@ export const theme = createTheme({
                 },
             },
         },
+        MuiTypography: {
+            styleOverrides: {
+                root: { fontFamily: 'Montserrat, sans-serif' },
+                h1: {
+                    fontSize: '26px',
+                    fontWeight: 600,
+                    lineHeight: '32px',
+                    marginBottom: '30px',
+                },
+            },
+        },
         MuiButton: {
             styleOverrides: {
                 root: ({ ownerState }) => ({
@@ -21,30 +29,18 @@ export const theme = createTheme({
                         ownerState.color === 'primary' && {
                             backgroundColor: '#366EFF',
                             color: '#fff',
+                            borderRadius: '30px',
+                            textTransform: 'capitalize',
+                            fontSize: '16px',
+                            lineHeight: '20px',
+                            letterSpacing: '0.01em',
+                            padding: '8px auto',
+                            boxShadow:
+                                '0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3)',
+                            fontFamily: 'Montserrat, sans-serif',
                         }),
                 }),
             },
         },
-        // MuiSvgIcon: {
-        //     styleOverrides: {
-        //         root: {
-        //             '&$checked': {
-        //                 color: 'red',
-        //             },
-        //         },
-        //     },
-        // },
-        // MuiCheckbox: {
-        //     styleOverrides: {
-        //         root: {
-        //           secondary: {
-        //                 color: '#custom color',
-        //                 '&.Mui-checked': {
-        //                     color: 'red',
-        //                 },
-        //             },
-        //         },
-        //     },
-        // },
     },
 })

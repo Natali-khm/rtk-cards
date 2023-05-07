@@ -1,20 +1,17 @@
 import { Form } from 'common/components/form/Form'
 import { PasswordInput } from 'common/components/input/PasswordInput'
-import { useAppDispatch } from '../../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
 import { authThunks } from '../../auth.slice'
+import { Navigate } from 'react-router-dom'
 
 
 export const Register = () => {
-    // const [showPassword, setShowPassword] = React.useState(false)
-
-    // const handleClickShowPassword = () => setShowPassword((show) => !show)
-
-    // const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    //     event.preventDefault()
-    // }
-
     const dispatch = useAppDispatch();
+    const selector = useAppSelector(state => state.auth.profile)
 
+    if (selector) {
+        return <Navigate to={'/login'}/>
+    }
 
     const registerHandler = (e:any) => {
         const payload = {

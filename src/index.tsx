@@ -10,6 +10,7 @@ import { ThemeProvider } from '@mui/material'
 import { theme } from './common/constants/theme'
 import { Register } from './features/auth/components/register/Register'
 import { Login } from './features/auth/components/login/Login'
+import { ForgotPassword } from './features/auth/components/forgot_password/ForgotPassword'
 
 const router = createHashRouter([
     {
@@ -23,6 +24,10 @@ const router = createHashRouter([
             {
                 path: '/register',
                 element: <Register />,
+            },
+            {
+                path: '/forgot_password',
+                element: <ForgotPassword />,
             },
         ],
     },
