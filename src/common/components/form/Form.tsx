@@ -35,7 +35,12 @@ export const Form: FC<FormPropsType & PropsWithChildren> = ({
                     <Typography variant="h1"> {title} </Typography>
                     <form style={{ width: '347px' }}>
                         <FormGroup sx={{ marginBottom: marginBottom || '40px' }}>{children}</FormGroup>
-                        <Button type={'submit'} variant={'contained'} sx={{ width: '100%' }} onClick={onClick}>
+                        <Button
+                            type={'submit'}
+                            variant={'contained'}
+                            fullWidth={true}
+                            onClick={onClick}
+                            >
                             {btnTitle}
                         </Button>
                     </form>

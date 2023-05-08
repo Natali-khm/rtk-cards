@@ -6,7 +6,7 @@ import './App.css'
 import { Outlet } from 'react-router-dom'
 import Container from '@mui/material/Container'
 
-function App() {
+export function App() {
     const isLoading = useAppSelector((state) => state.app.isLoading)
 
     const dispatch = useAppDispatch()
@@ -18,10 +18,8 @@ function App() {
     }, [])
 
     return (
-        <Container fixed>
+        <Container  /* sx={{ backgroundColor: 'red' }}  */  maxWidth={'xl'}>
             <Outlet />
         </Container>
     )
 }
-
-export default App

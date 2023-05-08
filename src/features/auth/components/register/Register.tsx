@@ -1,9 +1,9 @@
 import { Form } from 'common/components/form/Form'
 import { PasswordInput } from 'common/components/input/PasswordInput'
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { authThunks } from '../../auth.slice'
 import { Navigate } from 'react-router-dom'
-import { EmailInput } from '../../../../common/components/input/EmailInput'
+import { EmailInput } from 'common/components/input/EmailInput'
 
 export const Register = () => {
     const dispatch = useAppDispatch()

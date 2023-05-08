@@ -1,11 +1,12 @@
-import { Form } from '../../../../common/components/form/Form'
 import { PasswordInput } from 'common/components/input/PasswordInput'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
+import { EmailInput } from 'common/components/input/EmailInput'
+import { Form } from 'common/components/form/Form'
 import { Link } from 'react-router-dom'
+import { useAppDispatch } from 'app/hooks'
 import { authThunks } from '../../auth.slice'
-import { useAppDispatch } from '../../../../app/hooks'
-import { EmailInput } from '../../../../common/components/input/EmailInput'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { paths } from '../../../../common/constants/paths'
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -25,7 +26,7 @@ export const Login = () => {
             title={'Sign in'}
             btnTitle={'Sign in'}
             description={"Don't have an account?"}
-            link={{ to: '/register', title: 'Sign up' }}
+            link={{ to: paths.REGISTER, title: 'Sign up' }}
             onClick={loginHandler}
             marginBottom={'69px'}>
             <EmailInput />
@@ -36,7 +37,7 @@ export const Login = () => {
                 sx={{ marginTop: '20px' }}
             />
             <Link
-                to={'/forgot-password'}
+                to={paths.FORGOT_PASSWORD}
                 style={{
                     color: 'black',
                     marginLeft: 'auto',
