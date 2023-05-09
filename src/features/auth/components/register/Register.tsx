@@ -4,13 +4,14 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { authThunks } from '../../auth.slice'
 import { Navigate } from 'react-router-dom'
 import { EmailInput } from 'common/components/input/EmailInput'
+import { paths } from '../../../../common/constants/paths'
 
 export const Register = () => {
     const dispatch = useAppDispatch()
     const selector = useAppSelector((state) => state.auth.profile)
 
     if (selector) {
-        return <Navigate to={'/login'} />
+        return <Navigate to={paths.LOGIN} />
     }
 
     const registerHandler = (e: any) => {
@@ -28,7 +29,7 @@ export const Register = () => {
             title={'Sign up'}
             btnTitle={'Sign up'}
             description={'Already have an account?'}
-            link={{ to: '/login', title: 'Sign in' }}
+            link={{ to: paths.LOGIN, title: 'Sign in' }}
             onClick={registerHandler}
             marginBottom={'60px'}>
             <EmailInput />

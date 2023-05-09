@@ -13,14 +13,18 @@ export const PasswordInput = ({ label }: any) => {
     const handleClickShowPassword = () => setShowPassword((show) => !show)
 
     return (
-        <FormControl sx={{mt: 3}} variant="standard">
+        <FormControl sx={{ mt: 3 }} variant="standard">
             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
             <Input
+                defaultValue={'qwerty12345'}
                 id="standard-adornment-password"
                 type={showPassword ? 'text' : 'password'}
                 endAdornment={
                     <InputAdornment position="end">
-                        <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} sx={{ color: '#000' }}>
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            sx={{ color: '#000' }}>
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </InputAdornment>

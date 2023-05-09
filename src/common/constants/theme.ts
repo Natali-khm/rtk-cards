@@ -19,6 +19,7 @@ export const theme = createTheme({
                     fontWeight: 500,
                     fontSize: '14px',
                     lineHeight: '17px',
+                    margin: 0
                 },
             },
         },
@@ -45,6 +46,10 @@ export const theme = createTheme({
                     lineHeight: '24px',
                     textAlign: 'center',
                 },
+                h4: {
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                },
                 body1: {
                     fontWeight: 600,
                     marginTop: 31,
@@ -61,7 +66,13 @@ export const theme = createTheme({
                 },
             },
         },
-
+        MuiMenuItem: {
+          styleOverrides: {
+            root: {
+              // opacity: 1
+            }
+          }
+        },
         MuiButton: {
             variants: [
                 {
@@ -89,6 +100,9 @@ export const theme = createTheme({
                         lineHeight: '20px',
                         letterSpacing: '0.01em',
                         boxShadow: '0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3)',
+                        '&:hover': {
+                            backgroundColor: '#0c4ff7',
+                        },
                     },
                 },
                 // {

@@ -5,12 +5,16 @@ import { createAppAsyncThunk } from '../../common/types/createAppAsyncThunk'
 
 const slice = createSlice({
     name: 'auth',
-    initialState: { profile: null as ProfileType | null },
+    initialState: { profile: null as ProfileType | null }, //null as ProfileType | null
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(login.fulfilled, (state, action) => {
-            state.profile = action.payload.profile
-        })
+        builder
+            .addCase(login.fulfilled, (state, action) => {
+                state.profile = action.payload.profile
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                state.profile = null
+            })
     },
 })
 
@@ -23,5 +27,9 @@ const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
     return { profile: res.data }
 })
 
+const logout = createAppAsyncThunk('auth/logout', async () => {
+    await authApi.logout()
+})
+
 export const authReducer = slice.reducer
-export const authThunks = { register, login }
+export const authThunks = { register, login, logout }

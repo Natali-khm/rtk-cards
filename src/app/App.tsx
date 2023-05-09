@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './hooks'
 import { Counter } from '../features/counter/Counter'
 import { appActions } from './app.slice'
-import './App.css'
 import { Outlet } from 'react-router-dom'
 import Container from '@mui/material/Container'
+import { Header } from 'common/components/header/Header'
 
 export function App() {
     const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -18,8 +18,11 @@ export function App() {
     }, [])
 
     return (
-        <Container  /* sx={{ backgroundColor: 'red' }}  */  maxWidth={'xl'}>
-            <Outlet />
-        </Container>
+        <>
+            <Header />
+            <Container /* sx={{ backgroundColor: 'red' }}  */ maxWidth={'xl'}>
+                <Outlet />
+            </Container>
+        </>
     )
 }

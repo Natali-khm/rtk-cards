@@ -15,7 +15,7 @@ export const Login = () => {
         const payload = {
             email: 'natka_test_dev@gmail.com',
             password: 'qwerty12345',
-            rememberMe: false,
+            rememberMe: true,
         }
         dispatch(authThunks.login(payload))
         e.preventDefault()
