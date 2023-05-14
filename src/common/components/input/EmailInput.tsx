@@ -1,25 +1,25 @@
 import TextField from '@mui/material/TextField'
 import { FC } from 'react'
-import { UseFormRegister, FieldValues } from 'react-hook-form'
-import { FormValidateType } from '../../../features/auth/components/register/Register'
+import { UseFormRegister, FieldErrors } from 'react-hook-form'
+import { FormValidateType } from '../../../features/auth/hooks/useAppForm'
 
 type PropsType = {
-    register?: UseFormRegister<FormValidateType> // FIX ?
-    errorMessage?: string
+    register: UseFormRegister<FormValidateType>
+    errors: FieldErrors<FormValidateType>
+    defaultValue?: string
 }
 
-export const EmailInput: FC<PropsType> = ({ register, errorMessage }) => {
-    if (!register) return <div>#</div> // FIX
-
+export const EmailInput: FC<PropsType> = ({ register, errors, defaultValue }) => {
     return (
         <TextField
-            type="text" // email
+            type="email"
             label="Email"
             margin="normal"
             variant="standard"
-            helperText={errorMessage}
-            error={!!errorMessage}
             {...register('email')}
+            error={!!errors.email}
+            defaultValue={defaultValue}
+            helperText={`${errors.email ? errors.email?.message : ''}`}
         />
     )
 }

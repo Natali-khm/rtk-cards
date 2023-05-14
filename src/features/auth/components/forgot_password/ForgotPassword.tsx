@@ -1,24 +1,28 @@
-import React from 'react'
 import { Form } from 'common/components/form/Form'
-import { InfoMessage } from '../../../../common/components/info_message/InfoMessage'
-import { EmailInput } from '../../../../common/components/input/EmailInput'
+import { InfoMessage } from 'common/components/info_message/InfoMessage'
+import { EmailInput } from 'common/components/input/EmailInput'
+import { SubmitHandler } from 'react-hook-form'
+import { FormValidateType, useAppForm } from '../../hooks/useAppForm'
+import { paths } from 'common/constants/paths'
 
 export const ForgotPassword = () => {
-    const forgotPasswordHandler = (e: any) => {
-        e.preventDefault()
+    const { register, handleSubmit, errors } = useAppForm(['email'])
+
+    const forgotPasswordHandler: SubmitHandler<FormValidateType> = (data) => {
+        console.log(data) // TODO
     }
     return (
         <Form
-            title={'Forgot your password?'}
+            marginBottom={'65px'}
             btnTitle={'Send instructions'}
+            title={'Forgot your password?'}
+            onSubmit={handleSubmit(forgotPasswordHandler)}
             description={'Did you remember your password?'}
             link={{
-                to: '/login',
+                to: paths.LOGIN,
                 title: 'Try loggin in',
-            }}
-            // onClick={forgotPasswordHandler}
-            marginBottom={'65px'}>
-            <EmailInput />
+            }}>
+            <EmailInput register={register} errors={errors} />
             <InfoMessage text={'Enter your email address and we will send you further instructions'} />
         </Form>
     )

@@ -4,25 +4,22 @@ import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { UseFormRegister } from 'react-hook-form'
-import { FormValidateType } from '../../../features/auth/components/register/Register'
+import { UseFormRegister, FieldErrors } from 'react-hook-form'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import { FormValidateType } from '../../../features/auth/hooks/useAppForm'
 
 type PropsType = {
-    register?: UseFormRegister<FormValidateType> // FIX ?
-    name: 'password' | 'confirmPassword'
-    defaultValue?: string
     label: string
-    errorMessage: string
+    defaultValue?: string
+    name: 'password' | 'confirmPassword'
+    errors: FieldErrors<FormValidateType>
+    register: UseFormRegister<FormValidateType>
 }
 
-export const PasswordInput = ({ register, name, defaultValue, label, errorMessage }: PropsType) => {
+export const PasswordInput = ({ register, name, defaultValue, label, errors }: PropsType) => {
     const [showPassword, setShowPassword] = useState(false)
     const handleClickShowPassword = () => setShowPassword((show) => !show)
-    if (!register) {
-        return <div>d</div>
-    } // FIX
 
     return (
         <Box sx={{ mt: 3 }}>
@@ -34,8 +31,8 @@ export const PasswordInput = ({ register, name, defaultValue, label, errorMessag
                     id="input-with-icon-password"
                     type={showPassword ? 'text' : 'password'}
                     label={label}
-                    helperText={errorMessage}
-                    error={!!errorMessage}
+                    helperText={`${errors[name] ? errors[name]?.message : ''}`}
+                    error={!!errors[name]}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -53,8 +50,3 @@ export const PasswordInput = ({ register, name, defaultValue, label, errorMessag
         </Box>
     )
 }
-
-// {...register(name, {
-//     required: true,
-//     minLength: { value: 8, message: 'Password must be at least 8 characters' },
-// })}

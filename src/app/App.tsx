@@ -6,6 +6,9 @@ import { Outlet } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import { Header } from 'common/components/header/Header'
 import { authThunks } from '../features/auth/auth.slice'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import * as yup from 'yup'
 
 export function App() {
     // const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -15,6 +18,7 @@ export function App() {
     useEffect(() => {
         dispatch(authThunks.isAuth())
     }, [])
+
 
     return (
         <>

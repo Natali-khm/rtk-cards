@@ -4,38 +4,15 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { authThunks } from '../../auth.slice'
 import { Navigate } from 'react-router-dom'
 import { paths } from 'common/constants/paths'
-import { Resolver, SubmitHandler, useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import { SubmitHandler } from 'react-hook-form'
 import { EmailInput } from 'common/components/input/EmailInput'
-
-const schema = yup.object().shape({
-    email: yup.string().email('Please enter a valid email').required('Email is required'),
-    password: yup.string().min(8, 'Password must be must be at least 8 characters').required('Password is required'),
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('password')], 'Passwords do not match')
-        .min(8, 'Password must be must be at least 8 characters')
-        .required('Password is required'),
-})
-
-export type FormValidateType = {
-    email: string
-    password: string
-    confirmPassword?: string
-    rememberMe?: boolean
-    name: string
-}
+import { FormValidateType, useAppForm } from '../../hooks/useAppForm'
 
 export const Register = () => {
     const dispatch = useAppDispatch()
     const selector = useAppSelector((state) => state.auth.profile)
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<FormValidateType>({ resolver: yupResolver(schema), defaultValues: {}, mode: 'onTouched' })
+    const { register, handleSubmit, errors } = useAppForm(['email', 'password', 'confirmPassword'])
 
     if (selector) {
         return <Navigate to={paths.LOGIN} />
@@ -55,27 +32,17 @@ export const Register = () => {
         console.log(data)
     }
 
-    const passwordError = errors.password?.message || ''
-    const passwordConfError = errors.confirmPassword?.message || ''
-    const emailError = errors.email?.message || ''
-
-    console.log(errors)
     return (
         <Form
-            onSubmit={handleSubmit(onSubmit)}
             title={'Sign up'}
             btnTitle={'Sign up'}
+            marginBottom={'60px'}
+            onSubmit={handleSubmit(onSubmit)}
             description={'Already have an account?'}
-            link={{ to: paths.LOGIN, title: 'Sign in' }}
-            marginBottom={'60px'}>
-            <EmailInput register={register} errorMessage={emailError} />
-            <PasswordInput register={register} label={'Password'} name={'password'} errorMessage={passwordError} />
-            <PasswordInput
-                register={register}
-                label={'Confirm password'}
-                name={'confirmPassword'}
-                errorMessage={passwordConfError}
-            />
+            link={{ to: paths.LOGIN, title: 'Sign in' }}>
+            <EmailInput register={register} errors={errors} />
+            <PasswordInput register={register} label={'Password'} name={'password'} errors={errors} />
+            <PasswordInput register={register} label={'Confirm password'} name={'confirmPassword'} errors={errors} />
         </Form>
     )
 }

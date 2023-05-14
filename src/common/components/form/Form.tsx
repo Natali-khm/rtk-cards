@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, FormEventHandler, PropsWithChildren } from 'react'
 import Grid from '@mui/material/Grid'
 import FormControl from '@mui/material/FormControl'
 import FormGroup from '@mui/material/FormGroup'
@@ -16,7 +16,7 @@ type FormPropsType = {
         to: string
         title: string
     }
-    onSubmit?: () => void // FIX
+    onSubmit: FormEventHandler
 }
 
 export const Form: FC<FormPropsType & PropsWithChildren> = ({
