@@ -10,6 +10,7 @@ export const EditableField = () => {
     const [editMode, setEditMode] = useState(false)
     const [name, setName] = useState('Nataliya')
 
+
     const handleEditor = () => {
         setEditMode(!editMode)
     }

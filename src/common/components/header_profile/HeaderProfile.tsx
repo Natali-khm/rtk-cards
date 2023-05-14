@@ -32,7 +32,6 @@ export const HeaderProfile = () => {
     }
 
     const logoutHandler = () => {
-        debugger
         dispatch(authThunks.logout())
     }
 

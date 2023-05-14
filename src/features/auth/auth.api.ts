@@ -9,6 +9,9 @@ export const authApi = {
     },
     logout: () => {
         return instance.delete('auth/me')
+    },
+    me: () => {
+        return instance.post('auth/me')
     }
 }
 
@@ -28,16 +31,16 @@ type RegisterResponseType = {
 
 
 export type ProfileType = {
-    _id: string
+    created: string
     email: string
-    rememberMe: boolean
     isAdmin: boolean
     name: string
-    verified: boolean
     publicCardPacksCount: number
-    created: string
-    updated: string
-    __v: number
+    rememberMe: boolean
     token: string
     tokenDeathTime: number
+    updated: string
+    verified: boolean
+    __v: number
+    _id: string
 }

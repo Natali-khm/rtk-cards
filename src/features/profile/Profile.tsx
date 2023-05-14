@@ -12,8 +12,17 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import LogoutIcon from '@mui/icons-material/Logout'
 import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
+import { useAppSelector } from '../../app/hooks'
+import { Navigate } from 'react-router-dom'
 
 export const Profile = () => {
+    const profile = useAppSelector((state) => state.auth.profile)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+  
+    if (!isLoggedIn){
+      return <Navigate to={paths.LOGIN}/>
+    }
+
     return (
         <Box>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />
@@ -38,7 +47,7 @@ export const Profile = () => {
                         <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96 }} />
                     </Badge>
                     <EditableField />
-                    <Typography variant="body2"> blablabla@gmail.com </Typography>
+                    <Typography variant="body2"> {profile?.email} </Typography>
                     <Button
                         startIcon={<LogoutIcon />}
                         sx={{

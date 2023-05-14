@@ -16,7 +16,7 @@ type FormPropsType = {
         to: string
         title: string
     }
-    onClick: (e: any) => void
+    onSubmit?: () => void // FIX
 }
 
 export const Form: FC<FormPropsType & PropsWithChildren> = ({
@@ -25,22 +25,17 @@ export const Form: FC<FormPropsType & PropsWithChildren> = ({
     description,
     children,
     link,
-    onClick,
     marginBottom,
+    onSubmit,
 }) => {
     return (
         <Paper sx={{ width: '413px', m: '60px auto 0' }}>
             <FormControl>
                 <Grid container sx={{ p: '35px 33px 42px' }} justifyContent={'center'}>
                     <Typography variant="h1"> {title} </Typography>
-                    <form style={{ width: '347px' }}>
+                    <form style={{ width: '347px' }} onSubmit={onSubmit}>
                         <FormGroup sx={{ marginBottom: marginBottom || '40px' }}>{children}</FormGroup>
-                        <Button
-                            type={'submit'}
-                            variant={'contained'}
-                            fullWidth={true}
-                            onClick={onClick}
-                            >
+                        <Button type={'submit'} variant={'contained'} fullWidth={true}>
                             {btnTitle}
                         </Button>
                     </form>

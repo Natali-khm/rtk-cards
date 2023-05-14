@@ -16,7 +16,7 @@ export const ForgotPassword = () => {
                 to: '/login',
                 title: 'Try loggin in',
             }}
-            onClick={forgotPasswordHandler}
+            // onClick={forgotPasswordHandler}
             marginBottom={'65px'}>
             <EmailInput />
             <InfoMessage text={'Enter your email address and we will send you further instructions'} />

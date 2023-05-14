@@ -1,15 +1,20 @@
 import { PasswordInput } from 'common/components/input/PasswordInput'
 import { EmailInput } from 'common/components/input/EmailInput'
 import { Form } from 'common/components/form/Form'
-import { Link } from 'react-router-dom'
-import { useAppDispatch } from 'app/hooks'
+import { Link, Navigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { authThunks } from '../../auth.slice'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { paths } from '../../../../common/constants/paths'
+import { paths } from 'common/constants/paths'
 
 export const Login = () => {
     const dispatch = useAppDispatch()
+    const isAuth = useAppSelector(state => state.auth.profile)
+
+    if (isAuth) {
+        return <Navigate to={paths.PACKS}/>
+    }
 
     const loginHandler = (e: any) => {
         const payload = {
@@ -27,10 +32,10 @@ export const Login = () => {
             btnTitle={'Sign in'}
             description={"Don't have an account?"}
             link={{ to: paths.REGISTER, title: 'Sign up' }}
-            onClick={loginHandler}
+            // onClick={loginHandler}
             marginBottom={'69px'}>
             <EmailInput />
-            <PasswordInput label="Password" />
+            {/* <PasswordInput name="Password" /> */}
             <FormControlLabel
                 label={'Remember me'}
                 control={<Checkbox sx={{ color: '#00000099', '&.Mui-checked': { color: '#366EFF' } }} />}
