@@ -17,9 +17,12 @@ const slice = createSlice({
                 state.profile = null
                 state.isLoggedIn = false
             })
-            .addCase(isAuth.fulfilled, (state, action: PayloadAction<ProfileType>) => {
+            .addCase(isAuth.fulfilled, (state, action) => {
                 state.isLoggedIn = true
-                state.profile = action.payload
+                state.profile = action.payload.profile
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.profile = action.payload.profile
             })
     },
 })
@@ -37,10 +40,23 @@ const logout = createAppAsyncThunk('auth/logout', async () => {
     await authApi.logout()
 })
 
-const isAuth = createAppAsyncThunk('auth/isAuth', async () => {
+const isAuth = createAppAsyncThunk<{profile: ProfileType}>('auth/isAuth', async () => {
     const res = await authApi.me()
-    return res.data
+    return { profile: res.data }
 })
 
+const updateProfile = createAppAsyncThunk<{ profile: ProfileType }, UpdateProfileDataType>(
+    'auth/updateProfile',
+    async (arg) => {
+        const res = await authApi.updateProfile(arg)
+        return { profile: res.data.updatedUser }
+    }
+)
+
 export const authReducer = slice.reducer
-export const authThunks = { register, login, logout, isAuth }
+export const authThunks = { register, login, logout, isAuth, updateProfile }
+
+export type UpdateProfileDataType = {
+    name?: string
+    avatar?: string
+}

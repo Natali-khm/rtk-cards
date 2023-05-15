@@ -5,32 +5,48 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
+import { useAppDispatch } from '../../../app/hooks'
+import { authThunks } from '../../../features/auth/auth.slice'
 
-export const EditableField = () => {
+type PropsType = {
+    profileName: string
+}
+
+export const EditableField = ({ profileName }: PropsType) => {
     const [editMode, setEditMode] = useState(false)
-    const [name, setName] = useState('Nataliya')
+    const [name, setName] = useState(profileName)
+    const dispatch = useAppDispatch()
 
-
-    const handleEditor = () => {
-        setEditMode(!editMode)
+    const setEditorOpen = () => {
+        setEditMode(true)
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value)
     }
 
+    const setNewValue = () => {
+        setEditMode(false)
+        dispatch(authThunks.updateProfile({name}))
+    }
+
+    const handleBlur = () => {
+        setNewValue()
+    }
+
     return (
         <Box sx={{ mt: '17px', width: '100%' }}>
             {editMode ? (
                 <TextField
+                    fullWidth
                     value={name}
-                    onChange={handleChange}
                     label="Nickname"
                     variant="standard"
-                    fullWidth
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     InputProps={{
                         endAdornment: (
-                            <Button variant="contained" color="secondary" onClick={handleEditor}>
+                            <Button variant="contained" color="secondary" onClick={setNewValue}>
                                 save
                             </Button>
                         ),
@@ -39,7 +55,7 @@ export const EditableField = () => {
             ) : (
                 <Typography variant="h3">
                     {name}
-                    <IconButton sx={{ verticalAlign: 'baseline' }} onClick={handleEditor}>
+                    <IconButton sx={{ verticalAlign: 'baseline' }} onClick={setEditorOpen}>
                         <BorderColorOutlinedIcon htmlColor={'black'} fontSize={'small'} />
                     </IconButton>
                 </Typography>

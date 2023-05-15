@@ -1,4 +1,5 @@
 import { instance } from 'common/api/common.api'
+import { UpdateProfileDataType } from './auth.slice'
 
 export const authApi = {
     register: (arg: ArgRegisterType) => {
@@ -8,11 +9,14 @@ export const authApi = {
         return instance.post<ProfileType>('auth/login', arg)
     },
     logout: () => {
-        return instance.delete('auth/me')
+        return instance.delete<LogoutResponseType>('auth/me')
     },
     me: () => {
-        return instance.post('auth/me')
-    }
+        return instance.post<ProfileType>('auth/me')
+    },
+    updateProfile: (arg: UpdateProfileDataType) => {
+        return instance.put<{ updatedUser: ProfileType}>('auth/me', arg)
+    },
 }
 
 // types
@@ -26,11 +30,16 @@ export type ArgLoginType = {
 export type ArgRegisterType = Omit<ArgLoginType, 'rememberMe'>
 
 type RegisterResponseType = {
-    addedUser: Omit<ProfileType, 'token' | 'tokenDeathTime'>
+    addedUser: Omit<ProfileType, 'avatar' | 'token' | 'tokenDeathTime'>
 }
 
+export type LogoutResponseType = {
+    info: string
+    error?: string
+}
 
 export type ProfileType = {
+    avatar: string
     created: string
     email: string
     isAdmin: boolean
@@ -44,3 +53,5 @@ export type ProfileType = {
     __v: number
     _id: string
 }
+
+

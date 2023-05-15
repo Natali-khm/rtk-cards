@@ -17,10 +17,10 @@ import { Navigate } from 'react-router-dom'
 
 export const Profile = () => {
     const profile = useAppSelector((state) => state.auth.profile)
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  
-    if (!isLoggedIn){
-      return <Navigate to={paths.LOGIN}/>
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+
+    if (!isLoggedIn) {
+        return <Navigate to={paths.LOGIN} />
     }
 
     return (
@@ -46,7 +46,7 @@ export const Profile = () => {
                         }>
                         <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96 }} />
                     </Badge>
-                    <EditableField />
+                    <EditableField profileName={profile?.name || ''} />
                     <Typography variant="body2"> {profile?.email} </Typography>
                     <Button
                         startIcon={<LogoutIcon />}
