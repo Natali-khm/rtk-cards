@@ -9,7 +9,7 @@ export const authApi = {
         return instance.post<ProfileType>('auth/login', arg)
     },
     logout: () => {
-        return instance.delete<LogoutResponseType>('auth/me')
+        return instance.delete<AuthResponseType>('auth/me')
     },
     me: () => {
         return instance.post<ProfileType>('auth/me')
@@ -18,11 +18,26 @@ export const authApi = {
         return instance.put<{ updatedUser: ProfileType }>('auth/me', arg)
     },
     forgotPassword: (arg: PasswordRecovDataType) => {
-        return axios.post<ForgotPasswordResponseType>('https://neko-back.herokuapp.com/2.0/auth/forgot', arg, { withCredentials: true })
+        return axios.post<ForgotPasswordResponseType>('https://neko-back.herokuapp.com/2.0/auth/forgot', arg, {
+            withCredentials: true,
+        })
+    },
+    setnewPassword: (arg: SetNewPasswordDataType) => {
+        return axios.post<AuthResponseType>('https://neko-back.herokuapp.com/2.0/auth/set-new-password', arg, {
+            withCredentials: true,
+        })
+    },
+    block: () => {
+        const arg = {
+            id: '6324234234jjhh234324d234',
+            // id пользователя, которого хотите забанить
+            blockReason: 'Контент ненормативного характера',
+        }
+        return axios.post<AuthResponseType>('https://neko-back.herokuapp.com/2.0/auth/block', arg, {
+            withCredentials: true,
+        })
     },
 }
-
-
 
 // types
 
@@ -38,7 +53,7 @@ type RegisterResponseType = {
     addedUser: Omit<ProfileType, 'avatar' | 'token' | 'tokenDeathTime'>
 }
 
-export type LogoutResponseType = {
+export type AuthResponseType = {
     info: string
     error?: string
 }
@@ -75,4 +90,14 @@ export type PasswordRecovDataType = {
     email: string
     from?: string
     message: string
+}
+
+export type SetNewPasswordDataType = {
+    password: string
+    resetPasswordToken: string
+}
+
+type BlockDataType = {
+    id: string
+    blockReason: string
 }

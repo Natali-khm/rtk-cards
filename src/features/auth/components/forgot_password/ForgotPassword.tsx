@@ -18,7 +18,7 @@ export const ForgotPassword = () => {
         dispatch(authThunks.forgotPassword({email: data.email, message: passwordRecovMess, from: "Nata"}))
     }
     
-    const isMailSent = useAppSelector(state => state.auth.isMailSent)
+    const isMailSent = useAppSelector(state => state.auth.passwordRecovery.isMailSent)
 
     if (isMailSent){
         return <Navigate to={paths.CHECK_EMAIL}/>

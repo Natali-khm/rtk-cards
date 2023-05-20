@@ -5,6 +5,7 @@ import {
     ArgRegisterType,
     PasswordRecovDataType,
     ProfileType,
+    SetNewPasswordDataType,
     UpdateProfileDataType,
     authApi,
 } from './auth.api'
@@ -12,7 +13,11 @@ import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 
 const slice = createSlice({
     name: 'auth',
-    initialState: { profile: null as ProfileType | null, isLoggedIn: false, isMailSent: false },
+    initialState: {
+        profile: null as ProfileType | null,
+        isLoggedIn: false,
+        passwordRecovery: { isMailSent: false, email: null as string | null, isPasswordSet: false },
+    },
     reducers: {},
     extraReducers: (builder) => {
         builder
@@ -32,7 +37,11 @@ const slice = createSlice({
                 state.profile = action.payload.profile
             })
             .addCase(forgotPassword.fulfilled, (state, action) => {
-                state.isMailSent = action.payload.isMailSent
+                state.passwordRecovery.isMailSent = action.payload.isMailSent
+                state.passwordRecovery.email = action.payload.email
+            })
+            .addCase(setNewPassword.fulfilled, (state, action) => {
+                state.passwordRecovery.isPasswordSet = true
             })
     },
 })
@@ -63,13 +72,18 @@ const updateProfile = createAppAsyncThunk<{ profile: ProfileType }, UpdateProfil
     }
 )
 
-const forgotPassword = createAppAsyncThunk<{ isMailSent: boolean }, PasswordRecovDataType>(
+const forgotPassword = createAppAsyncThunk<{ isMailSent: boolean; email: string }, PasswordRecovDataType>(
     'auth/forgotPassword',
     async (arg) => {
-        const res = await authApi.forgotPassword(arg)
-        return { isMailSent: true }
+        await authApi.forgotPassword(arg)
+        return { isMailSent: true, email: arg.email }
     }
 )
 
+const setNewPassword = createAppAsyncThunk<void, SetNewPasswordDataType>('auth/setNewPassword', async (arg) => {
+    await authApi.setnewPassword(arg)
+})
+
+
 export const authReducer = slice.reducer
-export const authThunks = { register, login, logout, isAuth, updateProfile, forgotPassword }
+export const authThunks = { register, login, logout, isAuth, updateProfile, forgotPassword, setNewPassword }
