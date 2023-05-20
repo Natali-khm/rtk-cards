@@ -18,18 +18,13 @@ export const Register = () => {
         return <Navigate to={paths.LOGIN} />
     }
 
-    const registerHandler = (e: any) => {
+    const onSubmit: SubmitHandler<FormValidateType> = (data) => {
         const payload = {
-            email: 'natka_test_dev@gmail.com',
-            password: 'qwerty12345',
+            email: 'natka.test.dev@gmail.com',
+            password: 'qwerty12345$',
         }
 
-        dispatch(authThunks.register(payload))
-        e.preventDefault()
-    }
-
-    const onSubmit: SubmitHandler<FormValidateType> = (data) => {
-        console.log(data)
+        dispatch(authThunks.register(data))
     }
 
     return (

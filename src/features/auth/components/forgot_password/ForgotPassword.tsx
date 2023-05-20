@@ -4,13 +4,26 @@ import { EmailInput } from 'common/components/input/EmailInput'
 import { SubmitHandler } from 'react-hook-form'
 import { FormValidateType, useAppForm } from '../../hooks/useAppForm'
 import { paths } from 'common/constants/paths'
+import { useDispatch } from 'react-redux'
+import { authThunks } from '../../auth.slice'
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
+import { passwordRecovMess } from './constants'
+import { Navigate } from 'react-router-dom'
 
 export const ForgotPassword = () => {
     const { register, handleSubmit, errors } = useAppForm(['email'])
+    const dispatch = useAppDispatch()
 
     const forgotPasswordHandler: SubmitHandler<FormValidateType> = (data) => {
-        console.log(data) // TODO
+        dispatch(authThunks.forgotPassword({email: data.email, message: passwordRecovMess, from: "Nata"}))
     }
+    
+    const isMailSent = useAppSelector(state => state.auth.isMailSent)
+
+    if (isMailSent){
+        return <Navigate to={paths.CHECK_EMAIL}/>
+    }
+
     return (
         <Form
             marginBottom={'65px'}

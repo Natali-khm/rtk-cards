@@ -32,13 +32,13 @@ export const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             description={"Don't have an account?"}
             link={{ to: paths.REGISTER, title: 'Sign up' }}>
-            <EmailInput register={register} errors={errors} defaultValue={'natka_test_dev@gmail.com'} />
+            <EmailInput register={register} errors={errors} defaultValue={'natka.test.dev@gmail.com'} />
             <PasswordInput
                 register={register}
                 label={'Password'}
                 name={'password'}
                 errors={errors}
-                defaultValue={'qwerty12345'}
+                defaultValue={'qwerty12345$'}
             />
             <FormControlLabel
                 label={'Remember me'}

@@ -1,11 +1,18 @@
 import { AppDispatch, RootState } from './../../app/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { ArgLoginType, ArgRegisterType, ProfileType, authApi } from './auth.api'
-import { createAppAsyncThunk } from '../../common/types/createAppAsyncThunk'
+import {
+    ArgLoginType,
+    ArgRegisterType,
+    PasswordRecovDataType,
+    ProfileType,
+    UpdateProfileDataType,
+    authApi,
+} from './auth.api'
+import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 
 const slice = createSlice({
     name: 'auth',
-    initialState: { profile: null as ProfileType | null, isLoggedIn: false },
+    initialState: { profile: null as ProfileType | null, isLoggedIn: false, isMailSent: false },
     reducers: {},
     extraReducers: (builder) => {
         builder
@@ -24,6 +31,9 @@ const slice = createSlice({
             .addCase(updateProfile.fulfilled, (state, action) => {
                 state.profile = action.payload.profile
             })
+            .addCase(forgotPassword.fulfilled, (state, action) => {
+                state.isMailSent = action.payload.isMailSent
+            })
     },
 })
 
@@ -40,7 +50,7 @@ const logout = createAppAsyncThunk('auth/logout', async () => {
     await authApi.logout()
 })
 
-const isAuth = createAppAsyncThunk<{profile: ProfileType}>('auth/isAuth', async () => {
+const isAuth = createAppAsyncThunk<{ profile: ProfileType }>('auth/isAuth', async () => {
     const res = await authApi.me()
     return { profile: res.data }
 })
@@ -53,10 +63,13 @@ const updateProfile = createAppAsyncThunk<{ profile: ProfileType }, UpdateProfil
     }
 )
 
-export const authReducer = slice.reducer
-export const authThunks = { register, login, logout, isAuth, updateProfile }
+const forgotPassword = createAppAsyncThunk<{ isMailSent: boolean }, PasswordRecovDataType>(
+    'auth/forgotPassword',
+    async (arg) => {
+        const res = await authApi.forgotPassword(arg)
+        return { isMailSent: true }
+    }
+)
 
-export type UpdateProfileDataType = {
-    name?: string
-    avatar?: string
-}
+export const authReducer = slice.reducer
+export const authThunks = { register, login, logout, isAuth, updateProfile, forgotPassword }

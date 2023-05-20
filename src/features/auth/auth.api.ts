@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { instance } from 'common/api/common.api'
-import { UpdateProfileDataType } from './auth.slice'
 
 export const authApi = {
     register: (arg: ArgRegisterType) => {
@@ -15,9 +15,14 @@ export const authApi = {
         return instance.post<ProfileType>('auth/me')
     },
     updateProfile: (arg: UpdateProfileDataType) => {
-        return instance.put<{ updatedUser: ProfileType}>('auth/me', arg)
+        return instance.put<{ updatedUser: ProfileType }>('auth/me', arg)
+    },
+    forgotPassword: (arg: PasswordRecovDataType) => {
+        return axios.post<ForgotPasswordResponseType>('https://neko-back.herokuapp.com/2.0/auth/forgot', arg, { withCredentials: true })
     },
 }
+
+
 
 // types
 
@@ -38,6 +43,13 @@ export type LogoutResponseType = {
     error?: string
 }
 
+export type ForgotPasswordResponseType = {
+    answer: boolean
+    html: boolean
+    info: string
+    success: boolean
+}
+
 export type ProfileType = {
     avatar: string
     created: string
@@ -54,4 +66,13 @@ export type ProfileType = {
     _id: string
 }
 
+export type UpdateProfileDataType = {
+    name?: string
+    avatar?: string
+}
 
+export type PasswordRecovDataType = {
+    email: string
+    from?: string
+    message: string
+}
