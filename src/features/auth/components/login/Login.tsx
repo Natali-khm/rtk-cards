@@ -1,35 +1,26 @@
 import { PasswordInput } from 'common/components/input/PasswordInput'
 import { EmailInput } from 'common/components/input/EmailInput'
-import { Form } from 'common/components/form/Form'
-import { Link, Navigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { authThunks } from '../../auth.slice'
-import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import { useRedirect } from '../../hooks/useRedirect'
+import { useAppForm } from '../../hooks/useAppForm'
+import { Form } from 'common/components/form/Form'
 import { paths } from 'common/constants/paths'
-import { SubmitHandler } from 'react-hook-form'
-import { FormValidateType, useAppForm } from '../../hooks/useAppForm'
+import Checkbox from '@mui/material/Checkbox'
+import { useAuth } from '../../hooks/useAuth'
+import { Link } from 'react-router-dom'
 
 export const Login = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password'])
+    const { onLoginSubmit, isLoggedIn } = useAuth()
 
-    const dispatch = useAppDispatch()
-    const isAuth = useAppSelector((state) => state.auth.profile)
-
-    if (isAuth) {
-        return <Navigate to={paths.PACKS} />
-    }
-
-    const onSubmit: SubmitHandler<FormValidateType> = (data) => {
-        dispatch(authThunks.login(data))
-    }
+    useRedirect(paths.PACKS, isLoggedIn)
 
     return (
         <Form
             title={'Sign in'}
             btnTitle={'Sign in'}
             marginBottom={'69px'}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onLoginSubmit)}
             description={"Don't have an account?"}
             link={{ to: paths.REGISTER, title: 'Sign up' }}>
             <EmailInput register={register} errors={errors} defaultValue={'natka.test.dev@gmail.com'} />
