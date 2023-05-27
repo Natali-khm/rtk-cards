@@ -11,7 +11,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useNavigate } from 'react-router-dom'
 import { paths } from '../../constants/paths'
-import { useAppDispatch } from 'app/hooks'
+import { useAppDispatch } from 'common/hooks/hooks'
 import { authThunks } from '../../../features/auth/auth.slice'
 
 export const HeaderProfile = () => {
@@ -35,8 +35,8 @@ export const HeaderProfile = () => {
         dispatch(authThunks.logout())
     }
 
-    const typographyStyle = { m: 0, opacity: 1, color: 'black', fontWeight: 500 } 
-    const iconStyle = {mr: '14px', verticalAlign: 'text-bottom'}
+    const typographyStyle = { m: 0, opacity: 1, color: 'black', fontWeight: 500 }
+    const iconStyle = { mr: '14px', verticalAlign: 'text-bottom' }
 
     return (
         <Grid container justifyContent={'flex-end'} alignItems={'center'}>
@@ -64,13 +64,13 @@ export const HeaderProfile = () => {
                 elevation={1}>
                 <MenuItem onClick={handleCloseUserMenu}>
                     <Typography sx={typographyStyle} textAlign="center" onClick={redirToProfileHandler}>
-                        <PermIdentityIcon sx={iconStyle}/>
+                        <PermIdentityIcon sx={iconStyle} />
                         Profile
                     </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseUserMenu}>
                     <Typography sx={typographyStyle} textAlign="center" onClick={logoutHandler}>
-                        <LogoutIcon sx={iconStyle}/>
+                        <LogoutIcon sx={iconStyle} />
                         Log out
                     </Typography>
                 </MenuItem>

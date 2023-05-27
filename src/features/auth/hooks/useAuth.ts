@@ -1,6 +1,6 @@
 import { SubmitHandler } from 'react-hook-form'
 import { FormValidateType } from './useAppForm'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { authThunks } from '../auth.slice'
 import { passwordRecovMess } from '../components/forgot_password/constants'
 import { useParams } from 'react-router-dom'
@@ -14,7 +14,6 @@ export const useAuth = () => {
 
     const dispatch = useAppDispatch()
     const { token } = useParams()
-
 
     const onRegisterSubmit: SubmitHandler<FormValidateType> = (data) => {
         const payload = {
@@ -30,7 +29,7 @@ export const useAuth = () => {
     }
 
     const onForgotPasswordSubmit: SubmitHandler<FormValidateType> = (data) => {
-        dispatch(authThunks.forgotPassword({email: data.email, message: passwordRecovMess, from: "Nata"}))
+        dispatch(authThunks.forgotPassword({ email: data.email, message: passwordRecovMess, from: 'Nata' }))
     }
 
     const onNewPasswordSubmit: SubmitHandler<FormValidateType> = (data) => {
@@ -42,5 +41,14 @@ export const useAuth = () => {
         )
     }
 
-    return { onRegisterSubmit, onLoginSubmit, onForgotPasswordSubmit, onNewPasswordSubmit, isLoggedIn, isMailSent, email, isPasswordSet }
+    return {
+        onRegisterSubmit,
+        onLoginSubmit,
+        onForgotPasswordSubmit,
+        onNewPasswordSubmit,
+        isLoggedIn,
+        isMailSent,
+        email,
+        isPasswordSet,
+    }
 }

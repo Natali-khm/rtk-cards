@@ -1,6 +1,6 @@
 import { HeaderProfile } from '../header_profile/HeaderProfile'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppSelector } from 'app/hooks'
+import { useAppSelector } from 'common/hooks/hooks'
 import logo from 'assets/image/logo.svg'
 import { paths } from '../../constants/paths'
 import Container from '@mui/material/Container'

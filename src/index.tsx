@@ -7,7 +7,8 @@ import { RouterProvider, createHashRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './common/constants/theme'
 import { router } from './common/routes/Routes'
-
+import { GlobalError } from './common/components/global_error/GlobalError'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const container = document.getElementById('root')!
@@ -17,6 +18,7 @@ root.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <RouterProvider router={router} />
+            <GlobalError />
         </ThemeProvider>
     </Provider>
 )

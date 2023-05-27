@@ -1,5 +1,4 @@
 import profileAvatar from 'assets/image/profile_avatar.jpg'
-import { EditableField } from 'common/components/editable_field/EditableField'
 import { BackspaceLink } from 'common/components/link/BackspaceLink'
 import { paths } from 'common/constants/paths'
 import Box from '@mui/material/Box'
@@ -12,12 +11,19 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import LogoutIcon from '@mui/icons-material/Logout'
 import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
-import { useAppSelector } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hooks'
 import { Navigate } from 'react-router-dom'
+import { authThunks } from '../auth/auth.slice'
+import { EditableProfileName } from 'common/components/editable_profile_name/EditableProfileName'
 
 export const Profile = () => {
     const profile = useAppSelector((state) => state.auth.profile)
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+    const dispatch = useAppDispatch()
+
+    const logoutHandler = () => {
+        dispatch(authThunks.logout())
+    }
 
     if (!isLoggedIn) {
         return <Navigate to={paths.LOGIN} />
@@ -46,10 +52,11 @@ export const Profile = () => {
                         }>
                         <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96 }} />
                     </Badge>
-                    <EditableField profileName={profile?.name || ''} />
+                    <EditableProfileName profileName={profile?.name || ''} />
                     <Typography variant="body2"> {profile?.email} </Typography>
                     <Button
                         startIcon={<LogoutIcon />}
+                        onClick={logoutHandler}
                         sx={{
                             backgroundColor: '#FCFCFC',
                             color: 'black',

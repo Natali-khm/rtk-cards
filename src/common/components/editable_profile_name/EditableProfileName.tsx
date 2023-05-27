@@ -5,20 +5,21 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import { useAppDispatch } from '../../../app/hooks'
+import { useAppDispatch } from '../../hooks/hooks'
 import { authThunks } from '../../../features/auth/auth.slice'
 
 type PropsType = {
     profileName: string
 }
 
-export const EditableField = ({ profileName }: PropsType) => {
+export const EditableProfileName = ({ profileName }: PropsType) => {
     const [editMode, setEditMode] = useState(false)
-    const [name, setName] = useState(profileName)
+    const [name, setName] = useState('')
     const dispatch = useAppDispatch()
-
+    
     const setEditorOpen = () => {
         setEditMode(true)
+        setName(profileName)
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +28,8 @@ export const EditableField = ({ profileName }: PropsType) => {
 
     const setNewValue = () => {
         setEditMode(false)
-        dispatch(authThunks.updateProfile({name}))
+        dispatch(authThunks.updateProfile({ name }))
+        setName('')
     }
 
     const handleBlur = () => {
@@ -54,7 +56,7 @@ export const EditableField = ({ profileName }: PropsType) => {
                 />
             ) : (
                 <Typography variant="h3">
-                    {name}
+                    {profileName}
                     <IconButton sx={{ verticalAlign: 'baseline' }} onClick={setEditorOpen}>
                         <BorderColorOutlinedIcon htmlColor={'black'} fontSize={'small'} />
                     </IconButton>
