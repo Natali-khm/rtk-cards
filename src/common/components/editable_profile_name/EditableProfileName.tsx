@@ -5,8 +5,8 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import { useAppDispatch } from '../../hooks/hooks'
 import { authThunks } from '../../../features/auth/auth.slice'
+import { useAppDispatch } from '../../hooks'
 
 type PropsType = {
     profileName: string

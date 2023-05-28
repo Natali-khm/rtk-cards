@@ -1,16 +1,19 @@
 import { SubmitHandler } from 'react-hook-form'
 import { FormValidateType } from './useAppForm'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { authThunks } from '../auth.slice'
 import { passwordRecovMess } from '../components/forgot_password/constants'
 import { useParams } from 'react-router-dom'
-import { authLoggedIn, authMailSent, authEmail, authPasswordIsSet } from '../auth.selectors'
+import { authLoggedIn, authMailSent, authEmail, authPasswordIsSet, profile, authInitialized } from '../auth.selectors'
+import { useAppSelector } from 'common/hooks'
+import { useAppDispatch } from 'common/hooks'
 
 export const useAuth = () => {
+    const email = useAppSelector(authEmail)
     const isLoggedIn = useAppSelector(authLoggedIn)
     const isMailSent = useAppSelector(authMailSent)
-    const email = useAppSelector(authEmail)
     const isPasswordSet = useAppSelector(authPasswordIsSet)
+    const userProfile = useAppSelector(profile)
+    const isInitialized = useAppSelector(authInitialized)
 
     const dispatch = useAppDispatch()
     const { token } = useParams()
@@ -40,15 +43,21 @@ export const useAuth = () => {
             })
         )
     }
+    const logoutHandler = () => {
+        dispatch(authThunks.logout())
+    }
 
     return {
         onRegisterSubmit,
         onLoginSubmit,
         onForgotPasswordSubmit,
         onNewPasswordSubmit,
+        logoutHandler,
         isLoggedIn,
         isMailSent,
         email,
         isPasswordSet,
+        isInitialized,
+        userProfile,
     }
 }

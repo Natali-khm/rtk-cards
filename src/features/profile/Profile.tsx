@@ -11,19 +11,12 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import LogoutIcon from '@mui/icons-material/Logout'
 import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
-import { useAppDispatch, useAppSelector } from 'common/hooks/hooks'
 import { Navigate } from 'react-router-dom'
-import { authThunks } from '../auth/auth.slice'
 import { EditableProfileName } from 'common/components/editable_profile_name/EditableProfileName'
+import { useAuth } from '../auth/hooks/useAuth'
 
 export const Profile = () => {
-    const profile = useAppSelector((state) => state.auth.profile)
-    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
-
-    const logoutHandler = () => {
-        dispatch(authThunks.logout())
-    }
+    const {isLoggedIn, userProfile, logoutHandler} = useAuth()
 
     if (!isLoggedIn) {
         return <Navigate to={paths.LOGIN} />
@@ -52,8 +45,8 @@ export const Profile = () => {
                         }>
                         <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96 }} />
                     </Badge>
-                    <EditableProfileName profileName={profile?.name || ''} />
-                    <Typography variant="body2"> {profile?.email} </Typography>
+                    <EditableProfileName profileName={userProfile?.name || ''} />
+                    <Typography variant="body2"> {userProfile?.email} </Typography>
                     <Button
                         startIcon={<LogoutIcon />}
                         onClick={logoutHandler}

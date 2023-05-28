@@ -11,13 +11,12 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useNavigate } from 'react-router-dom'
 import { paths } from '../../constants/paths'
-import { useAppDispatch } from 'common/hooks/hooks'
-import { authThunks } from '../../../features/auth/auth.slice'
+import { useAuth } from '../../../features/auth/hooks/useAuth'
 
 export const HeaderProfile = () => {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
+    const { logoutHandler } = useAuth()
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
@@ -29,10 +28,6 @@ export const HeaderProfile = () => {
 
     const redirToProfileHandler = () => {
         navigate(paths.PROFILE)
-    }
-
-    const logoutHandler = () => {
-        dispatch(authThunks.logout())
     }
 
     const typographyStyle = { m: 0, opacity: 1, color: 'black', fontWeight: 500 }

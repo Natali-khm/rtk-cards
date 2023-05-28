@@ -9,8 +9,7 @@ import {
     authApi,
 } from './auth.api'
 import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
-import { thunkTryCatch } from '../../common/utils/thunk-try-catch'
-import { appActions } from '../../app/app.slice'
+import { thunkTryCatch } from '../../common/utils'
 
 const slice = createSlice({
     name: 'auth',
@@ -34,7 +33,7 @@ const slice = createSlice({
                 state.profile = action.payload.profile
                 state.isLoggedIn = true
             })
-            .addCase(logout.fulfilled, (state, action) => {
+            .addCase(logout.fulfilled, (state) => {
                 state.profile = null
                 state.isLoggedIn = false
             })
@@ -42,7 +41,7 @@ const slice = createSlice({
                 state.passwordRecovery.isMailSent = action.payload.isMailSent
                 state.passwordRecovery.email = action.payload.email
             })
-            .addCase(setNewPassword.fulfilled, (state, action) => {
+            .addCase(setNewPassword.fulfilled, (state) => {
                 state.passwordRecovery.isPasswordSet = true
             })
             .addCase(updateProfile.fulfilled, (state, action) => {
@@ -56,15 +55,10 @@ const register = createAppAsyncThunk<void, ArgRegisterType>('auth/register', asy
 })
 
 const isAuth = createAppAsyncThunk<{ profile: ProfileType }>('auth/isAuth', async (arg, thunkAPI) => {
-    const { rejectWithValue, dispatch } = thunkAPI
-    try {
+    return thunkTryCatch(thunkAPI, async () => {
         const res = await authApi.me()
         return { profile: res.data }
-    } catch (e) {
-        return rejectWithValue(null)
-    } finally {
-        dispatch(appActions.initialization({ isInitialized: true }))
-    }
+    })
 })
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login', async (arg, thunkAPI) => {
@@ -101,5 +95,6 @@ const updateProfile = createAppAsyncThunk<{ profile: ProfileType }, UpdateProfil
         })
     }
 )
+
 export const authReducer = slice.reducer
 export const authThunks = { register, login, logout, isAuth, updateProfile, forgotPassword, setNewPassword }

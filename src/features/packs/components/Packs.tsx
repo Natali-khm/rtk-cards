@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom'
-import { useAppSelector } from 'common/hooks/hooks'
 import { paths } from 'common/constants/paths'
+import { useAuth } from '../../auth/hooks/useAuth'
 
 export const Packs = () => {
-    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+    const { isLoggedIn } = useAuth()
 
     if (!isLoggedIn) {
         return <Navigate to={paths.LOGIN} />

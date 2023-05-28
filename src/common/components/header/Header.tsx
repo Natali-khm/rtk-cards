@@ -1,15 +1,15 @@
 import { HeaderProfile } from '../header_profile/HeaderProfile'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppSelector } from 'common/hooks/hooks'
 import logo from 'assets/image/logo.svg'
 import { paths } from '../../constants/paths'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
+import { useAuth } from '../../../features/auth/hooks/useAuth'
 
 export const Header = () => {
-    const profile = useAppSelector((state) => state.auth.profile)
+    const { isLoggedIn } = useAuth()
     const navigate = useNavigate()
 
     const redirectHandler = () => {
@@ -23,7 +23,7 @@ export const Header = () => {
                     <Link to={paths.PACKS} style={{ flexGrow: 1 }}>
                         <img src={logo} alt="incubator-logo" />
                     </Link>
-                    {profile ? (
+                    {isLoggedIn ? (
                         <HeaderProfile />
                     ) : (
                         <Button variant={'contained'} sx={{ pl: '28px', pr: '28px' }} onClick={redirectHandler}>

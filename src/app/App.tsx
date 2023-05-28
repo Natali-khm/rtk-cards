@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../common/hooks/hooks'
-import { Outlet } from 'react-router-dom'
-import Container from '@mui/material/Container'
+import { Layout } from './Layout'
 import { Header } from 'common/components/header/Header'
 import { authThunks } from '../features/auth/auth.slice'
+import LinearProgress from '@mui/material/LinearProgress'
+import { useAppSelector } from 'common/hooks'
+import { useAppDispatch } from 'common/hooks'
+import { useAuth } from '../features/auth/hooks/useAuth'
 
 export function App() {
-    // const isLoading = useAppSelector((state) => state.app.isLoading)
-
+    const isLoading = useAppSelector((state) => state.app.isLoading)
     const dispatch = useAppDispatch()
-    const isInitialized = useAppSelector((state) => state.app.isAppInitialized)
-    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)    
+
+    const { isInitialized, isLoggedIn } = useAuth()
 
     useEffect(() => {
         dispatch(authThunks.isAuth())
@@ -19,9 +20,9 @@ export function App() {
     return (
         <>
             <Header />
-            <Container /* sx={{ backgroundColor: 'red' }}  */ maxWidth={'xl'}>
-                {isInitialized && isLoggedIn !== null ? <Outlet /> : <div>Loading</div>}
-            </Container>
+            <div>{isLoading && <LinearProgress />}</div>
+            {!isInitialized && 'Initialization'}
+            {isInitialized && isLoggedIn !== null && <Layout />}
         </>
     )
 }
