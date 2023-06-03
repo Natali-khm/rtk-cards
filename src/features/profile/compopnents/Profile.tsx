@@ -1,26 +1,22 @@
-import profileAvatar from 'assets/image/profile_avatar.jpg'
+import { EditableProfileName } from 'common/components/editable_profile_name/EditableProfileName'
+import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
 import { BackspaceLink } from 'common/components/link/BackspaceLink'
+import { useAuth, useAuthSelectors } from '../../auth/hooks'
+import profileAvatar from 'assets/image/profile_avatar.jpg'
+import LogoutIcon from '@mui/icons-material/Logout'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
 import { paths } from 'common/constants/paths'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Badge from '@mui/material/Badge'
-import Paper from '@mui/material/Paper'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import LogoutIcon from '@mui/icons-material/Logout'
-import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
-import { Navigate } from 'react-router-dom'
-import { EditableProfileName } from 'common/components/editable_profile_name/EditableProfileName'
-import { useAuth } from '../auth/hooks/useAuth'
+import Badge from '@mui/material/Badge'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
 export const Profile = () => {
-    const {isLoggedIn, userProfile, logoutHandler} = useAuth()
-
-    if (!isLoggedIn) {
-        return <Navigate to={paths.LOGIN} />
-    }
+    const { logoutHandler } = useAuth()
+    const { userProfile } = useAuthSelectors()
 
     return (
         <Box>
@@ -43,7 +39,7 @@ export const Profile = () => {
                                 <LocalSeeOutlinedIcon sx={{ fontSize: '16px', color: '#FFF' }} />
                             </IconButton>
                         }>
-                        <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96 }} />
+                        <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96, mt: '30px' }} />
                     </Badge>
                     <EditableProfileName profileName={userProfile?.name || ''} />
                     <Typography variant="body2"> {userProfile?.email} </Typography>

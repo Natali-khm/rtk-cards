@@ -1,15 +1,9 @@
-import { InfoMessage } from 'common/components/info_message/InfoMessage'
-import { PasswordInput } from 'common/components/input/PasswordInput'
-import { paths } from '../../../../common/constants/paths'
-import { useRedirect } from '../../hooks/useRedirect'
-import { useAppForm } from '../../hooks/useAppForm'
-import { Form } from 'common/components/form/Form'
-import { useAuth } from '../../hooks/useAuth'
+import { InfoMessage, Form, PasswordInput } from 'common/components'
+import { useAppForm, useAuth } from 'features/auth/hooks'
 
 export const NewPassword = () => {
     const { register, handleSubmit, errors } = useAppForm(['password'])
-    const { onNewPasswordSubmit, isPasswordSet } = useAuth()
-    useRedirect(paths.LOGIN, isPasswordSet)
+    const { onNewPasswordSubmit } = useAuth()
 
     return (
         <Form

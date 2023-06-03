@@ -11,7 +11,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useNavigate } from 'react-router-dom'
 import { paths } from '../../constants/paths'
-import { useAuth } from '../../../features/auth/hooks/useAuth'
+import { useAuth } from 'features/auth/hooks'
 
 export const HeaderProfile = () => {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)

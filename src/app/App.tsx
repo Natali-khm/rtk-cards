@@ -1,17 +1,15 @@
-import { useEffect } from 'react'
-import { Layout } from './Layout'
-import { Header } from 'common/components/header/Header'
-import { authThunks } from '../features/auth/auth.slice'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import LinearProgress from '@mui/material/LinearProgress'
-import { useAppSelector } from 'common/hooks'
-import { useAppDispatch } from 'common/hooks'
-import { useAuth } from '../features/auth/hooks/useAuth'
+import { useAuthSelectors } from 'features/auth/hooks'
+import { authThunks } from 'features/auth/auth.slice'
+import { Header } from 'common/components'
+import { AppOutlet } from './AppOutlet'
+import { useEffect } from 'react'
 
 export function App() {
     const isLoading = useAppSelector((state) => state.app.isLoading)
     const dispatch = useAppDispatch()
-
-    const { isInitialized, isLoggedIn } = useAuth()
+    const { isInitialized, isLoggedIn } = useAuthSelectors()
 
     useEffect(() => {
         dispatch(authThunks.isAuth())
@@ -22,7 +20,7 @@ export function App() {
             <Header />
             <div>{isLoading && <LinearProgress />}</div>
             {!isInitialized && 'Initialization'}
-            {isInitialized && isLoggedIn !== null && <Layout />}
+            {isInitialized && isLoggedIn !== null && <AppOutlet />}
         </>
     )
 }

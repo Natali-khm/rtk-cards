@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice, current } from '@reduxjs/toolkit'
-import { fulfilled, pending, rejected } from './constants'
+import { fulfilled, pending, rejected } from './matchingUtilities'
 
 const slice = createSlice({
     name: 'app',
@@ -18,6 +18,7 @@ const slice = createSlice({
         builder
             .addMatcher(pending, (state) => {
                 state.isLoading = true
+                
             })
             .addMatcher(fulfilled, (state, action) => {
                 state.isLoading = false

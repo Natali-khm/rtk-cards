@@ -1,16 +1,10 @@
-import { InfoMessage } from 'common/components/info_message/InfoMessage'
-import { EmailInput } from 'common/components/input/EmailInput'
-import { useRedirect } from '../../hooks/useRedirect'
-import { useAppForm } from '../../hooks/useAppForm'
-import { Form } from 'common/components/form/Form'
-import { paths } from 'common/constants/paths'
-import { useAuth } from '../../hooks/useAuth'
+import { EmailInput, Form, InfoMessage } from 'common/components'
+import { useAppForm, useAuth } from 'features/auth/hooks'
+import { paths } from 'common/constants'
 
 export const ForgotPassword = () => {
     const { register, handleSubmit, errors } = useAppForm(['email'])
-    const { onForgotPasswordSubmit, isMailSent } = useAuth()
-
-    useRedirect(paths.CHECK_EMAIL, isMailSent)
+    const { onForgotPasswordSubmit } = useAuth()
 
     return (
         <Form

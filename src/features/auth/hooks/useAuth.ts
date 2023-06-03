@@ -1,21 +1,15 @@
+import { passwordRecovMess } from '../components/forgot_password/constants'
+import { useNavigate, useParams } from 'react-router-dom'
 import { SubmitHandler } from 'react-hook-form'
 import { FormValidateType } from './useAppForm'
-import { authThunks } from '../auth.slice'
-import { passwordRecovMess } from '../components/forgot_password/constants'
-import { useParams } from 'react-router-dom'
-import { authLoggedIn, authMailSent, authEmail, authPasswordIsSet, profile, authInitialized } from '../auth.selectors'
-import { useAppSelector } from 'common/hooks'
 import { useAppDispatch } from 'common/hooks'
+import { authThunks } from '../auth.slice'
+import { paths } from 'common/constants'
+import { toast } from 'react-toastify'
 
 export const useAuth = () => {
-    const email = useAppSelector(authEmail)
-    const isLoggedIn = useAppSelector(authLoggedIn)
-    const isMailSent = useAppSelector(authMailSent)
-    const isPasswordSet = useAppSelector(authPasswordIsSet)
-    const userProfile = useAppSelector(profile)
-    const isInitialized = useAppSelector(authInitialized)
-
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const { token } = useParams()
 
     const onRegisterSubmit: SubmitHandler<FormValidateType> = (data) => {
@@ -25,14 +19,28 @@ export const useAuth = () => {
         }
 
         dispatch(authThunks.register(data))
+            .unwrap()
+            .then((res) => {
+                toast.success('You have successfully registered')
+                navigate(paths.LOGIN)
+            })
     }
 
     const onLoginSubmit: SubmitHandler<FormValidateType> = (data) => {
         dispatch(authThunks.login(data))
+            .unwrap()
+            .then((res) => {
+                toast.success(`Hello, ${res.profile.name}`)
+                navigate(paths.PACKS)
+            })
     }
 
     const onForgotPasswordSubmit: SubmitHandler<FormValidateType> = (data) => {
         dispatch(authThunks.forgotPassword({ email: data.email, message: passwordRecovMess, from: 'Nata' }))
+            .unwrap()
+            .then((res) => {
+                navigate(paths.CHECK_EMAIL)
+            })
     }
 
     const onNewPasswordSubmit: SubmitHandler<FormValidateType> = (data) => {
@@ -42,6 +50,10 @@ export const useAuth = () => {
                 resetPasswordToken: token || '',
             })
         )
+            .unwrap()
+            .then((res) => {
+                navigate(paths.LOGIN)
+            })
     }
     const logoutHandler = () => {
         dispatch(authThunks.logout())
@@ -53,11 +65,5 @@ export const useAuth = () => {
         onForgotPasswordSubmit,
         onNewPasswordSubmit,
         logoutHandler,
-        isLoggedIn,
-        isMailSent,
-        email,
-        isPasswordSet,
-        isInitialized,
-        userProfile,
     }
 }

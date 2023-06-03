@@ -7,11 +7,11 @@ import { createTheme } from '@mui/material'
 // }
 
 export const theme = createTheme({
-    // palette: {
-    //     primary: {
-    //         main: '#366EFF',
-    //     },
-    // },
+    palette: {
+        primary: {
+            main: '#366EFF',
+        },
+    },
     components: {
         MuiFormControlLabel: {
             styleOverrides: {
@@ -37,7 +37,6 @@ export const theme = createTheme({
                 h2: {
                     fontSize: '22px',
                     fontWeight: 600,
-                    marginBottom: '30px',
                     lineHeight: '27px',
                 },
                 h3: {
@@ -49,6 +48,11 @@ export const theme = createTheme({
                 h4: {
                     fontSize: '16px',
                     lineHeight: '24px',
+                },
+                h5: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 600,
                 },
                 body1: {
                     fontWeight: 600,
@@ -75,20 +79,20 @@ export const theme = createTheme({
         },
         MuiButton: {
             variants: [
-                {
-                    props: { color: 'secondary' },
-                    style: {
-                        fontSize: '12px',
-                        fontWeight: 400,
-                        lineHeight: '24px',
-                        borderRadius: '2px',
-                        paddingTop: 0,
-                        paddingBottom: 0,
-                        '&:hover': {
-                            backgroundColor: '#1565c0',
-                        },
-                    },
-                },
+                // {
+                //     props: { color: 'secondary' },
+                //     style: {
+                //         fontSize: '12px',
+                //         fontWeight: 400,
+                //         lineHeight: '24px',
+                //         borderRadius: '2px',
+                //         paddingTop: 0,
+                //         paddingBottom: 0,
+                //         '&:hover': {
+                //             backgroundColor: '#1565c0',
+                //         },
+                //     },
+                // },
                 {
                     props: { color: 'primary' },
                     style: {

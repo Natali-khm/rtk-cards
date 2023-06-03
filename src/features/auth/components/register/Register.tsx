@@ -1,16 +1,10 @@
-import { PasswordInput } from 'common/components/input/PasswordInput'
-import { EmailInput } from 'common/components/input/EmailInput'
-import { useRedirect } from '../../hooks/useRedirect'
-import { useAppForm } from '../../hooks/useAppForm'
-import { Form } from 'common/components/form/Form'
-import { paths } from 'common/constants/paths'
-import { useAuth } from '../../hooks/useAuth'
+import { EmailInput, Form, PasswordInput } from 'common/components'
+import { useAppForm, useAuth } from 'features/auth/hooks'
+import { paths } from 'common/constants'
 
 export const Register = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password', 'confirmPassword'])
-    const { onRegisterSubmit, isLoggedIn } = useAuth()
-
-    useRedirect(paths.LOGIN, isLoggedIn)
+    const { onRegisterSubmit } = useAuth()
 
     return (
         <Form

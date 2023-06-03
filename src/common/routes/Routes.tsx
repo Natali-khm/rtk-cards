@@ -1,17 +1,15 @@
+import { ForgotPassword, NewPassword, CheckEmail, Register, Login } from 'features/auth/components'
+import { Profile } from 'features/profile'
 import { createHashRouter } from 'react-router-dom'
-import { App } from 'app/App'
-import { paths } from '../constants/paths'
-import { Profile } from 'features/profile/Profile'
-import { Packs } from 'features/packs/components/Packs'
-import { Login } from 'features/auth/components/login/Login'
-import { Register } from 'features/auth/components/register/Register'
-import { CheckEmail } from 'features/auth/components/forgot_password/CheckEmail'
-import { NewPassword } from 'features/auth/components/forgot_password/NewPassword'
-import { ForgotPassword } from 'features/auth/components/forgot_password/ForgotPassword'
+import { Packs } from 'features/packs/components'
+import { ProtectedRoute } from './ProtectedRoute'
+import { paths } from 'common/constants'
+import { App } from 'app'
+import { Cards } from '../../features/cards/Cards'
 
 export const router = createHashRouter([
     {
-        path: paths.MAIN,
+        path: paths.PACKS,
         element: <App />,
         children: [
             {
@@ -36,12 +34,28 @@ export const router = createHashRouter([
             },
             {
                 path: paths.PROFILE,
-                element: <Profile />,
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: paths.PACKS,
-                element: <Packs />,
-            }
+                element: (
+                    <ProtectedRoute>
+                        <Packs />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: paths.CARDS,
+                element: (
+                    <ProtectedRoute>
+                        <Cards />
+                    </ProtectedRoute>
+                ),
+            },
         ],
     },
 ])

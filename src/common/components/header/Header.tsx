@@ -1,15 +1,15 @@
 import { HeaderProfile } from '../header_profile/HeaderProfile'
+import { useAuthSelectors } from 'features/auth/hooks'
 import { Link, useNavigate } from 'react-router-dom'
-import logo from 'assets/image/logo.svg'
-import { paths } from '../../constants/paths'
 import Container from '@mui/material/Container'
+import { paths } from '../../constants/paths'
 import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
-import { useAuth } from '../../../features/auth/hooks/useAuth'
+import logo from 'assets/image/logo.svg'
 
 export const Header = () => {
-    const { isLoggedIn } = useAuth()
+    const { isLoggedIn } = useAuthSelectors()
     const navigate = useNavigate()
 
     const redirectHandler = () => {

@@ -1,5 +1,5 @@
 export const paths = {
-    MAIN: '/',
+    PACKS: '/',
     PAGE_NOT_FOUND: '404',
     REGISTER: '/register',
     LOGIN: '/login',
@@ -8,7 +8,6 @@ export const paths = {
     SET_NEW_PASSWORD: '/set-new-password/:token',
     PROFILE: '/profile',
     CARDS: '/cards',
-    PACKS: '/packs',
     LEARN: '/learn',
     SANDBOX: '/sandbox',
 } as const

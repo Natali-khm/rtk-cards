@@ -1,13 +1,12 @@
-import { InfoMessage } from 'common/components/info_message/InfoMessage'
-import { Form } from 'common/components/form/Form'
+import { useAuthSelectors } from 'features/auth/hooks'
+import { Form, InfoMessage } from 'common/components'
 import { useNavigate } from 'react-router-dom'
-import { paths } from 'common/constants/paths'
-import { useAuth } from '../../hooks/useAuth'
 import emailImg from 'assets/image/email.svg'
+import { paths } from 'common/constants'
 
 export const CheckEmail = () => {
     const navigate = useNavigate()
-    const { email } = useAuth()
+    const { email } = useAuthSelectors()
 
     const checkEmailHandler = () => {
         navigate(paths.LOGIN)

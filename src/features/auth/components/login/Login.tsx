@@ -1,22 +1,15 @@
-import { PasswordInput } from 'common/components/input/PasswordInput'
-import { EmailInput } from 'common/components/input/EmailInput'
+import { PasswordInput, EmailInput, Form } from 'common/components'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { useRedirect } from '../../hooks/useRedirect'
-import { useAppForm } from '../../hooks/useAppForm'
-import { Form } from 'common/components/form/Form'
-import { paths } from 'common/constants/paths'
+import { useAppForm, useAuth } from 'features/auth/hooks'
 import Checkbox from '@mui/material/Checkbox'
-import { useAuth } from '../../hooks/useAuth'
+import { paths } from 'common/constants'
 import { Link } from 'react-router-dom'
 
 export const Login = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password'])
-    const { onLoginSubmit, isLoggedIn } = useAuth()
-
-    useRedirect(paths.PACKS, isLoggedIn)
+    const { onLoginSubmit } = useAuth()
 
     return (
-        
         <Form
             title={'Sign in'}
             btnTitle={'Sign in'}

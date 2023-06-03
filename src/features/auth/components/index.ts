@@ -1,0 +1,5 @@
+export { ForgotPassword } from './forgot_password/ForgotPassword'
+export { NewPassword } from './forgot_password/NewPassword'
+export { CheckEmail } from './forgot_password/CheckEmail'
+export { Register } from './register/Register'
+export { Login } from './login/Login'
