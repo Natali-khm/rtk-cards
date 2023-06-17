@@ -1,12 +1,13 @@
 import { instance } from '../../common/api/common.api'
 
 export const packsApi = {
-    getPacks() {
-        return instance.get<PackResponseType>('/cards/pack')
+    getPacks(params: GetPacksParamsType) {
+        // debugger
+        return instance.get<PackResponseType>('/cards/pack', {params})
     },
 }
 
-type CardPackType = {
+export type CardPackType = {
     _id: string
     user_id: string
     user_name: string
@@ -34,4 +35,15 @@ export type PackResponseType = {
     maxCardsCount: number
     token: string
     tokenDeathTime: number
+}
+
+export type GetPacksParamsType = {
+    packName?: string
+    min?: number
+    max?: number
+    sortPacks?: '0updated' | '1updated'
+    page?: number
+    pageCount?: number
+    user_id?: number
+    block?: boolean
 }

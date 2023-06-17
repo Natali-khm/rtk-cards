@@ -2,20 +2,21 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { SearchInput } from 'common/components/inputs/SearchInput'
-import TextField from '@mui/material/TextField'
-import Slider from '@mui/material/Slider'
 import { PacksPagination } from './PacksPagination'
 import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined'
 import IconButton from '@mui/material/IconButton'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import ButtonGroup from '@mui/material/ButtonGroup'
+import { useAppSelector } from '../../../common/hooks'
+import { CardsCountSlider } from './CardsCountSlider'
 
 type PacksFilterPropsType = {
     children: React.ReactNode
 }
 
 export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
+
     return (
         <Grid container alignItems={'flex-end'} /* style={{ border: '1px solid green' }} */>
             <Grid item md={5}>
@@ -38,15 +39,11 @@ export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
                 </Box>
             </Grid>
             <Grid item md={3} justifyContent={'center'} display={'flex'}>
-                <Box /* style={{ border: '1px solid' }} */>
+                <Box /* style={{ border: '1px solid' }}  */>
                     <Typography variant="h5" sx={{ mb: '8px' }}>
                         Number of cards
                     </Typography>
-                    <Grid container alignItems={'center'}>
-                        <TextField label="2" variant="outlined" size={'small'} sx={{ width: '42px' }} />
-                        <Slider defaultValue={50} sx={{ width: '200px' }} />
-                        <TextField label="10" variant="outlined" size={'small'} sx={{ width: '42px' }} />
-                    </Grid>
+                    <CardsCountSlider />
                 </Box>
             </Grid>
             <Grid item md={1} justifyContent={'flex-end'} display={'flex'}>

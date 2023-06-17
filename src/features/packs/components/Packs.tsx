@@ -7,12 +7,13 @@ import TextField from '@mui/material/TextField'
 import Slider from '@mui/material/Slider'
 import { PacksFilters } from './PacksFilters'
 import { PacksTable } from './PacksTable'
-import { useAppDispatch } from '../../../common/hooks'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsThunks } from '../packs.slice'
 import { useEffect } from 'react'
 
 export const Packs = () => {
     const dispatch = useAppDispatch()
+    const queryParams = useAppSelector((state) => state.packs.queryParams)
 
     useEffect(() => {
         dispatch(packsThunks.getPacks())
