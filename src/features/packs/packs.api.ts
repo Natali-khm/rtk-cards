@@ -1,9 +1,9 @@
-import { instance } from '../../common/api/common.api'
+import { instance } from 'common/api/common.api'
 
 export const packsApi = {
     getPacks(params: GetPacksParamsType) {
         // debugger
-        return instance.get<PackResponseType>('/cards/pack', {params})
+        return instance.get<PackResponseType>('/cards/pack', { params })
     },
 }
 
@@ -41,7 +41,15 @@ export type GetPacksParamsType = {
     packName?: string
     min?: number
     max?: number
-    sortPacks?: '0updated' | '1updated'
+    sortPacks?: string
+        // | '0updated'
+        // | '1updated'
+        // | '0name'
+        // | '1name'
+        // | '0cardsCount'
+        // | '1cardsCount'
+        // | '0user_name'
+        // | '1user_name'
     page?: number
     pageCount?: number
     user_id?: number

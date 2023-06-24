@@ -13,7 +13,7 @@ const slice = createSlice({
     reducers: {
         setQueryParams: (state, action: PayloadAction<{ params: GetPacksParamsType }>) => {
             state.queryParams = { ...state.queryParams, ...action.payload.params }
-            debugger
+            // debugger
         },
     },
     extraReducers: (builder) => {

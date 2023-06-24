@@ -11,7 +11,7 @@ import { packsReducer, packsThunks, packsActions } from '../packs.slice'
 import { useAppSelector } from 'common/hooks'
 
 export const PacksPagination = () => {
-    const selectStyle = {
+    const selectSX = {
         padding: '2px 2px',
         margin: '0 5px',
         borderRadius: '2px',
@@ -23,11 +23,12 @@ export const PacksPagination = () => {
         fontFamily: 'Montserrat',
         cursor: 'pointer',
     }
-
+    
     const dispatch = useDispatch()
     const cardPacksTotalCount = useAppSelector((state) => state.packs.packs.cardPacksTotalCount)
     const packsCountForPage = useAppSelector((state) => state.packs.packs.pageCount)
     const lastPage = Math.ceil(cardPacksTotalCount/packsCountForPage) || 0
+    const page = useAppSelector(state => state.packs.queryParams.page)
 
     const changePagination = (e: ChangeEvent<unknown>, page: number) => {
         dispatch(packsActions.setQueryParams({ params: { page } }))
@@ -39,9 +40,9 @@ export const PacksPagination = () => {
 
     return (
         <Grid container alignItems={'center'}>
-            <Pagination count={lastPage} shape="rounded" color={'primary'} onChange={changePagination} />
+            <Pagination count={lastPage} shape="rounded" color={'primary'} onChange={changePagination} page={page} />
             <span /* className={s.text1} */>Show</span>
-            <select style={selectStyle} value={packsCountForPage} onChange={changePacksCount}>
+            <select style={selectSX} value={packsCountForPage} onChange={changePacksCount}>
                 <option id={'option-4'} value={4}>
                     4
                 </option>
