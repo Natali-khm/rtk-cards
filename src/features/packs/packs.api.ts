@@ -42,16 +42,8 @@ export type GetPacksParamsType = {
     min?: number
     max?: number
     sortPacks?: string
-        // | '0updated'
-        // | '1updated'
-        // | '0name'
-        // | '1name'
-        // | '0cardsCount'
-        // | '1cardsCount'
-        // | '0user_name'
-        // | '1user_name'
     page?: number
     pageCount?: number
-    user_id?: number
+    user_id?: string
     block?: boolean
 }

@@ -8,7 +8,8 @@ import { useDebounce } from '../../hooks/useDebounce'
 import { useSearchParams } from 'react-router-dom'
 
 export const SearchInput = () => {
-    const packName = useAppSelector(state => state.packs.queryParams.packName)
+    const packName = useAppSelector((state) => state.packs.queryParams.packName)
+
     const [find, setFind] = useState(packName)
 
     const debouncedValue = useDebounce(find, 1000)

@@ -13,7 +13,6 @@ const slice = createSlice({
     reducers: {
         setQueryParams: (state, action: PayloadAction<{ params: GetPacksParamsType }>) => {
             state.queryParams = { ...state.queryParams, ...action.payload.params }
-            // debugger
         },
     },
     extraReducers: (builder) => {
@@ -35,7 +34,6 @@ const getPacks = createAppAsyncThunk<PackResponseType>('packs/getPacks', async (
     const { getState } = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
         const params = getState().packs.queryParams
-        // debugger
         const res = await packsApi.getPacks({ ...params })
         return res.data
     })
