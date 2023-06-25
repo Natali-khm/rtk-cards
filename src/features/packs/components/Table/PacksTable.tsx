@@ -30,15 +30,17 @@ export const PacksTable = () => {
 
                 <TableBody>
                     {isPacksLoading
-                        ? rowsForSkeleton.map(() => (
-                              <TableRow>
-                                  {tableTitles.map(() => (
-                                      <TableCell>
+                        ? rowsForSkeleton.map((_, i) => (
+                              <TableRow key={i}>
+                                  {tableTitles.map((_, i) => (
+                                      <TableCell key={i}>
                                           <Skeleton height={20} animation="wave" />
                                       </TableCell>
                                   ))}
                               </TableRow>
                           ))
+                        : !cardPacks?.length
+                        ? <TableRow><TableCell>nothing found</TableCell></TableRow> 
                         : cardPacks?.map((pack) => (
                               <TableRow key={pack._id}>
                                   <TableCell>{pack.name}</TableCell>
