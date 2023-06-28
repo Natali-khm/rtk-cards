@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Slider from '@mui/material/Slider'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsActions } from '../packs.slice'
+import { useSearchParams } from 'react-router-dom'
 
 export const CardsCountSlider = () => {
     const packs = useAppSelector((state) => state.packs.packs)
@@ -11,6 +12,7 @@ export const CardsCountSlider = () => {
     const dispatch = useAppDispatch()
     const [minValue, setMinValue] = useState(queryParams.min)
     const [maxValue, setMaxValue] = useState(queryParams.max)
+    const [searchParams, setSearchParams] = useSearchParams([])
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         if (Array.isArray(newValue)) {
@@ -18,8 +20,15 @@ export const CardsCountSlider = () => {
             setMaxValue(newValue[1])
         }
     }
-    const setRangeValues = () => {
+
+    const sendQuery = () => {
         dispatch(packsActions.setQueryParams({ params: { min: minValue, max: maxValue } }))
+    }
+
+    const setRangeValues = () => {
+        const params = Object.fromEntries(searchParams)
+        setSearchParams({ ...params, min: `${minValue}`, max: `${maxValue}` })
+        sendQuery()
     }
 
     const valuesStyle = {
@@ -29,9 +38,16 @@ export const CardsCountSlider = () => {
             fontFamily: 'Montserrat',
             fontSize: '14px',
             lineHeight: '24px',
-            textAlign: 'center'
+            textAlign: 'center',
         },
     }
+
+    useEffect(() => {
+        const params = Object.fromEntries(searchParams)
+        setMinValue(+params.min || 0)
+        setMaxValue(+params.max || 0)
+        sendQuery()
+    }, [])
 
     return (
         <Grid container alignItems={'center'}>

@@ -23,7 +23,7 @@ export const Login = () => {
                 label={'Password'}
                 name={'password'}
                 errors={errors}
-                defaultValue={'qwerty12345$'}
+                defaultValue={'wwwwwwww'}
             />
             <FormControlLabel
                 label={'Remember me'}

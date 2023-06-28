@@ -19,7 +19,8 @@ export const SearchInput = () => {
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
         const find = e.currentTarget.value
         setFind(find)
-        setSearchParams({ find })
+        const params = Object.fromEntries(searchParams)
+        setSearchParams({ ...params, find })
     }
 
     const sendQuery = (value: string) => {
@@ -27,13 +28,14 @@ export const SearchInput = () => {
     }
 
     useEffect(() => {
-        const params = Object.fromEntries(searchParams)
-        sendQuery(params.find || '')
+        sendQuery(debouncedValue)
     }, [debouncedValue])
 
     useEffect(() => {
-        setFind(packName)
-    }, [packName])
+        const params = Object.fromEntries(searchParams)
+        sendQuery(params.find || '')
+        setFind(params.find || '')
+    }, [])
 
     return (
         <TextField
