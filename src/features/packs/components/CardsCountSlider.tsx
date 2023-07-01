@@ -20,7 +20,7 @@ export const CardsCountSlider = () => {
             setMaxValue(newValue[1])
         }
     }
-
+// debugger
     const sendQuery = () => {
         dispatch(packsActions.setQueryParams({ params: { min: minValue, max: maxValue } }))
     }
@@ -43,6 +43,11 @@ export const CardsCountSlider = () => {
     }
 
     useEffect(() => {
+        sendQuery()
+    }, [minValue, maxValue ])
+
+    useEffect(() => {
+        // debugger
         const params = Object.fromEntries(searchParams)
         setMinValue(+params.min || 0)
         setMaxValue(+params.max || 0)

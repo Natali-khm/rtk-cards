@@ -6,33 +6,27 @@ import { packsActions } from '../packs.slice'
 import { useSearchParams } from 'react-router-dom'
 
 export const ShowPacksCards = () => {
-    const [active, setActive] = useState('')
     const dispatch = useAppDispatch()
-    const userId = useAppSelector((state) => state.auth.profile?._id)
+    const userId = useAppSelector((state) => state.packs.queryParams.user_id)
+    const profileId = useAppSelector((state) => state.auth.profile?._id)
     const [searchParams, setSearchParams] = useSearchParams([])
 
     const sendQuery = (value: string) => {
-        dispatch(packsActions.setQueryParams({ params: { user_id: value === 'my' ? userId : '', page: 1 } }))
+        dispatch(packsActions.setQueryParams({ params: { user_id: value === 'my' ? profileId : '', page: 1 } }))
     }
 
-    const onsetActive = (value: string) => () => {
-        setActive(value)
+    const setActive = (value: string) => () => {
         const params = Object.fromEntries(searchParams)
-
         setSearchParams({ ...params, packs: value })
+        sendQuery(value)
     }
-
-    useEffect(() => {
-        sendQuery(active || '')
-    }, [active])
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams)
         sendQuery(params.packs || '')
-        setActive(params.packs || '')
     }, [])
 
-        const buttonSX = {
+    const buttonSX = {
         borderRadius: 0,
         backgroundColor: 'white',
         width: '100px',
@@ -54,10 +48,10 @@ export const ShowPacksCards = () => {
 
     return (
         <ButtonGroup variant="outlined" aria-label="outlined button group">
-            <Button sx={active === 'my' ? activeSX : buttonSX} onClick={onsetActive('my')}>
+            <Button sx={userId ? activeSX : buttonSX} onClick={setActive('my')}>
                 My
             </Button>
-            <Button sx={active === '' ? activeSX : buttonSX} onClick={onsetActive('')}>
+            <Button sx={!userId ? activeSX : buttonSX} onClick={setActive('')}>
                 All
             </Button>
         </ButtonGroup>

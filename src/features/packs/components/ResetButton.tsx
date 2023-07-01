@@ -9,7 +9,7 @@ export const ResetButton = () => {
     const [searchParams, setSearchParams] = useSearchParams([])
 
     const resetHandler = () => {
-        dispatch(packsActions.setQueryParams({ params: { page: 1, pageCount: 4, min: 0, max: 0, packName: '' } }))
+        dispatch(packsActions.setQueryParams({ params: { page: 1, pageCount: 4, min: 0, max: 0, packName: '', user_id: '' } }))
         setSearchParams({})
     }
 
