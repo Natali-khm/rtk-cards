@@ -1,13 +1,8 @@
 import React, { ChangeEvent } from 'react'
 import Pagination from '@mui/material/Pagination'
-import Box from '@mui/material/Box'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
 import Grid from '@mui/material/Grid'
 import { useDispatch } from 'react-redux'
-import { packsReducer, packsThunks, packsActions } from '../packs.slice'
+import { packsReducer, packsActions } from '../packs.slice'
 import { useAppSelector } from 'common/hooks'
 
 export const PacksPagination = () => {
@@ -31,11 +26,11 @@ export const PacksPagination = () => {
     const page = useAppSelector(state => state.packs.queryParams.page)
 
     const changePagination = (e: ChangeEvent<unknown>, page: number) => {
-        dispatch(packsActions.setQueryParams({ params: { page } }))
+        dispatch(packsActions.setQueryParams({ params: { page, min:0, max:0 } }))
     }
 
     const changePacksCount = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(packsActions.setQueryParams({ params: { pageCount: +e.currentTarget.value } }))
+        dispatch(packsActions.setQueryParams({ params: { pageCount: +e.currentTarget.value,  min:0, max:0 } }))
     }
 
     return (

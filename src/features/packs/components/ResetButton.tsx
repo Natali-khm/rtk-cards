@@ -1,15 +1,16 @@
 import IconButton from '@mui/material/IconButton'
 import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined'
-import { useAppDispatch } from 'common/hooks'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsActions } from '../packs.slice'
 import { useSearchParams } from 'react-router-dom'
 
 export const ResetButton = () => {
     const dispatch = useAppDispatch()
     const [searchParams, setSearchParams] = useSearchParams([])
+    const maxCards = useAppSelector((state) => state.packs.packs.maxCardsCount)
 
     const resetHandler = () => {
-        dispatch(packsActions.setQueryParams({ params: { page: 1, pageCount: 4, min: 0, max: 0, packName: '', user_id: '' } }))
+        dispatch(packsActions.setQueryParams({ params: { page: 1, pageCount: 4, min: 0, max: maxCards, packName: '', user_id: '' } }))
         setSearchParams({})
     }
 

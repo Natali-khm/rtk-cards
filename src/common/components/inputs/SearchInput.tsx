@@ -24,7 +24,7 @@ export const SearchInput = () => {
     }
 
     const sendQuery = (value: string) => {
-        dispatch(packsActions.setQueryParams({ params: { packName: value } }))
+        dispatch(packsActions.setQueryParams({ params: { packName: value, min:0, max:0 } }))
     }
 
     useEffect(() => {

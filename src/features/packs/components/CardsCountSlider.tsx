@@ -7,11 +7,13 @@ import { packsActions } from '../packs.slice'
 import { useSearchParams } from 'react-router-dom'
 
 export const CardsCountSlider = () => {
-    const packs = useAppSelector((state) => state.packs.packs)
-    const queryParams = useAppSelector((state) => state.packs.queryParams)
+    const queryMin = useAppSelector((state) => state.packs.queryParams.min)
+    const queryMax = useAppSelector((state) => state.packs.queryParams.max)
+    const maxCards = useAppSelector((state) => state.packs.packs.maxCardsCount)
     const dispatch = useAppDispatch()
-    const [minValue, setMinValue] = useState(queryParams.min)
-    const [maxValue, setMaxValue] = useState(queryParams.max)
+
+    const [minValue, setMinValue] = useState(queryMin)
+    const [maxValue, setMaxValue] = useState(queryMax)
     const [searchParams, setSearchParams] = useSearchParams([])
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
@@ -20,16 +22,30 @@ export const CardsCountSlider = () => {
             setMaxValue(newValue[1])
         }
     }
-// debugger
-    const sendQuery = () => {
-        dispatch(packsActions.setQueryParams({ params: { min: minValue, max: maxValue } }))
+    const sendQuery = (min: number, max: number) => {
+        debugger
+        dispatch(packsActions.setQueryParams({ params: { min, max } }))
     }
 
     const setRangeValues = () => {
         const params = Object.fromEntries(searchParams)
         setSearchParams({ ...params, min: `${minValue}`, max: `${maxValue}` })
-        sendQuery()
+        sendQuery(minValue, maxValue)
     }
+
+    useEffect(() => {
+        debugger
+        setMinValue(queryMin)
+        setMaxValue(queryMax)
+    }, [queryMin, queryMax])                     // for updating
+
+    useEffect(() => {
+        debugger
+        const params = Object.fromEntries(searchParams)
+        setMinValue(+params.min || 0)
+        setMaxValue(+params.max || maxCards)
+        sendQuery(+params.min || 0, +params.max || maxCards)
+    }, [maxCards])                              // for initialization
 
     const valuesStyle = {
         backgroundColor: 'white',
@@ -41,23 +57,10 @@ export const CardsCountSlider = () => {
             textAlign: 'center',
         },
     }
-
-    useEffect(() => {
-        sendQuery()
-    }, [minValue, maxValue ])
-
-    useEffect(() => {
-        // debugger
-        const params = Object.fromEntries(searchParams)
-        setMinValue(+params.min || 0)
-        setMaxValue(+params.max || 0)
-        sendQuery()
-    }, [])
-
     return (
         <Grid container alignItems={'center'}>
             <TextField
-                value={minValue || packs.minCardsCount}
+                value={minValue}
                 variant="outlined"
                 size={'small'}
                 sx={valuesStyle}
@@ -65,15 +68,15 @@ export const CardsCountSlider = () => {
                 onBlur={setRangeValues}
             />
             <Slider
-                value={[minValue || 0, maxValue || packs.maxCardsCount]}
+                value={[minValue, maxValue]}
                 size="small"
                 sx={{ width: '155px', m: '0 12px' }}
                 onChange={handleSliderChange}
                 onChangeCommitted={setRangeValues}
-                max={packs.maxCardsCount}
+                max={maxCards}
             />
             <TextField
-                value={maxValue || packs.maxCardsCount}
+                value={maxValue}
                 variant="outlined"
                 size={'small'}
                 sx={valuesStyle}

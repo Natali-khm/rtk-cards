@@ -21,7 +21,7 @@ export const PacksTableHead = () => {
         setOrder(isAsc ? 'desc' : 'asc')
         setOrderBy(property)
         dispatch(
-            packsActions.setQueryParams({ params: { sortPacks: isAsc ? `0${property}` : `1${property}`, page: 1 } })
+            packsActions.setQueryParams({ params: { sortPacks: isAsc ? `0${property}` : `1${property}`, page: 1,  min:0, max:0 } })
         )
     }
     const cellSX = {

@@ -6,7 +6,7 @@ import { thunkTryCatch } from 'common/utils'
 const slice = createSlice({
     name: 'packs',
     initialState: {
-        packs: { minCardsCount: 0, maxCardsCount: 0 } as PackResponseType,
+        packs: { /* minCardsCount: 0, maxCardsCount: 100  */} as PackResponseType,
         queryParams: { page: 1, pageCount: 4, min: 0, max: 0, packName: '' } as GetPacksParamsType,
         isLoading: false,
     },

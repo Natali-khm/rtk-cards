@@ -22,6 +22,12 @@ export const PacksTable = () => {
         let date = new Date(pack.updated)
         return formatter.format(date)
     }
+    const cellSX = {
+        width: '260px',
+        maxWidth: '260px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    }
 
     return (
         <TableContainer component={Paper} sx={{ mt: '24px', mb: '40px' }}>
@@ -29,27 +35,31 @@ export const PacksTable = () => {
                 <PacksTableHead />
 
                 <TableBody>
-                    {isPacksLoading
-                        ? rowsForSkeleton.map((_, i) => (
-                              <TableRow key={i}>
-                                  {tableTitles.map((_, i) => (
-                                      <TableCell key={i}>
-                                          <Skeleton height={20} animation="wave" />
-                                      </TableCell>
-                                  ))}
-                              </TableRow>
-                          ))
-                        : !cardPacks?.length
-                        ? <TableRow><TableCell>nothing found</TableCell></TableRow> 
-                        : cardPacks?.map((pack) => (
-                              <TableRow key={pack._id}>
-                                  <TableCell>{pack.name}</TableCell>
-                                  <TableCell>{pack.cardsCount}</TableCell>
-                                  <TableCell>{formatDate(pack)}</TableCell>
-                                  <TableCell>{pack.user_name}</TableCell>
-                                  <TableCell>#</TableCell>
-                              </TableRow>
-                          ))}
+                    {isPacksLoading ? (
+                        rowsForSkeleton.map((_, i) => (
+                            <TableRow key={i}>
+                                {tableTitles.map((_, i) => (
+                                    <TableCell key={i}>
+                                        <Skeleton height={20} animation="wave" />
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        ))
+                    ) : !cardPacks?.length ? (
+                        <TableRow>
+                            <TableCell>nothing found</TableCell>
+                        </TableRow>
+                    ) : (
+                        cardPacks?.map((pack) => (
+                            <TableRow key={pack._id}>
+                                <TableCell sx={cellSX}>{pack.name}</TableCell>
+                                <TableCell>{pack.cardsCount}</TableCell>
+                                <TableCell>{formatDate(pack)}</TableCell>
+                                <TableCell>{pack.user_name}</TableCell>
+                                <TableCell>#</TableCell>
+                            </TableRow>
+                        ))
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
