@@ -10,7 +10,7 @@ export const ResetButton = () => {
     const maxCards = useAppSelector((state) => state.packs.packs.maxCardsCount)
 
     const resetHandler = () => {
-        dispatch(packsActions.setQueryParams({ params: { page: 1, pageCount: 4, min: 0, max: maxCards, packName: '', user_id: '' } }))
+        dispatch(packsActions.setQueryParams({ params: { page: 1, pageCount: 4, min: 0, max: maxCards, packName: '', user_id: '', sortPacks: '' } }))
         setSearchParams({})
     }
 

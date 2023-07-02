@@ -12,12 +12,17 @@ export const ShowPacksCards = () => {
     const [searchParams, setSearchParams] = useSearchParams([])
 
     const sendQuery = (value: string) => {
-        dispatch(packsActions.setQueryParams({ params: { user_id: value === 'my' ? profileId : '', page: 1, min: 0, max: 0 } }))
+        dispatch(packsActions.setQueryParams({ params: { user_id: value === 'my' ? profileId : '' } }))
     }
 
     const setActive = (value: string) => () => {
         const params = Object.fromEntries(searchParams)
-        setSearchParams({ ...params, packs: value })
+        if (value) {
+            setSearchParams({ ...params, packs: value }) 
+        } else {
+            delete params.packs
+            setSearchParams({ ...params})
+        }
         sendQuery(value)
     }
 

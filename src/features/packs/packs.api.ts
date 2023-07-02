@@ -39,8 +39,8 @@ export type PackResponseType = {
 
 export type GetPacksParamsType = {
     packName?: string
-    min: number
-    max: number
+    min?: number
+    max?: number
     sortPacks?: string
     page?: number
     pageCount?: number

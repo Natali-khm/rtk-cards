@@ -27,6 +27,7 @@ export const PacksTable = () => {
         maxWidth: '260px',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        padding: '21px 16px'
     }
 
     return (
@@ -40,7 +41,7 @@ export const PacksTable = () => {
                             <TableRow key={i}>
                                 {tableTitles.map((_, i) => (
                                     <TableCell key={i}>
-                                        <Skeleton height={20} animation="wave" />
+                                        <Skeleton height={30} animation="wave" />
                                     </TableCell>
                                 ))}
                             </TableRow>

@@ -1,9 +1,10 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Grid from '@mui/material/Grid'
 import { useDispatch } from 'react-redux'
 import { packsReducer, packsActions } from '../packs.slice'
 import { useAppSelector } from 'common/hooks'
+import { useSearchParams } from 'react-router-dom'
 
 export const PacksPagination = () => {
     const selectSX = {
@@ -18,26 +19,63 @@ export const PacksPagination = () => {
         fontFamily: 'Montserrat',
         cursor: 'pointer',
     }
-    
+
     const dispatch = useDispatch()
     const cardPacksTotalCount = useAppSelector((state) => state.packs.packs.cardPacksTotalCount)
-    const packsCountForPage = useAppSelector((state) => state.packs.packs.pageCount)
-    const lastPage = Math.ceil(cardPacksTotalCount/packsCountForPage) || 0
-    const page = useAppSelector(state => state.packs.queryParams.page)
+    
+    const packsCountForPage = useAppSelector((state) => state.packs.queryParams.pageCount)
+    const pageParams = useAppSelector((state) => state.packs.queryParams.page)
+    const [page, setPage] = useState(pageParams)
+    const [pageCount, setCount] = useState(packsCountForPage || 4)
 
-    const changePagination = (e: ChangeEvent<unknown>, page: number) => {
-        dispatch(packsActions.setQueryParams({ params: { page, min:0, max:0 } }))
+    
+    const lastPage = Math.ceil(cardPacksTotalCount / pageCount) || 0
+    const [searchParams, setSearchParams] = useSearchParams([])
+
+
+// debugger
+    const onSetQueryParams = (newPage: number, newPageCount: number) => {
+        // debugger
+        dispatch(packsActions.setQueryParams({ params: { page: newPage, pageCount: newPageCount } }))
+    }
+
+    const onSetSearchParams = (page: number, count: number) => {
+        // debugger
+        const params = Object.fromEntries(searchParams)
+        setSearchParams({ ...params, page: `${page}`, count: `${count}` })
+    }
+
+    const changePagination = (e: ChangeEvent<unknown>, newPage: number) => {
+        // debugger
+        setPage(newPage)
+        onSetQueryParams(newPage, pageCount)
+        onSetSearchParams(newPage, pageCount)
     }
 
     const changePacksCount = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(packsActions.setQueryParams({ params: { pageCount: +e.currentTarget.value,  min:0, max:0 } }))
+        // debugger
+        setCount(+e.currentTarget.value)
+        page && onSetQueryParams(page, +e.currentTarget.value)
+        page && onSetSearchParams(page, +e.currentTarget.value)
     }
+
+    useEffect(() => {
+        // debugger
+        setPage(pageParams)
+        packsCountForPage && setCount(packsCountForPage)
+    }, [pageParams, packsCountForPage])                             // to react to reset
+
+    useEffect(() => {
+        // debugger
+        const params = Object.fromEntries(searchParams)
+        onSetQueryParams(+params.page || 1, +params.count || 4)       // (without setPage, cause it changes pageParams, but pageParams causes setPage())
+    }, [])                                                          // for initialization, take params from search params
 
     return (
         <Grid container alignItems={'center'}>
             <Pagination count={lastPage} shape="rounded" color={'primary'} onChange={changePagination} page={page} />
-            <span /* className={s.text1} */>Show</span>
-            <select style={selectSX} value={packsCountForPage} onChange={changePacksCount}>
+            <span /* className={s.text1} */ >Show</span>
+            <select style={selectSX} value={pageCount} onChange={changePacksCount}>
                 <option id={'option-4'} value={4}>
                     4
                 </option>

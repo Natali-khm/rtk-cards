@@ -10,7 +10,7 @@ import { useSearchParams } from 'react-router-dom'
 export const SearchInput = () => {
     const packName = useAppSelector((state) => state.packs.queryParams.packName)
 
-    const [find, setFind] = useState(packName)
+    const [find, setFind] = useState('')
 
     const debouncedValue = useDebounce(find, 1000)
     const dispatch = useAppDispatch()
@@ -24,7 +24,8 @@ export const SearchInput = () => {
     }
 
     const sendQuery = (value: string) => {
-        dispatch(packsActions.setQueryParams({ params: { packName: value, min:0, max:0 } }))
+        // debugger
+        dispatch(packsActions.setQueryParams({ params: { packName: value} }))
     }
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export const SearchInput = () => {
         const params = Object.fromEntries(searchParams)
         sendQuery(params.find || '')
         setFind(params.find || '')
-    }, [])
+    }, [packName])
 
     return (
         <TextField

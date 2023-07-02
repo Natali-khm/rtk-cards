@@ -7,13 +7,13 @@ import { packsActions } from '../packs.slice'
 import { useSearchParams } from 'react-router-dom'
 
 export const CardsCountSlider = () => {
+    const dispatch = useAppDispatch()
     const queryMin = useAppSelector((state) => state.packs.queryParams.min)
     const queryMax = useAppSelector((state) => state.packs.queryParams.max)
     const maxCards = useAppSelector((state) => state.packs.packs.maxCardsCount)
-    const dispatch = useAppDispatch()
 
-    const [minValue, setMinValue] = useState(queryMin)
-    const [maxValue, setMaxValue] = useState(queryMax)
+    const [min, setMinValue] = useState(0)
+    const [max, setMaxValue] = useState(0)
     const [searchParams, setSearchParams] = useSearchParams([])
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
@@ -22,30 +22,28 @@ export const CardsCountSlider = () => {
             setMaxValue(newValue[1])
         }
     }
+
     const sendQuery = (min: number, max: number) => {
-        debugger
         dispatch(packsActions.setQueryParams({ params: { min, max } }))
     }
 
     const setRangeValues = () => {
         const params = Object.fromEntries(searchParams)
-        setSearchParams({ ...params, min: `${minValue}`, max: `${maxValue}` })
-        sendQuery(minValue, maxValue)
+        setSearchParams({ ...params, min: `${min}`, max: `${max}` })
+        sendQuery(min, max)
     }
 
     useEffect(() => {
-        debugger
-        setMinValue(queryMin)
-        setMaxValue(queryMax)
-    }, [queryMin, queryMax])                     // for updating
+        setMinValue(queryMin || 0)
+        setMaxValue(queryMax || 0)
+    }, [queryMin, queryMax]) // for updating
 
     useEffect(() => {
-        debugger
         const params = Object.fromEntries(searchParams)
-        setMinValue(+params.min || 0)
+        params.min && setMinValue(+params.min)
         setMaxValue(+params.max || maxCards)
         sendQuery(+params.min || 0, +params.max || maxCards)
-    }, [maxCards])                              // for initialization
+    }, [maxCards]) // for initialization and when the profile is received (know the maxCards value)
 
     const valuesStyle = {
         backgroundColor: 'white',
@@ -57,10 +55,11 @@ export const CardsCountSlider = () => {
             textAlign: 'center',
         },
     }
+
     return (
         <Grid container alignItems={'center'}>
             <TextField
-                value={minValue}
+                value={min}
                 variant="outlined"
                 size={'small'}
                 sx={valuesStyle}
@@ -68,7 +67,7 @@ export const CardsCountSlider = () => {
                 onBlur={setRangeValues}
             />
             <Slider
-                value={[minValue, maxValue]}
+                value={[min, max]}
                 size="small"
                 sx={{ width: '155px', m: '0 12px' }}
                 onChange={handleSliderChange}
@@ -76,7 +75,7 @@ export const CardsCountSlider = () => {
                 max={maxCards}
             />
             <TextField
-                value={maxValue}
+                value={max || 0} // to avoid a warning when input value is initialized to undefined
                 variant="outlined"
                 size={'small'}
                 sx={valuesStyle}
