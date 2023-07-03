@@ -2,41 +2,28 @@ import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { packsActions } from '../../../features/packs/packs.slice'
 import { useDebounce } from '../../hooks/useDebounce'
-import { useSearchParams } from 'react-router-dom'
+import { usePacksParams } from '../../../features/packs/hooks/usePacksParams'
 
 export const SearchInput = () => {
-    const packName = useAppSelector((state) => state.packs.queryParams.packName)
-
     const [find, setFind] = useState('')
 
     const debouncedValue = useDebounce(find, 1000)
-    const dispatch = useAppDispatch()
-    const [searchParams, setSearchParams] = useSearchParams([])
+    const { setSearchParams, params, setQueryParams, packName } = usePacksParams()
 
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
         const find = e.currentTarget.value
         setFind(find)
-        const params = Object.fromEntries(searchParams)
         setSearchParams({ ...params, find })
     }
 
-    const sendQuery = (value: string) => {
-        // debugger
-        dispatch(packsActions.setQueryParams({ params: { packName: value} }))
-    }
-
     useEffect(() => {
-        sendQuery(debouncedValue)
+        setQueryParams({ packName: debouncedValue })
     }, [debouncedValue])
 
     useEffect(() => {
-        const params = Object.fromEntries(searchParams)
-        sendQuery(params.find || '')
-        setFind(params.find || '')
-    }, [packName])
+        setFind(packName || '')
+    }, [packName]) // to react to reset
 
     return (
         <TextField

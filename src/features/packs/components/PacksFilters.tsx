@@ -1,21 +1,37 @@
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
 import { SearchInput } from 'common/components/inputs/SearchInput'
 import { PacksPagination } from './PacksPagination'
-import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
-import ButtonGroup from '@mui/material/ButtonGroup'
-import { useAppSelector } from '../../../common/hooks'
+import { useAppDispatch, useAppSelector } from '../../../common/hooks'
 import { CardsCountSlider } from './CardsCountSlider'
 import { ResetButton } from './ResetButton'
 import { ShowPacksCards } from './ShowPacksCards'
+import { packsActions } from '../packs.slice'
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { usePacksParams } from '../hooks/usePacksParams'
 
 type PacksFilterPropsType = {
     children: React.ReactNode
 }
 
 export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
+    const { setQueryParams, params, profileId, maxCards } = usePacksParams()
+
+    useEffect(() => {
+        setQueryParams({
+            ...params,
+            packName: params.find,
+            user_id: params.packs === 'my' ? profileId : '',
+            min: +params.min || 0,
+            max: +params.max || maxCards || 0,
+            sortPacks: params.order || '',
+            page: +params.page || 1,
+            pageCount: +params.count || 4,
+        })
+    }, [])
+
     return (
         <Grid container alignItems={'flex-end'} /* style={{ border: '1px solid green' }} */>
             <Grid item md={5}>

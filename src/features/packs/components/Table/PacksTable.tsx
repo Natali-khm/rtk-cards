@@ -33,7 +33,7 @@ export const PacksTable = () => {
     return (
         <TableContainer component={Paper} sx={{ mt: '24px', mb: '40px' }}>
             <Table>
-                <PacksTableHead />
+                <PacksTableHead/>
 
                 <TableBody>
                     {isPacksLoading ? (

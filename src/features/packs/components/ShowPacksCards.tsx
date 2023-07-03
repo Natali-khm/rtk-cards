@@ -1,36 +1,8 @@
 import ButtonGroup from '@mui/material/ButtonGroup'
 import Button from '@mui/material/Button'
-import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'common/hooks'
-import { packsActions } from '../packs.slice'
-import { useSearchParams } from 'react-router-dom'
+import { usePacksParams } from '../hooks/usePacksParams'
 
 export const ShowPacksCards = () => {
-    const dispatch = useAppDispatch()
-    const userId = useAppSelector((state) => state.packs.queryParams.user_id)
-    const profileId = useAppSelector((state) => state.auth.profile?._id)
-    const [searchParams, setSearchParams] = useSearchParams([])
-
-    const sendQuery = (value: string) => {
-        dispatch(packsActions.setQueryParams({ params: { user_id: value === 'my' ? profileId : '' } }))
-    }
-
-    const setActive = (value: string) => () => {
-        const params = Object.fromEntries(searchParams)
-        if (value) {
-            setSearchParams({ ...params, packs: value }) 
-        } else {
-            delete params.packs
-            setSearchParams({ ...params})
-        }
-        sendQuery(value)
-    }
-
-    useEffect(() => {
-        const params = Object.fromEntries(searchParams)
-        sendQuery(params.packs || '')
-    }, [])
-
     const buttonSX = {
         borderRadius: 0,
         backgroundColor: 'white',
@@ -49,6 +21,18 @@ export const ShowPacksCards = () => {
         width: '100px',
         boxShadow: 0,
         color: 'white',
+    }
+
+    const { setSearchParams, params, setQueryParams, userId, profileId } = usePacksParams()
+
+    const setActive = (value: string) => () => {
+        if (value) {
+            setSearchParams({ ...params, packs: value })
+        } else {
+            delete params.packs // if userId = ''
+            setSearchParams(params)
+        }
+        setQueryParams({ user_id: value === 'my' ? profileId : '' })
     }
 
     return (

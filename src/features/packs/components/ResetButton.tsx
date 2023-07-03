@@ -4,6 +4,11 @@ import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsActions } from '../packs.slice'
 import { useSearchParams } from 'react-router-dom'
 
+type PropsType = {
+    test: number
+}
+
+
 export const ResetButton = () => {
     const dispatch = useAppDispatch()
     const [searchParams, setSearchParams] = useSearchParams([])
@@ -23,3 +28,4 @@ export const ResetButton = () => {
         </IconButton>
     )
 }
+ 
