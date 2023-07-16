@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Slider from '@mui/material/Slider'
 import { usePacksParams } from '../hooks/usePacksParams'
+import { usePacksSelectors } from '../hooks/usePacksSelectors'
 
 export const CardsCountSlider = () => {
     const valuesStyle = {
@@ -19,7 +20,8 @@ export const CardsCountSlider = () => {
     const [min, setMinValue] = useState(0)
     const [max, setMaxValue] = useState(0)
 
-    const { setSearchParams, params, setQueryParams, queryMin, queryMax, maxCards } = usePacksParams()
+    const { setSearchParams, params, setQueryParams } = usePacksParams()
+    const { queryMin, queryMax, maxCards, packsAreLoading } = usePacksSelectors()
 
     const handleSliderChange = (e: Event, newValue: number | number[]) => {
         if (Array.isArray(newValue)) {
@@ -34,7 +36,6 @@ export const CardsCountSlider = () => {
     }
 
     useEffect(() => {
-        debugger
         setMinValue(queryMin || 0)
         setMaxValue(queryMax || maxCards)
     }, [queryMin, queryMax, maxCards]) // for updating and when the profile is received (know the maxCards value)
@@ -48,6 +49,7 @@ export const CardsCountSlider = () => {
                 sx={valuesStyle}
                 onChange={(e) => setMinValue(+e.currentTarget.value)}
                 onBlur={setRangeValues}
+                disabled={packsAreLoading}
             />
             <Slider
                 value={[min, max]}
@@ -56,6 +58,7 @@ export const CardsCountSlider = () => {
                 onChange={handleSliderChange}
                 onChangeCommitted={setRangeValues}
                 max={maxCards}
+                disabled={packsAreLoading}
             />
             <TextField
                 value={max || 0} // to avoid a warning when input value is initialized to undefined
@@ -64,6 +67,7 @@ export const CardsCountSlider = () => {
                 sx={valuesStyle}
                 onChange={(e) => setMaxValue(+e.currentTarget.value)}
                 onBlur={setRangeValues}
+                disabled={packsAreLoading}
             />
         </Grid>
     )

@@ -8,7 +8,7 @@ const pending = isPending(
     authThunks.logout,
     authThunks.forgotPassword,
     authThunks.setNewPassword,
-    authThunks.updateProfile,
+    authThunks.updateProfile
 )
 
 const fulfilled = isFulfilled(
@@ -17,8 +17,7 @@ const fulfilled = isFulfilled(
     authThunks.logout,
     authThunks.forgotPassword,
     authThunks.setNewPassword,
-    authThunks.updateProfile,
-
+    authThunks.updateProfile
 )
 
 const rejected = isRejected(
@@ -28,6 +27,9 @@ const rejected = isRejected(
     authThunks.forgotPassword,
     authThunks.setNewPassword,
     authThunks.updateProfile,
+    packsThunks.getPacks,
+    packsThunks.deletePack,
+    packsThunks.updatePack
 )
 
 export { pending, fulfilled, rejected }

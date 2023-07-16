@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from 'common/hooks'
+import { useAppDispatch } from 'common/hooks'
 import LinearProgress from '@mui/material/LinearProgress'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { authThunks } from 'features/auth/auth.slice'
@@ -7,9 +7,8 @@ import { AppOutlet } from './AppOutlet'
 import { useEffect } from 'react'
 
 export function App() {
-    const isLoading = useAppSelector((state) => state.app.isLoading)
     const dispatch = useAppDispatch()
-    const { isInitialized, isLoggedIn } = useAuthSelectors()
+    const { isInitialized, isLoggedIn, isLoading } = useAuthSelectors()
 
     useEffect(() => {
         dispatch(authThunks.isAuth())

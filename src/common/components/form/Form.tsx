@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { AppLink } from '../link/AppLink'
+import { useAuthSelectors } from '../../../features/auth/hooks'
 
 type FormPropsType = {
     title: string
@@ -28,6 +29,8 @@ export const Form: FC<FormPropsType & PropsWithChildren> = ({
     marginBottom,
     onSubmit,
 }) => {
+    const { isLoading } = useAuthSelectors()
+
     return (
         <Paper sx={{ width: '413px', m: '60px auto 0' }}>
             <FormControl>
@@ -35,7 +38,7 @@ export const Form: FC<FormPropsType & PropsWithChildren> = ({
                     <Typography variant="h1"> {title} </Typography>
                     <form style={{ width: '347px' }} onSubmit={onSubmit}>
                         <FormGroup sx={{ marginBottom: marginBottom || '40px' }}>{children}</FormGroup>
-                        <Button type={'submit'} variant={'contained'} fullWidth={true}>
+                        <Button type={'submit'} variant={'contained'} fullWidth={true} disabled={isLoading}>
                             {btnTitle}
                         </Button>
                     </form>

@@ -3,21 +3,20 @@ import Grid from '@mui/material/Grid'
 import { SearchInput } from 'common/components/inputs/SearchInput'
 import { PacksPagination } from './PacksPagination'
 import Box from '@mui/material/Box'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks'
 import { CardsCountSlider } from './CardsCountSlider'
 import { ResetButton } from './ResetButton'
 import { ShowPacksCards } from './ShowPacksCards'
-import { packsActions } from '../packs.slice'
 import { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import { usePacksParams } from '../hooks/usePacksParams'
+import { usePacksSelectors } from '../hooks/usePacksSelectors'
 
 type PacksFilterPropsType = {
     children: React.ReactNode
 }
 
 export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
-    const { setQueryParams, params, profileId, maxCards } = usePacksParams()
+    const { setQueryParams, params } = usePacksParams()
+    const { profileId, maxCards } = usePacksSelectors()
 
     useEffect(() => {
         setQueryParams({
@@ -34,7 +33,7 @@ export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
 
     return (
         <Grid container alignItems={'flex-end'} /* style={{ border: '1px solid green' }} */>
-            <Grid item md={5}>
+            <Grid item md={4}>
                 <Box /* style={{ border: '1px solid' }} */>
                     <Typography variant="h5" sx={{ mb: '8px' }}>
                         Search
@@ -50,8 +49,8 @@ export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
                     <ShowPacksCards />
                 </Box>
             </Grid>
-            <Grid item md={3} justifyContent={'center'} display={'flex'}>
-                <Box /* style={{ border: '1px solid' }}  */>
+            <Grid item md={4} justifyContent={'center'} display={'flex'}>
+                <Box /* style={{ border: '1px solid' }} */>
                     <Typography variant="h5" sx={{ mb: '8px' }}>
                         Number of cards
                     </Typography>
@@ -59,7 +58,7 @@ export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
                 </Box>
             </Grid>
             <Grid item md={1} justifyContent={'flex-end'} display={'flex'}>
-                <Box /* style={{ border: '1px solid' }} */>
+                <Box /*  style={{ border: '1px solid' }} */>
                     <ResetButton />
                 </Box>
             </Grid>

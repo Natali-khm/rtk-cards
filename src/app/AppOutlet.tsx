@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 export const AppOutlet = () => {
     return (
         <>
-            <Container /* sx={{ backgroundColor: 'red' }}  */ maxWidth={'xl'}>
+            <Container /* sx={{ backgroundColor: 'red' }}   */ maxWidth={'lg'}>
                 <Outlet />
             </Container>
         </>

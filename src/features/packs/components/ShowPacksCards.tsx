@@ -1,10 +1,11 @@
 import ButtonGroup from '@mui/material/ButtonGroup'
 import Button from '@mui/material/Button'
 import { usePacksParams } from '../hooks/usePacksParams'
+import { usePacksSelectors } from '../hooks/usePacksSelectors'
 
 export const ShowPacksCards = () => {
     const buttonSX = {
-        borderRadius: 0,
+        borderRadius: '3px',
         backgroundColor: 'white',
         width: '100px',
         boxShadow: 0,
@@ -16,14 +17,15 @@ export const ShowPacksCards = () => {
     }
 
     const activeSX = {
-        borderRadius: 0,
+        borderRadius: '3px',
         backgroundColor: '#366EFF',
         width: '100px',
         boxShadow: 0,
         color: 'white',
     }
 
-    const { setSearchParams, params, setQueryParams, userId, profileId } = usePacksParams()
+    const { setSearchParams, params, setQueryParams } = usePacksParams()
+    const { userId, profileId, packsAreLoading } = usePacksSelectors()
 
     const setActive = (value: string) => () => {
         if (value) {
@@ -36,11 +38,11 @@ export const ShowPacksCards = () => {
     }
 
     return (
-        <ButtonGroup variant="outlined" aria-label="outlined button group">
+        <ButtonGroup variant="outlined" disabled={packsAreLoading}>
             <Button sx={userId ? activeSX : buttonSX} onClick={setActive('my')}>
                 My
             </Button>
-            <Button sx={!userId ? activeSX : buttonSX} onClick={setActive('')}>
+            <Button sx={userId ? buttonSX : activeSX} onClick={setActive('')}>
                 All
             </Button>
         </ButtonGroup>

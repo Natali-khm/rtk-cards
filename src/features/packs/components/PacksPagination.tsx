@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Grid from '@mui/material/Grid'
 import { usePacksParams } from '../hooks/usePacksParams'
+import { usePacksSelectors } from '../hooks/usePacksSelectors'
 
 export const PacksPagination = () => {
     const selectSX = {
@@ -17,8 +18,8 @@ export const PacksPagination = () => {
         cursor: 'pointer',
     }
 
-    const { params, setSearchParams, setQueryParams, cardPacksTotalCount, packsCountForPage, pageParams } =
-        usePacksParams()
+    const { cardPacksTotalCount, packsCountForPage, pageParams, packsAreLoading } = usePacksSelectors()
+    const { params, setSearchParams, setQueryParams } = usePacksParams()
 
     const [page, setPage] = useState(pageParams || 1)
     const [pageCount, setCount] = useState(packsCountForPage || 4)
@@ -42,9 +43,16 @@ export const PacksPagination = () => {
 
     return (
         <Grid container alignItems={'center'}>
-            <Pagination count={lastPage} shape="rounded" color={'primary'} onChange={changePagination} page={page} />
+            <Pagination
+                count={lastPage}
+                shape="rounded"
+                color={'primary'}
+                onChange={changePagination}
+                page={page}
+                disabled={packsAreLoading}
+            />
             <span /* className={s.text1} */>Show</span>
-            <select style={selectSX} value={pageCount} onChange={changePacksCount}>
+            <select style={selectSX} value={pageCount} onChange={changePacksCount} disabled={packsAreLoading}>
                 <option id={'option-4'} value={4}>
                     4
                 </option>

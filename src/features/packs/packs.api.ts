@@ -2,8 +2,18 @@ import { instance } from 'common/api/common.api'
 
 export const packsApi = {
     getPacks(params: GetPacksParamsType) {
-        // debugger
-        return instance.get<PackResponseType>('/cards/pack', { params })
+        return instance.get<GetPackResponseType>('/cards/pack', { params })
+    },
+    addPack(params: AddPackParamsType) {
+        return instance.post<GeneralResponseType & { newCardsPack: CardPackType }>('/cards/pack', { cardsPack: params })
+    },
+    deletePack(id: string) {
+        return instance.delete<GeneralResponseType & { deletedCardsPack: CardPackType }>(`/cards/pack?id=${id}`)
+    },
+    updatePack(params: UpdateParamsPackType) {
+        return instance.put<GeneralResponseType & { updatedCardsPack: CardPackType }>('cards/pack', {
+            cardsPack: params,
+        })
     },
 }
 
@@ -26,7 +36,7 @@ export type CardPackType = {
     __v: number
 }
 
-export type PackResponseType = {
+export type GetPackResponseType = {
     cardPacks: CardPackType[]
     page: number
     pageCount: number
@@ -46,4 +56,18 @@ export type GetPacksParamsType = {
     pageCount?: number
     user_id?: string
     block?: boolean
+}
+
+export type AddPackParamsType = Omit<UpdateParamsPackType, '_id'>
+
+export type UpdateParamsPackType = {
+    _id: string
+    name?: string
+    deckCover?: string
+    private?: Boolean
+}
+
+type GeneralResponseType = {
+    token: string
+    tokenDeathTime: number
 }

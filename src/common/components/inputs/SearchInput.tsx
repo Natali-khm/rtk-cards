@@ -4,12 +4,14 @@ import SearchIcon from '@mui/icons-material/Search'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useDebounce } from '../../hooks/useDebounce'
 import { usePacksParams } from '../../../features/packs/hooks/usePacksParams'
+import { usePacksSelectors } from '../../../features/packs/hooks/usePacksSelectors'
 
 export const SearchInput = () => {
     const [find, setFind] = useState('')
 
     const debouncedValue = useDebounce(find, 1000)
-    const { setSearchParams, params, setQueryParams, packName } = usePacksParams()
+    const { setSearchParams, params, setQueryParams } = usePacksParams()
+    const { packName, packsAreLoading } = usePacksSelectors()
 
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
         const find = e.currentTarget.value
@@ -27,6 +29,7 @@ export const SearchInput = () => {
 
     return (
         <TextField
+            disabled={packsAreLoading}
             fullWidth
             value={find}
             onChange={onChangeText}

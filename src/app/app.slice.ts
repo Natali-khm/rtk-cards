@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice, current } from '@reduxjs/toolkit'
-import { fulfilled, pending, rejected } from './matchingUtilities'
+import { fulfilled, pending, rejected } from './appMatchingUtilities'
 
 const slice = createSlice({
     name: 'app',
@@ -10,7 +10,7 @@ const slice = createSlice({
     },
     reducers: {
         setAppError: (state, action: PayloadAction<{ error: string | null }>) => {
-            console.log(current(state))
+            // console.log(current(state))
             state.error = action.payload.error
         },
     },
@@ -18,7 +18,6 @@ const slice = createSlice({
         builder
             .addMatcher(pending, (state) => {
                 state.isLoading = true
-                
             })
             .addMatcher(fulfilled, (state, action) => {
                 state.isLoading = false
@@ -32,7 +31,7 @@ const slice = createSlice({
                 }
             )
             .addMatcher(rejected, (state, action) => {
-                if (action.payload) state.error = action.payload    /// TODO
+                if (action.payload) state.error = action.payload /// TODO
                 state.isLoading = false
             })
     },

@@ -9,19 +9,21 @@ import { tableTitles } from './constants'
 import { Order } from '../../packsTypes'
 import { visuallyHidden } from '@mui/utils'
 import { usePacksParams } from '../../hooks/usePacksParams'
+import { usePacksSelectors } from '../../hooks/usePacksSelectors'
 
 export const PacksTableHead = () => {
     const cellSX = {
-        width: '220px',
+        width: '210px',
         cursor: 'pointer',
         '&:first-of-type': { width: '260px', maxWidth: '260px', overflow: 'hidden', textOverflow: 'ellipsis' },
-        '&:last-of-type': { maxWidth: '120px' },
+        '&:last-of-type': { maxWidth: '150px', paddingLeft: '25px' },
     }
 
     const [orderBy, setOrderBy] = useState<string>('')
     const [order, setOrder] = useState<Order>('asc')
 
-    const { setSearchParams, params, setQueryParams, sortPacks } = usePacksParams()
+    const { setSearchParams, params, setQueryParams } = usePacksParams()
+    const { sortPacks, packsAreLoading } = usePacksSelectors()
 
     const handleRequestSort = (property: string) => {
         const isAsc = orderBy === property && order === 'asc'
@@ -43,6 +45,7 @@ export const PacksTableHead = () => {
                             <Typography variant="h5">{el.title}</Typography>
                         ) : (
                             <TableSortLabel
+                                disabled={packsAreLoading}
                                 active={orderBy === el.id}
                                 direction={orderBy === el.id ? order : 'asc'}
                                 onClick={() => handleRequestSort(el.id)}>

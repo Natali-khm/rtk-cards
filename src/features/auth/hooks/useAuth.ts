@@ -13,11 +13,6 @@ export const useAuth = () => {
     const { token } = useParams()
 
     const onRegisterSubmit: SubmitHandler<FormValidateType> = (data) => {
-        const payload = {
-            email: 'natka.test.dev@gmail.com',
-            password: 'qwerty12345$',
-        }
-
         dispatch(authThunks.register(data))
             .unwrap()
             .then((res) => {

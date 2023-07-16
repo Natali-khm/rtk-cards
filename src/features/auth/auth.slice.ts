@@ -9,7 +9,7 @@ import {
     authApi,
 } from './auth.api'
 import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
-import { thunkTryCatch } from '../../common/utils'
+import { thunkTryCatch } from 'common/utils'
 
 const slice = createSlice({
     name: 'auth',
@@ -21,7 +21,7 @@ const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(register.rejected, (state, action) => {})
+            .addCase(register.rejected, (state, action) => {})  // ??
             .addCase(isAuth.fulfilled, (state, action) => {
                 state.isLoggedIn = true
                 state.profile = action.payload.profile

@@ -1,6 +1,6 @@
 import { PasswordInput, EmailInput, Form } from 'common/components'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { useAppForm, useAuth } from 'features/auth/hooks'
+import { useAppForm, useAuth, useAuthSelectors } from 'features/auth/hooks'
 import Checkbox from '@mui/material/Checkbox'
 import { paths } from 'common/constants'
 import { Link } from 'react-router-dom'
@@ -27,7 +27,7 @@ export const Login = () => {
             />
             <FormControlLabel
                 label={'Remember me'}
-                sx={{ marginTop: '20px' }}
+                sx={{ mt: '20px', color: 'black' }}
                 control={
                     <Checkbox
                         {...register('rememberMe')}
