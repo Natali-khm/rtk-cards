@@ -9,7 +9,7 @@ import { usePacksSelectors } from '../../../features/packs/hooks/usePacksSelecto
 export const SearchInput = () => {
     const [find, setFind] = useState('')
 
-    const debouncedValue = useDebounce(find, 1000)
+    const debouncedValue = useDebounce(find, 800)
     const { setSearchParams, params, setQueryParams } = usePacksParams()
     const { packName, packsAreLoading } = usePacksSelectors()
 

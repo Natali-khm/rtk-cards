@@ -7,7 +7,6 @@ import { PacksTable } from './Table/PacksTable'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsThunks } from '../packs.slice'
 import { useEffect } from 'react'
-import { usePacksSelectors } from '../hooks/usePacksSelectors'
 import { toast } from 'react-toastify'
 
 export const Packs = () => {
@@ -27,7 +26,7 @@ export const Packs = () => {
     })
 
     return (
-        <Box style={{ border: '1px solid red' }}>
+        <Box /* style={{ border: '1px solid red' }} */>
             <Grid
                 container
                 justifyContent={'space-between'}

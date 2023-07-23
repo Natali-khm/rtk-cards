@@ -18,7 +18,7 @@ export const PacksPagination = () => {
         cursor: 'pointer',
     }
 
-    const { cardPacksTotalCount, packsCountForPage, pageParams, packsAreLoading } = usePacksSelectors()
+    const { cardPacksTotalCount, packsCountForPage, pageParams, packsAreLoading, cardPacks } = usePacksSelectors()
     const { params, setSearchParams, setQueryParams } = usePacksParams()
 
     const [page, setPage] = useState(pageParams || 1)
@@ -42,28 +42,34 @@ export const PacksPagination = () => {
     }, [pageParams, packsCountForPage]) // to react to reset
 
     return (
-        <Grid container alignItems={'center'}>
-            <Pagination
-                count={lastPage}
-                shape="rounded"
-                color={'primary'}
-                onChange={changePagination}
-                page={page}
-                disabled={packsAreLoading}
-            />
-            <span /* className={s.text1} */>Show</span>
-            <select style={selectSX} value={pageCount} onChange={changePacksCount} disabled={packsAreLoading}>
-                <option id={'option-4'} value={4}>
-                    4
-                </option>
-                <option id={'option-7'} value={7}>
-                    7
-                </option>
-                <option id={'option-10'} value={10}>
-                    10
-                </option>
-            </select>
-            <span /* className={s.text2} */>Cards per Page</span>
-        </Grid>
+        <>
+            {cardPacks?.length ? (
+                <Grid container alignItems={'center'}>
+                    <Pagination
+                        count={lastPage}
+                        shape="rounded"
+                        color={'primary'}
+                        onChange={changePagination}
+                        page={page}
+                        disabled={packsAreLoading}
+                    />
+                    <span /* className={s.text1} */>Show</span>
+                    <select style={selectSX} value={pageCount} onChange={changePacksCount} disabled={packsAreLoading}>
+                        <option id={'option-4'} value={4}>
+                            4
+                        </option>
+                        <option id={'option-7'} value={7}>
+                            7
+                        </option>
+                        <option id={'option-10'} value={10}>
+                            10
+                        </option>
+                    </select>
+                    <span /* className={s.text2} */>Cards per Page</span>
+                </Grid>
+            ) : (
+                ''
+            )}
+        </>
     )
 }

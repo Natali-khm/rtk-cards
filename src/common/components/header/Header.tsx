@@ -18,7 +18,7 @@ export const Header = () => {
 
     return (
         <AppBar position="static" color={'inherit'} elevation={2}>
-            <Container maxWidth={'xl'}>
+            <Container maxWidth={'lg'}>
                 <Toolbar disableGutters={true}>
                     <Link to={paths.PACKS} style={{ flexGrow: 1 }}>
                         <img src={logo} alt="incubator-logo" />
