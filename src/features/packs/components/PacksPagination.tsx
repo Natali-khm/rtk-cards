@@ -1,23 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import Pagination from '@mui/material/Pagination'
-import Grid from '@mui/material/Grid'
 import { usePacksParams } from '../hooks/usePacksParams'
 import { usePacksSelectors } from '../hooks/usePacksSelectors'
+import { CustomPagination } from 'common/components/table/CustomPagination'
+import { SelectChangeEvent } from '@mui/material/Select'
 
 export const PacksPagination = () => {
-    const selectSX = {
-        padding: '2px 2px',
-        margin: '0 5px',
-        borderRadius: '2px',
-        border: '1px solid #D9D9D9',
-        fontSize: '14px',
-        lineHeight: '17px',
-        fontWeight: '400',
-        width: '44px',
-        fontFamily: 'Montserrat',
-        cursor: 'pointer',
-    }
-
     const { cardPacksTotalCount, packsCountForPage, pageParams, packsAreLoading, cardPacks } = usePacksSelectors()
     const { params, setSearchParams, setQueryParams } = usePacksParams()
 
@@ -31,9 +18,9 @@ export const PacksPagination = () => {
         setSearchParams({ ...params, page: `${newPage}` })
     }
 
-    const changePacksCount = (e: ChangeEvent<HTMLSelectElement>) => {
-        setQueryParams({ pageCount: +e.currentTarget.value })
-        setSearchParams({ ...params, count: e.currentTarget.value })
+    const changePacksCount = (e: SelectChangeEvent<number>) => {
+        setQueryParams({ pageCount: +e.target.value })
+        setSearchParams({ ...params, count: e.target.value as string })
     }
 
     useEffect(() => {
@@ -43,32 +30,15 @@ export const PacksPagination = () => {
 
     return (
         <>
-            {cardPacks?.length ? (
-                <Grid container alignItems={'center'}>
-                    <Pagination
-                        count={lastPage}
-                        shape="rounded"
-                        color={'primary'}
-                        onChange={changePagination}
-                        page={page}
-                        disabled={packsAreLoading}
-                    />
-                    <span /* className={s.text1} */>Show</span>
-                    <select style={selectSX} value={pageCount} onChange={changePacksCount} disabled={packsAreLoading}>
-                        <option id={'option-4'} value={4}>
-                            4
-                        </option>
-                        <option id={'option-7'} value={7}>
-                            7
-                        </option>
-                        <option id={'option-10'} value={10}>
-                            10
-                        </option>
-                    </select>
-                    <span /* className={s.text2} */>Cards per Page</span>
-                </Grid>
-            ) : (
-                ''
+            {!!cardPacks?.length && (
+                <CustomPagination
+                    count={lastPage}
+                    page={page}
+                    onChangePag={changePagination}
+                    disabled={packsAreLoading}
+                    value={pageCount}
+                    onChangeSel={changePacksCount}
+                />
             )}
         </>
     )

@@ -1,6 +1,6 @@
 import { TableTitles } from "../../packsTypes";
 
-export const tableTitles: TableTitles[] = [
+export const packsTableTitles: TableTitles[] = [
     { title: 'Name', id: 'name' },
     { title: 'Cards', id: 'cardsCount' },
     { title: 'Last Updated', id: 'updated' },

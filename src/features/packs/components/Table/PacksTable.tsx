@@ -4,97 +4,91 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import Skeleton from '@mui/material/Skeleton'
 import { CardPackType } from '../../packs.api'
 import { PacksTableHead } from './PacksTableHead'
-import { tableTitles } from './constants'
+import { packsTableTitles } from './packsConstants'
 import IconButton from '@mui/material/IconButton'
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
 import { usePacksSelectors } from '../../hooks/usePacksSelectors'
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
-import { useAppDispatch } from '../../../../common/hooks'
+import { useAppDispatch } from 'common/hooks'
 import { packsThunks } from '../../packs.slice'
 import { toast } from 'react-toastify'
 import { NothingFound } from './NothingFound'
+import { useNavigate } from 'react-router-dom'
+import { nameCellSX } from '../packsStyles'
+import { TableSkeleton } from 'common/components/table/TableSkeleton'
+import { formatDate } from 'common/utils/formatDate'
 
 export const PacksTable = () => {
     const { profileId, packsCountForPage, packsAreLoading, cardPacks } = usePacksSelectors()
     const rowsForSkeleton = Array.from(Array(packsCountForPage), (_, i) => i++)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
-    const formatDate = (pack: CardPackType) => {
-        let formatter = new Intl.DateTimeFormat('ru')
-        let date = new Date(pack.updated)
-        return formatter.format(date)
-    }
-    const cellSX = {
-        width: '260px',
-        maxWidth: '260px',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        padding: '21px 16px',
-    }
+    const formatedDate = (date: string) => formatDate(date)
 
     const deletePack = (id: string, name: string) => {
-        dispatch(packsThunks.deletePack(id)).then((res) => {
-            toast.success(`'${name}' pack is deleted`)
-        })
+        dispatch(packsThunks.deletePack(id))
+            .unwrap()
+            .then((res) => {
+                toast.success(`'${name}' pack is deleted`)
+            })
     }
 
     const updatePack = (id: string, name: string) => {
-        dispatch(packsThunks.updatePack({ _id: id, name: 'updated name' })).then((res) => {
-            toast.success(`'${name}' pack is updated`)
-        })
+        dispatch(packsThunks.updatePack({ _id: id, name: 'updated name' }))
+            .unwrap()
+            .then((res) => {
+                toast.success(`'${name}' pack is updated`)
+            })
+    }
+
+    const navigateTo = (id: string) => {
+        navigate(`cards/${id}`)
     }
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ mt: '48px', mb: '40px' }}>
+            <TableContainer component={Paper} /* sx={{ mt: '48px', mb: '40px' }} */>
                 <Table>
                     <PacksTableHead />
 
                     <TableBody>
-                        {packsAreLoading
-                            ? rowsForSkeleton.map((_, i) => (
-                                  <TableRow key={i}>
-                                      {tableTitles.map((_, i) => (
-                                          <TableCell key={i}>
-                                              <Skeleton height={40} animation="wave" />
-                                          </TableCell>
-                                      ))}
-                                  </TableRow>
-                              ))
-                            : cardPacks?.map((pack: CardPackType) => (
-                                  <TableRow key={pack._id}>
-                                      <TableCell sx={cellSX}>{pack.name}</TableCell>
-                                      <TableCell>{pack.cardsCount}</TableCell>
-                                      <TableCell>{formatDate(pack)}</TableCell>
-                                      <TableCell>{pack.user_name}</TableCell>
-                                      <TableCell>
-                                          <IconButton
-                                          //   sx={styleForIcons}
-                                          //   disabled={p.cardsCount === 0}
-                                          >
-                                              <SchoolOutlinedIcon />
-                                          </IconButton>
-                                          {pack.user_id === profileId && (
-                                              <>
-                                                  <IconButton
-                                                      //   sx={styleForIcons}
-                                                      onClick={() => updatePack(pack._id, pack.name)}>
-                                                      <BorderColorOutlinedIcon />
-                                                  </IconButton>
-                                                  <IconButton
-                                                      //   sx={styleForIcons}
-                                                      onClick={() => deletePack(pack._id, pack.name)}>
-                                                      <DeleteOutlinedIcon />
-                                                  </IconButton>
-                                              </>
-                                          )}
-                                      </TableCell>
-                                  </TableRow>
-                              ))}
+                        {packsAreLoading ? (
+                            <TableSkeleton rowsNumb={rowsForSkeleton} colNumb={packsTableTitles} />
+                        ) : (
+                            cardPacks?.map((pack: CardPackType) => (
+                                <TableRow hover key={pack._id}>
+                                    <TableCell sx={nameCellSX} onClick={() => navigateTo(pack._id)}>
+                                        {pack.name}
+                                    </TableCell>
+                                    <TableCell>{pack.cardsCount}</TableCell>
+                                    <TableCell>{formatedDate(pack.updated)}</TableCell>
+                                    <TableCell>{pack.user_name}</TableCell>
+                                    <TableCell>
+                                        <IconButton size="small" disabled={pack.cardsCount === 0}>
+                                            <SchoolOutlinedIcon fontSize="small" />
+                                        </IconButton>
+                                        {pack.user_id === profileId && (
+                                            <>
+                                                <IconButton
+                                                    onClick={() => updatePack(pack._id, pack.name)}
+                                                    size="small">
+                                                    <BorderColorOutlinedIcon fontSize="small" />
+                                                </IconButton>
+                                                <IconButton
+                                                    onClick={() => deletePack(pack._id, pack.name)}
+                                                    size="small">
+                                                    <DeleteOutlinedIcon fontSize="small" />
+                                                </IconButton>
+                                            </>
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>

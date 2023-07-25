@@ -10,9 +10,10 @@ import {
     profileIdS,
     queryMaxS,
     queryMinS,
+    queryParamsS,
     sortPacksS,
     userIdS,
-} from '../packs.selectors'
+} from './packs.selectors'
 
 export const usePacksSelectors = () => {
     const cardPacksTotalCount = useAppSelector(cardPacksTotalCountS)
@@ -27,6 +28,7 @@ export const usePacksSelectors = () => {
     const packName = useAppSelector(packNameS)
     const packsAreLoading = useAppSelector(packsAreLoadingS)
     const cardPacks = useAppSelector(cardPacksS)
+    const queryParams = useAppSelector(queryParamsS)
 
     return {
         cardPacksTotalCount,
@@ -41,5 +43,6 @@ export const usePacksSelectors = () => {
         packName,
         packsAreLoading,
         cardPacks,
+        queryParams,
     }
 }

@@ -12,6 +12,7 @@ const profileIdS = (state: RootState) => state.auth.profile?._id
 const packNameS = (state: RootState) => state.packs.queryParams.packName
 const packsAreLoadingS = (state: RootState) => state.packs.isLoading
 const cardPacksS = (state: RootState) => state.packs.packs.cardPacks
+const queryParamsS = (state: RootState) => state.packs.queryParams
 
 export {
     cardPacksTotalCountS,
@@ -26,4 +27,5 @@ export {
     packNameS,
     packsAreLoadingS,
     cardPacksS,
+    queryParamsS,
 }

@@ -100,7 +100,7 @@ export const theme = createTheme({
                         paddingBottom: '8px',
                         textTransform: 'none',
                         borderRadius: '30px',
-                        fontSize: '16px',
+                        fontSize: '14px',
                         lineHeight: '20px',
                         letterSpacing: '0.01em',
                         boxShadow: '0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3)',

@@ -7,7 +7,7 @@ export const paths = {
     CHECK_EMAIL: '/check-email',
     SET_NEW_PASSWORD: '/set-new-password/:token',
     PROFILE: '/profile',
-    CARDS: '/cards',
+    CARDS: '/cards/:packId',
     LEARN: '/learn',
     SANDBOX: '/sandbox',
 } as const

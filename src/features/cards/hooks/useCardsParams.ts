@@ -1,15 +1,15 @@
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { GetPacksParamsType } from '../packs.api'
-import { packsActions } from '../packs.slice'
+import { GetCardsParamsType } from '../cards.api'
+import { cardsActions } from '../cards.slice'
 
-export const usePacksParams = () => {
+export const useCardsParams = () => {
     const dispatch = useDispatch()
     const [searchParams, setSearchParams] = useSearchParams([])
     const params = Object.fromEntries(searchParams)
 
-    const setQueryParams = (newParams: GetPacksParamsType) => {
-        dispatch(packsActions.setQueryParams({ params: newParams }))
+    const setQueryParams = (newParams: GetCardsParamsType) => {
+        dispatch(cardsActions.setQueryParams({ params: newParams }))
     }
 
     return {

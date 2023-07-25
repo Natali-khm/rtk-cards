@@ -5,20 +5,14 @@ import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import Box from '@mui/material/Box'
-import { tableTitles } from './constants'
+import { packsTableTitles } from './packsConstants'
 import { Order } from '../../packsTypes'
 import { visuallyHidden } from '@mui/utils'
 import { usePacksParams } from '../../hooks/usePacksParams'
 import { usePacksSelectors } from '../../hooks/usePacksSelectors'
+import { tableHeadSX } from '../packsStyles'
 
 export const PacksTableHead = () => {
-    const cellSX = {
-        width: '210px',
-        cursor: 'pointer',
-        '&:first-of-type': { width: '260px', maxWidth: '260px', overflow: 'hidden', textOverflow: 'ellipsis' },
-        '&:last-of-type': { maxWidth: '150px', paddingLeft: '25px' },
-    }
-
     const [orderBy, setOrderBy] = useState<string>('')
     const [order, setOrder] = useState<Order>('asc')
 
@@ -37,10 +31,10 @@ export const PacksTableHead = () => {
     }, [sortPacks])
 
     return (
-        <TableHead sx={{ backgroundColor: '#EFEFEF' }}>
+        <TableHead>
             <TableRow>
-                {tableTitles.map((el, id) => (
-                    <TableCell key={id} sx={cellSX}>
+                {packsTableTitles.map((el) => (
+                    <TableCell key={el.id} sx={tableHeadSX}>
                         {el.id === 'actions' ? (
                             <Typography variant="h5">{el.title}</Typography>
                         ) : (

@@ -29,7 +29,8 @@ const rejected = isRejected(
     authThunks.updateProfile,
     packsThunks.getPacks,
     packsThunks.deletePack,
-    packsThunks.updatePack
+    packsThunks.updatePack,
+    packsThunks.addPack
 )
 
 export { pending, fulfilled, rejected }
