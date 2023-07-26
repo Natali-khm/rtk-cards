@@ -7,7 +7,7 @@ export const NothingFound = () => {
     const { packName } = usePacksSelectors()
 
     return (
-        <Grid container alignItems={'center'} sx={{ p: '20px 0' }} direction="column" gap={2}>
+        <Grid container alignItems={'center'} sx={{ p: '50px 0' }} direction="column" gap={2}>
             <Box>
                 <SearchOffRoundedIcon sx={{ color: '#0c4ff7' }} fontSize="large" />
             </Box>

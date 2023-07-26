@@ -1,17 +1,18 @@
-import Table from '@mui/material/Table'
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
+import TableContainer from '@mui/material/TableContainer'
+import IconButton from '@mui/material/IconButton'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+
 import { CardPackType } from '../../packs.api'
-import { PacksTableHead } from './PacksTableHead'
+import { PacksTableHeader } from './PacksTableHeader'
 import { packsTableTitles } from './packsConstants'
-import IconButton from '@mui/material/IconButton'
-import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
 import { usePacksSelectors } from '../../hooks/usePacksSelectors'
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import { useAppDispatch } from 'common/hooks'
 import { packsThunks } from '../../packs.slice'
 import { toast } from 'react-toastify'
@@ -22,11 +23,11 @@ import { TableSkeleton } from 'common/components/table/TableSkeleton'
 import { formatDate } from 'common/utils/formatDate'
 
 export const PacksTable = () => {
-    const { profileId, packsCountForPage, packsAreLoading, cardPacks } = usePacksSelectors()
-    const rowsForSkeleton = Array.from(Array(packsCountForPage), (_, i) => i++)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const { profileId, packsCountForPage, packsAreLoading, cardPacks } = usePacksSelectors()
 
+    const rowsForSkeleton = Array.from(Array(packsCountForPage), (_, i) => i++)
     const formatedDate = (date: string) => formatDate(date)
 
     const deletePack = (id: string, name: string) => {
@@ -48,12 +49,12 @@ export const PacksTable = () => {
     const navigateTo = (id: string) => {
         navigate(`cards/${id}`)
     }
-
+debugger
     return (
         <>
-            <TableContainer component={Paper} /* sx={{ mt: '48px', mb: '40px' }} */>
+            <TableContainer component={Paper}>
                 <Table>
-                    <PacksTableHead />
+                    <PacksTableHeader />
 
                     <TableBody>
                         {packsAreLoading ? (

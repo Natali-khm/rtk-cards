@@ -1,8 +1,9 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+
 import { PacksFilters } from './PacksFilters'
 import { PacksTable } from './Table/PacksTable'
-import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { useAppDispatch } from 'common/hooks'
 import { packsThunks } from '../packs.slice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -13,7 +14,7 @@ import { usePacksSelectors } from '../hooks/usePacksSelectors'
 export const Packs = () => {
     const dispatch = useAppDispatch()
     const { setQueryParams, params } = usePacksParams()
-    const { profileId, maxCards, packsAreLoading, queryParams } = usePacksSelectors()
+    const { profileId, packsAreLoading, queryParams } = usePacksSelectors()
 
     const addNewPack = () => {
         const name = 'new card4'
@@ -27,14 +28,18 @@ export const Packs = () => {
     useEffect(() => {
         setQueryParams({
             ...params,
-            packName: params.find,
             user_id: params.packs === 'my' ? profileId : '',
-            min: +params.min || 0,
-            max: +params.max || maxCards || 0,
-            sortPacks: params.order || '',
-            page: +params.page || 1,
-            pageCount: +params.count || 4,
         })
+        return () =>
+            setQueryParams({
+                packName: '',
+                min: 0,
+                max: 0,
+                sortPacks: '',
+                page: 1,
+                pageCount: 4,
+                user_id: '',
+            })
     }, [])
 
     useEffect(() => {

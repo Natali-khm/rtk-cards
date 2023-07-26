@@ -1,7 +1,8 @@
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+
 import { CardsPagination } from './CardsPagination'
+import { CardsSearchInput } from './CardsSearchInput'
 
 type PropsType = {
     children: React.ReactNode
@@ -10,9 +11,9 @@ type PropsType = {
 export const CardsFilters: React.FC<PropsType> = ({ children }) => {
     return (
         <Grid container spacing={5} alignItems="flex-end">
-            <Grid item md={4}>
+            <Grid item md={12}>
                 <Box>
-                    {/* <SearchInput /> */}
+                    <CardsSearchInput />
                 </Box>
             </Grid>
             <Grid item md={12}>

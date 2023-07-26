@@ -1,43 +1,40 @@
 import TableContainer from '@mui/material/TableContainer'
-import Table from '@mui/material/Table'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
 import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
+import Table from '@mui/material/Table'
+import Paper from '@mui/material/Paper'
+
 import { useCardsSelectors } from '../hooks/useCardsSelectors'
 import { CardType } from '../cards.api'
-import TableCell from '@mui/material/TableCell'
-import Paper from '@mui/material/Paper'
 import { cardsTableTitles } from '../cardsConstants'
-import { tableHeadSX } from '../../packs/components/packsStyles'
-import Typography from '@mui/material/Typography'
 import { formatDate } from 'common/utils/formatDate'
+import { TableSkeleton } from 'common/components/table/TableSkeleton'
+import { CardsTableHeader } from './CardsTableHeader'
 
 export const CardsTable = () => {
-    const { cards } = useCardsSelectors()
+    const { cards, cardsAreLoading, cardsCountForPage } = useCardsSelectors()
     const formatedDate = (date: string) => formatDate(date)
+    const rowsForSkeleton = Array.from(Array(cardsCountForPage), (_, i) => i++)
 
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    <TableRow>
-                        {cardsTableTitles.map((t) => (
-                            <TableCell key={t.id} sx={tableHeadSX}>
-                                <Typography variant="h5">{t.title}</Typography>
-                            </TableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
+                <CardsTableHeader />
 
                 <TableBody>
-                    {cards?.map((c: CardType) => (
-                        <TableRow key={c._id} sx={{ cursor: 'pointer' }} hover>
-                            <TableCell>{c.question}</TableCell>
-                            <TableCell>{c.answer}</TableCell>
-                            <TableCell>{formatedDate(c.updated)}</TableCell>
-                            <TableCell>grade</TableCell>
-                        </TableRow>
-                    ))}
+                    {cardsAreLoading ? (
+                        <TableSkeleton rowsNumb={rowsForSkeleton} colNumb={cardsTableTitles} />
+                    ) : (
+                        cards?.map((c: CardType) => (
+                            <TableRow key={c._id} sx={{ cursor: 'pointer' }} hover>
+                                <TableCell>{c.question}</TableCell>
+                                <TableCell>{c.answer}</TableCell>
+                                <TableCell>{formatedDate(c.updated)}</TableCell>
+                                <TableCell>grade</TableCell>
+                            </TableRow>
+                        ))
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

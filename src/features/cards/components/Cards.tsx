@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
+
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { cardsThunks, cardsActions } from '../cards.slice'
+import { cardsThunks } from '../cards.slice'
 import { useAppDispatch } from 'common/hooks'
 import { BackspaceLink } from 'common/components/link/BackspaceLink'
 import { paths } from 'common/constants'
@@ -13,26 +12,25 @@ import { CardsTable } from './CardsTable'
 import { CardsFilters } from './CardsFilters'
 import { useCardsParams } from '../hooks/useCardsParams'
 
-// export type GetCardsParamsType = {
-//     cardAnswer?: string
-//     cardQuestion?: string
-//     cardsPack_id?: string
-//     min?: number
-//     max?: number
-//     sortCards?: string
-//     page?: number
-//     pageCount?: number
-// }
-
 export const Cards = () => {
-    const { packId } = useParams<{ packId: string }>()
     const dispatch = useAppDispatch()
+    const { packId } = useParams<{ packId: string }>()
     const { setQueryParams, params } = useCardsParams()
-
     const { packName, queryParams } = useCardsSelectors()
 
     useEffect(() => {
-        setQueryParams({ ...params, cardsPack_id: packId || '', pageCount: +params.count || 4 })
+        setQueryParams({ ...params, cardsPack_id: packId || '' })
+        return () =>
+            setQueryParams({
+                cardAnswer: '',
+                cardQuestion: '',
+                cardsPack_id: '',
+                min: 0,
+                max: 0,
+                sortCards: '',
+                page: 1,
+                pageCount: 4,
+            })
     }, [])
 
     useEffect(() => {
@@ -42,7 +40,7 @@ export const Cards = () => {
     return (
         <Grid container>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />
-            <Grid container justifyContent={'space-between'} alignItems={'center'} sx={{ m: '18px 0' }}>
+            <Grid container justifyContent={'space-between'} alignItems={'center'} sx={{ m: '18px 0 46px' }}>
                 <SubHeader title={packName} onClick={() => {}} buttonTitle="Learn to Pack" disabled={false} />
             </Grid>
             <Grid item md={12}>

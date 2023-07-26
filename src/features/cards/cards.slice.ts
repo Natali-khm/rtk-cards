@@ -30,7 +30,6 @@ const getCards = createAppAsyncThunk<GetCardsResponseType>('cards/getCards', (ar
     const { getState } = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
         const params = getState().cards.queryParams
-        debugger
         const res = await cardsApi.getCards(params)
         return res.data
     })

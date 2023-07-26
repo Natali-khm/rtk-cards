@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import TableSortLabel from '@mui/material/TableSortLabel'
+import { visuallyHidden } from '@mui/utils'
 import Box from '@mui/material/Box'
+
+import { useEffect, useState } from 'react'
 import { packsTableTitles } from './packsConstants'
 import { Order } from '../../packsTypes'
-import { visuallyHidden } from '@mui/utils'
 import { usePacksParams } from '../../hooks/usePacksParams'
 import { usePacksSelectors } from '../../hooks/usePacksSelectors'
 import { tableHeadSX } from '../packsStyles'
 
-export const PacksTableHead = () => {
+export const PacksTableHeader = () => {
     const [orderBy, setOrderBy] = useState<string>('')
     const [order, setOrder] = useState<Order>('asc')
 
@@ -22,7 +23,7 @@ export const PacksTableHead = () => {
     const handleRequestSort = (property: string) => {
         const isAsc = orderBy === property && order === 'asc'
         setQueryParams({ sortPacks: isAsc ? `0${property}` : `1${property}` })
-        property && setSearchParams({ ...params, order: isAsc ? `0${property}` : `1${property}` })
+        property && setSearchParams({ ...params, sortPacks: isAsc ? `0${property}` : `1${property}` })
     }
 
     useEffect(() => {

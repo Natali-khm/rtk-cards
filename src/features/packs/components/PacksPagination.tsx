@@ -20,7 +20,7 @@ export const PacksPagination = () => {
 
     const changePacksCount = (e: SelectChangeEvent<number>) => {
         setQueryParams({ pageCount: +e.target.value })
-        setSearchParams({ ...params, count: e.target.value as string })
+        setSearchParams({ ...params, pageCount: e.target.value as string })
     }
 
     useEffect(() => {

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Slider from '@mui/material/Slider'
+
+import { useEffect, useState } from 'react'
 import { usePacksParams } from '../hooks/usePacksParams'
 import { usePacksSelectors } from '../hooks/usePacksSelectors'
 import { valuesStyle } from './packsStyles'

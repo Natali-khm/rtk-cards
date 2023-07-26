@@ -1,11 +1,12 @@
-import { HeaderProfile } from '../header_profile/HeaderProfile'
-import { useAuthSelectors } from 'features/auth/hooks'
-import { Link, useNavigate } from 'react-router-dom'
 import Container from '@mui/material/Container'
-import { paths } from '../../constants/paths'
 import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
+
+import { HeaderProfile } from '../header_profile/HeaderProfile'
+import { useAuthSelectors } from 'features/auth/hooks'
+import { Link, useNavigate } from 'react-router-dom'
+import { paths } from '../../constants/paths'
 import logo from 'assets/image/logo.svg'
 
 export const Header = () => {
@@ -21,7 +22,7 @@ export const Header = () => {
             <Container maxWidth={'lg'}>
                 <Toolbar disableGutters={true}>
                     <Link to={paths.PACKS} style={{ flexGrow: 1 }}>
-                        <img src={logo} alt="incubator-logo" />
+                        <img src={logo} alt="incubator-logo" style={{height: '34px'}}/>
                     </Link>
                     {isLoggedIn ? (
                         <HeaderProfile />

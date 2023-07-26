@@ -1,5 +1,6 @@
 import { useAppSelector } from 'common/hooks'
 import {
+    cardQuestionS,
     cardsAreLoadingS,
     cardsCountForPageS,
     cardsS,
@@ -7,6 +8,7 @@ import {
     packNameS,
     pageS,
     queryParamsS,
+    sortCardsS,
 } from './cards.selectors'
 
 export const useCardsSelectors = () => {
@@ -17,6 +19,8 @@ export const useCardsSelectors = () => {
     const cardsCountForPage = useAppSelector(cardsCountForPageS)
     const pageParams = useAppSelector(pageS)
     const cardsAreLoading = useAppSelector(cardsAreLoadingS)
+    const cardQuestion = useAppSelector(cardQuestionS)
+    const sortCards = useAppSelector(sortCardsS)
 
     return {
         packName,
@@ -26,5 +30,7 @@ export const useCardsSelectors = () => {
         cardsCountForPage,
         pageParams,
         cardsAreLoading,
+        cardQuestion,
+        sortCards,
     }
 }

@@ -2,11 +2,11 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import { SearchInput } from 'common/components/inputs/SearchInput'
 import { PacksPagination } from './PacksPagination'
 import { CardsCountSlider } from './CardsCountSlider'
 import { ResetButton } from './ResetButton'
 import { ShowPacksCards } from './ShowPacksCards'
+import { PacksSearchInput } from './PacksSearchInput'
 
 type PacksFilterPropsType = {
     children: React.ReactNode
@@ -17,10 +17,7 @@ export const PacksFilters: React.FC<PacksFilterPropsType> = ({ children }) => {
         <Grid container spacing={5} alignItems="flex-end">
             <Grid item md={4}>
                 <Box>
-                    <Typography variant="h5" sx={{ mb: '8px' }}>
-                        Search
-                    </Typography>
-                    <SearchInput />
+                    <PacksSearchInput />
                 </Box>
             </Grid>
             <Grid item md={3} justifyContent="center" display="flex">
