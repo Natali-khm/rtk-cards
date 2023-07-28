@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
+import Grid from '@mui/material/Grid'
 
 type BackLinkPropsType = {
     link: string
@@ -9,7 +10,7 @@ type BackLinkPropsType = {
 
 export const BackspaceLink: FC<BackLinkPropsType> = ({ link, title }) => {
     return (
-        <div style={{ /* backgroundColor: 'blue', */ margin: '24px 0 12px' }}>
+        <Grid item md={12} style={{ margin: '24px 0 12px' }}>
             <Link
                 to={link}
                 style={{
@@ -22,6 +23,6 @@ export const BackspaceLink: FC<BackLinkPropsType> = ({ link, title }) => {
                 <KeyboardBackspaceIcon sx={{ verticalAlign: 'middle', mr: '12px' }} />
                 {title}
             </Link>
-        </div>
+        </Grid>
     )
 }

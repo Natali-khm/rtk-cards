@@ -1,7 +1,8 @@
+import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded'
-import { usePacksSelectors } from '../../hooks/usePacksSelectors'
+
+import { usePacksSelectors } from 'features/packs/hooks'
 
 export const NothingFound = () => {
     const { packName } = usePacksSelectors()

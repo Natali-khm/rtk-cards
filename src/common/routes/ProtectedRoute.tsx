@@ -1,7 +1,7 @@
-import React, { FC, PropsWithChildren } from 'react'
+import React from 'react'
+import { paths } from 'common/constants'
+import { Navigate } from 'react-router-dom'
 import { useAuthSelectors } from 'features/auth/hooks'
-import { Navigate, PathRouteProps, RouteProps } from 'react-router-dom'
-import { paths } from '../constants'
 
 export const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
     const { isLoggedIn } = useAuthSelectors()

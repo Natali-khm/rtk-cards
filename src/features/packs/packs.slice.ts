@@ -1,6 +1,7 @@
-import { PayloadAction, createSlice, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit'
-import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
+import { PayloadAction, createSlice, isPending, isRejected } from '@reduxjs/toolkit'
+
 import { AddPackParamsType, GetPacksParamsType, GetPackResponseType, packsApi, UpdateParamsPackType } from './packs.api'
+import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 import { thunkTryCatch } from 'common/utils'
 
 const slice = createSlice({
@@ -13,6 +14,10 @@ const slice = createSlice({
     reducers: {
         setQueryParams: (state, action: PayloadAction<{ params: GetPacksParamsType }>) => {
             state.queryParams = { ...state.queryParams, ...action.payload.params }
+        },
+        clearState: (state) => {
+            state.packs = {} as GetPackResponseType
+            state.queryParams = {}
         },
     },
     extraReducers: (builder) => {

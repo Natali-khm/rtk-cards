@@ -1,36 +1,37 @@
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { cardsThunks } from '../cards.slice'
+import { CardsTable, CardsFilters, EmptyPack } from 'features/cards/components'
+import { useCardsSelectors, useCardsParams } from 'features/cards/hooks'
+import { cardsActions, cardsThunks } from 'features/cards/cards.slice'
+import { BackspaceLink, SubHeader } from 'common/components'
+import { useAuthSelectors } from 'features//auth/hooks'
 import { useAppDispatch } from 'common/hooks'
-import { BackspaceLink } from 'common/components/link/BackspaceLink'
 import { paths } from 'common/constants'
-import { SubHeader } from 'common/components/sub_header/SubHeader'
-import { useCardsSelectors } from '../hooks/useCardsSelectors'
-import { CardsTable } from './CardsTable'
-import { CardsFilters } from './CardsFilters'
-import { useCardsParams } from '../hooks/useCardsParams'
+import { toast } from 'react-toastify'
+import { useEffect } from 'react'
 
 export const Cards = () => {
     const dispatch = useAppDispatch()
-    const { packId } = useParams<{ packId: string }>()
     const { setQueryParams, params } = useCardsParams()
-    const { packName, queryParams } = useCardsSelectors()
+    const { packName, queryParams, cardsList, cards, packUserId, packId, cardsAreLoading } = useCardsSelectors()
+    const { profileId } = useAuthSelectors()
+
+    const initialization = !Object.keys(cards).length
+
+    const addNewCard = () => {
+        dispatch(cardsThunks.addCard({ cardsPack_id: packId }))
+            .unwrap()
+            .then((res) => {
+                toast.success(`New card is created`)
+            })
+    }
 
     useEffect(() => {
         setQueryParams({ ...params, cardsPack_id: packId || '' })
-        return () =>
-            setQueryParams({
-                cardAnswer: '',
-                cardQuestion: '',
-                cardsPack_id: '',
-                min: 0,
-                max: 0,
-                sortCards: '',
-                page: 1,
-                pageCount: 4,
-            })
+        return () => {
+            dispatch(cardsActions.clearState())
+        }
     }, [])
 
     useEffect(() => {
@@ -38,15 +39,27 @@ export const Cards = () => {
     }, [queryParams])
 
     return (
-        <Grid container>
+        <Grid justifyContent="center">
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />
-            <Grid container justifyContent={'space-between'} alignItems={'center'} sx={{ m: '18px 0 46px' }}>
-                <SubHeader title={packName} onClick={() => {}} buttonTitle="Learn to Pack" disabled={false} />
-            </Grid>
+            <Box sx={{ m: '24px 0 34px' }}>
+                <SubHeader
+                    title={packName}
+                    onClick={addNewCard}
+                    buttonTitle={packUserId === profileId ? 'Add new card' : 'Learn to Pack'}
+                    disabled={cardsAreLoading}
+                    showBtn={!!cardsList?.length}
+                />
+            </Box>
             <Grid item md={12}>
-                <CardsFilters>
-                    <CardsTable />
-                </CardsFilters>
+                {initialization ? (
+                    <div>initialization</div>
+                ) : !cardsList?.length ? (
+                    <EmptyPack />
+                ) : (
+                    <CardsFilters>
+                        <CardsTable />
+                    </CardsFilters>
+                )}
             </Grid>
         </Grid>
     )

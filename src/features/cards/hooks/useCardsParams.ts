@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { GetCardsParamsType } from '../cards.api'
 import { cardsActions } from '../cards.slice'
+import { useDispatch } from 'react-redux'
 
 export const useCardsParams = () => {
     const dispatch = useDispatch()

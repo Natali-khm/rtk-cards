@@ -1,8 +1,8 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-import { usePacksParams } from '../hooks/usePacksParams'
-import { usePacksSelectors } from '../hooks/usePacksSelectors'
-import { CustomPagination } from 'common/components/table/CustomPagination'
 import { SelectChangeEvent } from '@mui/material/Select'
+import { ChangeEvent, useEffect, useState } from 'react'
+
+import { usePacksParams, usePacksSelectors } from 'features/packs/hooks'
+import { CustomPagination } from 'common/components'
 
 export const PacksPagination = () => {
     const { cardPacksTotalCount, packsCountForPage, pageParams, packsAreLoading, cardPacks } = usePacksSelectors()

@@ -3,9 +3,12 @@ import {
     cardQuestionS,
     cardsAreLoadingS,
     cardsCountForPageS,
+    cardsListS,
     cardsS,
     cardsTotalCountS,
+    packIdS,
     packNameS,
+    packUserIdS,
     pageS,
     queryParamsS,
     sortCardsS,
@@ -13,6 +16,7 @@ import {
 
 export const useCardsSelectors = () => {
     const packName = useAppSelector(packNameS)
+    const cardsList = useAppSelector(cardsListS)
     const cards = useAppSelector(cardsS)
     const queryParams = useAppSelector(queryParamsS)
     const cardsTotalCount = useAppSelector(cardsTotalCountS)
@@ -21,10 +25,12 @@ export const useCardsSelectors = () => {
     const cardsAreLoading = useAppSelector(cardsAreLoadingS)
     const cardQuestion = useAppSelector(cardQuestionS)
     const sortCards = useAppSelector(sortCardsS)
+    const packUserId = useAppSelector(packUserIdS)
+    const packId = useAppSelector(packIdS)
 
     return {
         packName,
-        cards,
+        cardsList,
         queryParams,
         cardsTotalCount,
         cardsCountForPage,
@@ -32,5 +38,8 @@ export const useCardsSelectors = () => {
         cardsAreLoading,
         cardQuestion,
         sortCards,
+        cards,
+        packUserId,
+        packId,
     }
 }

@@ -1,7 +1,7 @@
-import IconButton from '@mui/material/IconButton'
 import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined'
-import { usePacksSelectors } from '../hooks/usePacksSelectors'
-import { usePacksParams } from '../hooks/usePacksParams'
+import IconButton from '@mui/material/IconButton'
+
+import { usePacksSelectors, usePacksParams } from 'features/packs/hooks'
 
 export const ResetButton = () => {
     const { maxCards, packsAreLoading } = usePacksSelectors()

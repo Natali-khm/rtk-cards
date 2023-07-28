@@ -1,17 +1,16 @@
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import TableCell from '@mui/material/TableCell'
-import Typography from '@mui/material/Typography'
 import TableSortLabel from '@mui/material/TableSortLabel'
+import Typography from '@mui/material/Typography'
+import TableHead from '@mui/material/TableHead'
+import TableCell from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
 import { visuallyHidden } from '@mui/utils'
 import Box from '@mui/material/Box'
 
+import { usePacksParams, usePacksSelectors } from 'features/packs/hooks'
+import { packsTableTitles } from 'features/packs/packsConstants'
+import { tableHeadSX } from 'common/styles/commonStyles'
+import { Order } from 'features/packs/packsTypes'
 import { useEffect, useState } from 'react'
-import { packsTableTitles } from './packsConstants'
-import { Order } from '../../packsTypes'
-import { usePacksParams } from '../../hooks/usePacksParams'
-import { usePacksSelectors } from '../../hooks/usePacksSelectors'
-import { tableHeadSX } from '../packsStyles'
 
 export const PacksTableHeader = () => {
     const [orderBy, setOrderBy] = useState<string>('')

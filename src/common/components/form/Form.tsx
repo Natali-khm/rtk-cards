@@ -5,7 +5,7 @@ import FormGroup from '@mui/material/FormGroup'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
-import { AppLink } from '../link/AppLink'
+import { AppLink } from '../links/AppLink'
 import { useAuthSelectors } from '../../../features/auth/hooks'
 
 type FormPropsType = {

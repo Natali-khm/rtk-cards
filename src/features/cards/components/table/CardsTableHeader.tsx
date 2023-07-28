@@ -6,13 +6,11 @@ import TableRow from '@mui/material/TableRow'
 import { visuallyHidden } from '@mui/utils'
 import Box from '@mui/material/Box'
 
-import { tableHeadSX } from '../../packs/components/packsStyles'
-import { cardsTableTitles } from '../cardsConstants'
+import { useCardsParams, useCardsSelectors } from 'features/cards/hooks'
+import { cardsTableTitles } from 'features/cards/cardsConstants'
+import { tableHeadSX } from 'common/styles/commonStyles'
+import { Order } from 'features/cards/cardsTypes'
 import { useEffect, useState } from 'react'
-import { Order } from './cardsTypes'
-import { useCardsParams } from '../hooks/useCardsParams'
-import { useCardsSelectors } from '../hooks/useCardsSelectors'
-
 
 export const CardsTableHeader = () => {
     const [orderBy, setOrderBy] = useState<string>('')

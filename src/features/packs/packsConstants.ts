@@ -1,4 +1,4 @@
-import { TableTitles } from "../../packsTypes";
+import { TableTitles } from './packsTypes'
 
 export const packsTableTitles: TableTitles[] = [
     { title: 'Name', id: 'name' },

@@ -1,8 +1,7 @@
+import { usePacksParams, usePacksSelectors } from 'features/packs/hooks'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { usePacksParams } from '../hooks/usePacksParams'
-import { usePacksSelectors } from '../hooks/usePacksSelectors'
-import { useDebounce } from 'common/hooks/useDebounce'
-import { SearchInput } from 'common/components/inputs/SearchInput'
+import { SearchInput } from 'common/components'
+import { useDebounce } from 'common/hooks'
 
 export const PacksSearchInput = () => {
     const { packName, packsAreLoading } = usePacksSelectors()

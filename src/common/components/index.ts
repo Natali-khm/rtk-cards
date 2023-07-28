@@ -1,4 +1,9 @@
-export { Header } from './header/Header';
+export { BackspaceLink } from 'common/components/links/BackspaceLink'
+export { TableSkeleton } from './skeleton/TableSkeleton'
+export { CustomPagination } from './pagination/CustomPagination'
+export { SearchInput } from './inputs/SearchInput'
+export { SubHeader } from 'common/components/sub_header/SubHeader'
+export { Header } from './header/Header'
 export { InfoMessage } from './info_message/InfoMessage'
 export { PasswordInput } from './inputs/PasswordInput'
 export { EmailInput } from './inputs/EmailInput'

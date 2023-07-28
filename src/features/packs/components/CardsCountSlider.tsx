@@ -1,11 +1,10 @@
-import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Slider from '@mui/material/Slider'
+import Grid from '@mui/material/Grid'
 
+import { usePacksParams, usePacksSelectors } from 'features/packs/hooks'
+import { valuesStyle } from 'features/packs/packsStyles'
 import { useEffect, useState } from 'react'
-import { usePacksParams } from '../hooks/usePacksParams'
-import { usePacksSelectors } from '../hooks/usePacksSelectors'
-import { valuesStyle } from './packsStyles'
 
 export const CardsCountSlider = () => {
     const [min, setMinValue] = useState(0)

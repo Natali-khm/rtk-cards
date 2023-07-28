@@ -1,8 +1,7 @@
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import { CardsPagination } from './CardsPagination'
-import { CardsSearchInput } from './CardsSearchInput'
+import { CardsPagination, CardsSearchInput } from 'features/cards/components'
 
 type PropsType = {
     children: React.ReactNode

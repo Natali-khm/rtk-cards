@@ -1,11 +1,11 @@
 import { ForgotPassword, NewPassword, CheckEmail, Register, Login } from 'features/auth/components'
-import { Profile } from 'features/profile'
+import { Profile } from 'features/profile/compopnents'
 import { createHashRouter } from 'react-router-dom'
 import { Packs } from 'features/packs/components'
-import { ProtectedRoute } from './ProtectedRoute'
+import { Cards } from 'features/cards/components'
+import { ProtectedRoute } from 'common/routes'
 import { paths } from 'common/constants'
 import { App } from 'app'
-import { Cards } from '../../features/cards/components/Cards'
 
 export const router = createHashRouter([
     {

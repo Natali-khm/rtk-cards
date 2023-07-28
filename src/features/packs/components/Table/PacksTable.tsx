@@ -9,23 +9,25 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 
-import { CardPackType } from '../../packs.api'
-import { PacksTableHeader } from './PacksTableHeader'
-import { packsTableTitles } from './packsConstants'
-import { usePacksSelectors } from '../../hooks/usePacksSelectors'
-import { useAppDispatch } from 'common/hooks'
-import { packsThunks } from '../../packs.slice'
-import { toast } from 'react-toastify'
-import { NothingFound } from './NothingFound'
+import { PacksTableHeader, NothingFound } from 'features/packs/components'
+import { packsTableTitles } from 'features/packs/packsConstants'
+import { cardsActions } from 'features/cards/cards.slice'
+import { usePacksSelectors } from 'features/packs/hooks'
+import { packsThunks } from 'features/packs/packs.slice'
+import { CardPackType } from 'features/packs/packs.api'
+import { nameCellSX } from 'features/packs/packsStyles'
+import { useAuthSelectors } from 'features/auth/hooks'
+import { TableSkeleton } from 'common/components'
 import { useNavigate } from 'react-router-dom'
-import { nameCellSX } from '../packsStyles'
-import { TableSkeleton } from 'common/components/table/TableSkeleton'
-import { formatDate } from 'common/utils/formatDate'
+import { useAppDispatch } from 'common/hooks'
+import { formatDate } from 'common/utils'
+import { toast } from 'react-toastify'
 
 export const PacksTable = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const { profileId, packsCountForPage, packsAreLoading, cardPacks } = usePacksSelectors()
+    const { packsCountForPage, packsAreLoading, cardPacks } = usePacksSelectors()
+    const { profileId } = useAuthSelectors()
 
     const rowsForSkeleton = Array.from(Array(packsCountForPage), (_, i) => i++)
     const formatedDate = (date: string) => formatDate(date)
@@ -47,9 +49,10 @@ export const PacksTable = () => {
     }
 
     const navigateTo = (id: string) => {
+        dispatch(cardsActions.setPackId(id))
         navigate(`cards/${id}`)
     }
-debugger
+
     return (
         <>
             <TableContainer component={Paper}>

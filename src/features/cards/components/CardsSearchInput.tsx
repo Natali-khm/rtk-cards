@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { SearchInput } from 'common/components/inputs/SearchInput'
-import { useCardsSelectors } from '../hooks/useCardsSelectors'
-import { useCardsParams } from '../hooks/useCardsParams'
-import { useDebounce } from 'common/hooks/useDebounce'
+import { ChangeEvent, useEffect, useState } from 'react'
+
+import { useCardsSelectors,useCardsParams } from 'features/cards/hooks'
+import { SearchInput } from 'common/components'
+import { useDebounce } from 'common/hooks'
 
 export const CardsSearchInput = () => {
     const { cardsAreLoading, cardQuestion } = useCardsSelectors()
@@ -18,6 +18,7 @@ export const CardsSearchInput = () => {
     }
 
     useEffect(() => {
+        if (cardQuestion === find) return
         setQueryParams({ cardQuestion: debouncedValue })
     }, [debouncedValue])
 

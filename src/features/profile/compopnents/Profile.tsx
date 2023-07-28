@@ -1,6 +1,6 @@
 import { EditableProfileName } from 'common/components/editable_profile_name/EditableProfileName'
 import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
-import { BackspaceLink } from 'common/components/link/BackspaceLink'
+import { BackspaceLink } from 'common/components/links/BackspaceLink'
 import { useAuth, useAuthSelectors } from '../../auth/hooks'
 import profileAvatar from 'assets/image/profile_avatar.jpg'
 import LogoutIcon from '@mui/icons-material/Logout'

@@ -1,14 +1,13 @@
 import { SelectChangeEvent } from '@mui/material/Select'
 
-import { CustomPagination } from 'common/components/table/CustomPagination'
-import { useCardsSelectors } from '../hooks/useCardsSelectors'
+import { useCardsSelectors, useCardsParams } from 'features/cards/hooks'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useCardsParams } from '../hooks/useCardsParams'
+import { CustomPagination } from 'common/components'
 
 export const CardsPagination = () => {
     const { cardsTotalCount, cardsCountForPage, pageParams, cardsAreLoading } = useCardsSelectors()
     const { params, setSearchParams, setQueryParams } = useCardsParams()
-    
+
     const [page, setPage] = useState(pageParams || 1)
     const [pageCount, setCount] = useState(cardsCountForPage || 4)
 

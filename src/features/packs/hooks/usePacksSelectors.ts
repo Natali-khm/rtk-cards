@@ -7,7 +7,6 @@ import {
     packsAreLoadingS,
     packsCountForPageS,
     pageS,
-    profileIdS,
     queryMaxS,
     queryMinS,
     queryParamsS,
@@ -24,7 +23,6 @@ export const usePacksSelectors = () => {
     const queryMax = useAppSelector(queryMaxS)
     const maxCards = useAppSelector(maxCardsS)
     const userId = useAppSelector(userIdS)
-    const profileId = useAppSelector(profileIdS)
     const packName = useAppSelector(packNameS)
     const packsAreLoading = useAppSelector(packsAreLoadingS)
     const cardPacks = useAppSelector(cardPacksS)
@@ -39,7 +37,6 @@ export const usePacksSelectors = () => {
         queryMax,
         maxCards,
         userId,
-        profileId,
         packName,
         packsAreLoading,
         cardPacks,
