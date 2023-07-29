@@ -15,7 +15,7 @@ type PropsType = {
 
 export const CustomPagination: FC<PropsType> = ({ count, page, disabled, value, onChangePag, onChangeSel }) => {
     return (
-            <Grid container alignItems={'center'}>
+            <Grid container alignItems={'center'} sx={{mb: '30px'}}>
                 <Pagination
                     shape="rounded"
                     color={'primary'}

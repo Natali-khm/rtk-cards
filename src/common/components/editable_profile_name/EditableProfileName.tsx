@@ -1,12 +1,13 @@
-import { ChangeEvent, useState } from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import { authThunks } from '../../../features/auth/auth.slice'
-import { useAppDispatch } from '../../hooks'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+
+import { authThunks } from 'features/auth/auth.slice'
+import { ChangeEvent, useState } from 'react'
+import { useAppDispatch } from 'common/hooks'
 
 type PropsType = {
     profileName: string

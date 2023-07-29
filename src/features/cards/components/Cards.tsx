@@ -2,41 +2,33 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
 import { CardsTable, CardsFilters, EmptyPack } from 'features/cards/components'
-import { useCardsSelectors, useCardsParams } from 'features/cards/hooks'
-import { cardsActions, cardsThunks } from 'features/cards/cards.slice'
+import { useCardsSelectors, useFetchCards } from 'features/cards/hooks'
 import { BackspaceLink, SubHeader } from 'common/components'
+import { cardsThunks } from 'features/cards/cards.slice'
 import { useAuthSelectors } from 'features//auth/hooks'
 import { useAppDispatch } from 'common/hooks'
 import { paths } from 'common/constants'
 import { toast } from 'react-toastify'
-import { useEffect } from 'react'
+import { MoreInfo } from './MoreInfo'
 
 export const Cards = () => {
     const dispatch = useAppDispatch()
-    const { setQueryParams, params } = useCardsParams()
-    const { packName, queryParams, cardsList, cards, packUserId, packId, cardsAreLoading } = useCardsSelectors()
+    const { packName, cardsList, cards, packUserId, cardsAreLoading, cardQuestion, cardsTotalCount, packId } =
+        useCardsSelectors()
     const { profileId } = useAuthSelectors()
+
+    useFetchCards()
 
     const initialization = !Object.keys(cards).length
 
     const addNewCard = () => {
-        dispatch(cardsThunks.addCard({ cardsPack_id: packId }))
-            .unwrap()
-            .then((res) => {
-                toast.success(`New card is created`)
-            })
+        packId &&
+            dispatch(cardsThunks.addCard({ cardsPack_id: packId }))
+                .unwrap()
+                .then((res) => {
+                    toast.success(`New card is created`)
+                })
     }
-
-    useEffect(() => {
-        setQueryParams({ ...params, cardsPack_id: packId || '' })
-        return () => {
-            dispatch(cardsActions.clearState())
-        }
-    }, [])
-
-    useEffect(() => {
-        dispatch(cardsThunks.getCards())
-    }, [queryParams])
 
     return (
         <Grid justifyContent="center">
@@ -45,15 +37,16 @@ export const Cards = () => {
                 <SubHeader
                     title={packName}
                     onClick={addNewCard}
-                    buttonTitle={packUserId === profileId ? 'Add new card' : 'Learn to Pack'}
                     disabled={cardsAreLoading}
                     showBtn={!!cardsList?.length}
-                />
+                    buttonTitle={packUserId === profileId ? 'Add new card' : 'Learn to Pack'}>
+                    {packUserId === profileId ? <MoreInfo /> : undefined}
+                </SubHeader>
             </Box>
             <Grid item md={12}>
                 {initialization ? (
                     <div>initialization</div>
-                ) : !cardsList?.length ? (
+                ) : !cardsAreLoading && !cardsTotalCount && !cardQuestion ? (
                     <EmptyPack />
                 ) : (
                     <CardsFilters>

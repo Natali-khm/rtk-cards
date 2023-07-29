@@ -1,2 +1,2 @@
 export { paths } from './paths'
-export { theme } from './theme'
+export { theme } from '../styles/theme'

@@ -1,4 +1,3 @@
-export { NothingFound } from './NothingFound'
 export { PacksTableHeader } from './table/PacksTableHeader'
 export { PacksSearchInput } from './PacksSearchInput'
 export { ShowPacksCards } from './ShowPacksCards'

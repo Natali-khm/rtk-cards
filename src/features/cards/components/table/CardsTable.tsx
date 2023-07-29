@@ -17,17 +17,18 @@ import { CardsTableHeader } from 'features/cards/components'
 import { useCardsSelectors } from 'features/cards/hooks'
 import { cardsThunks } from 'features/cards/cards.slice'
 import { useAuthSelectors } from 'features/auth/hooks'
-import { TableSkeleton } from 'common/components'
+import { NothingFound, TableSkeleton } from 'common/components'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
 import { toast } from 'react-toastify'
 
 export const CardsTable = () => {
-    const { cardsList, cardsAreLoading, cardsCountForPage, packUserId } = useCardsSelectors()
+    const dispatch = useAppDispatch()
+    const { cardsList, cardsAreLoading, cardsCountForPage, packUserId, cardQuestion } = useCardsSelectors()
+    const { profileId } = useAuthSelectors()
+
     const formatedDate = (date: string) => formatDate(date)
     const rowsForSkeleton = Array.from(Array(cardsCountForPage), (_, i) => i++)
-    const { profileId } = useAuthSelectors()
-    const dispatch = useAppDispatch()
 
     const updateCard = (id: string, newParams?: CardRequestType) => {
         dispatch(cardsThunks.updateCard({ _id: id, ...newParams }))
@@ -54,47 +55,54 @@ export const CardsTable = () => {
     }
 
     return (
-        <TableContainer component={Paper}>
-            <Table>
-                <CardsTableHeader />
+        <>
+            <TableContainer component={Paper} >
+                <Table>
+                    <CardsTableHeader />
 
-                <TableBody>
-                    {cardsAreLoading ? (
-                        <TableSkeleton rowsNumb={rowsForSkeleton} colNumb={cardsTableTitles} />
-                    ) : (
-                        cardsList?.map((c: CardType) => (
-                            <TableRow key={c._id} sx={{ cursor: 'pointer' }} hover>
-                                <TableCell>{c.question}</TableCell>
-                                <TableCell>{c.answer}</TableCell>
-                                <TableCell>{formatedDate(c.updated)}</TableCell>
-                                <TableCell>
-                                    <Grid container alignItems="center" justifyContent="space-between">
-                                        <Rating
-                                            size="small"
-                                            value={c.grade}
-                                            onChange={(event, newValue) => {
-                                                newValue && updateCardGrade(c._id, newValue)
-                                            }}
-                                        />
-                                        {packUserId === profileId && (
-                                            <Box>
-                                                <IconButton
-                                                    onClick={() => updateCard(c._id, { question: 'updated question' })}
-                                                    size="small">
-                                                    <BorderColorOutlinedIcon fontSize="small" />
-                                                </IconButton>
-                                                <IconButton onClick={() => deleteCard(c._id, c.question)} size="small">
-                                                    <DeleteOutlinedIcon fontSize="small" />
-                                                </IconButton>
-                                            </Box>
-                                        )}
-                                    </Grid>
-                                </TableCell>
-                            </TableRow>
-                        ))
-                    )}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    <TableBody>
+                        {cardsAreLoading ? (
+                            <TableSkeleton rowsNumb={rowsForSkeleton} colNumb={cardsTableTitles} />
+                        ) : (
+                            cardsList?.map((c: CardType) => (
+                                <TableRow key={c._id} sx={{ cursor: 'pointer' }} hover>
+                                    <TableCell>{c.question}</TableCell>
+                                    <TableCell>{c.answer}</TableCell>
+                                    <TableCell>{formatedDate(c.updated)}</TableCell>
+                                    <TableCell>
+                                        <Grid container alignItems="center" justifyContent="space-between">
+                                            <Rating
+                                                size="small"
+                                                value={c.grade}
+                                                onChange={(event, newValue) => {
+                                                    newValue && updateCardGrade(c._id, newValue)
+                                                }}
+                                            />
+                                            {packUserId === profileId && (
+                                                <Box>
+                                                    <IconButton
+                                                        onClick={() =>
+                                                            updateCard(c._id, { question: 'updated question' })
+                                                        }
+                                                        size="small">
+                                                        <BorderColorOutlinedIcon fontSize="small" />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        onClick={() => deleteCard(c._id, c.question)}
+                                                        size="small">
+                                                        <DeleteOutlinedIcon fontSize="small" />
+                                                    </IconButton>
+                                                </Box>
+                                            )}
+                                        </Grid>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            {cardQuestion && !cardsList?.length && <NothingFound query={cardQuestion || ''} />}
+        </>
     )
 }

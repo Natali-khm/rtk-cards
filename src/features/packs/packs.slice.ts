@@ -8,7 +8,7 @@ const slice = createSlice({
     name: 'packs',
     initialState: {
         packs: {} as GetPackResponseType,
-        queryParams: { page: 1, pageCount: 4 } as GetPacksParamsType,
+        queryParams: { pageCount: 4, min: 0, max: 0 } as GetPacksParamsType,
         isLoading: false,
     },
     reducers: {

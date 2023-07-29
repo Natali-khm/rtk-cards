@@ -5,11 +5,10 @@ import { store } from './app/store'
 import reportWebVitals from './reportWebVitals'
 import { RouterProvider, createHashRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
-import { theme } from './common/constants/theme'
+import { theme } from './common/styles/theme'
 import { router } from './common/routes/Routes'
 import { GlobalError } from './common/components/global_error/GlobalError'
-import 'react-toastify/dist/ReactToastify.css';
-
+import 'react-toastify/dist/ReactToastify.css'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)

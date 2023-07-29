@@ -7,7 +7,7 @@ export const PacksSearchInput = () => {
     const { packName, packsAreLoading } = usePacksSelectors()
     const { setSearchParams, params, setQueryParams } = usePacksParams()
 
-    const [find, setFind] = useState('')
+    const [find, setFind] = useState(packName || '')
     const debouncedValue = useDebounce(find, 800)
 
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +17,7 @@ export const PacksSearchInput = () => {
     }
 
     useEffect(() => {
+        if (packName === find) return
         setQueryParams({ packName: debouncedValue })
     }, [debouncedValue])
 

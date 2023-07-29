@@ -8,7 +8,7 @@ export const CardsSearchInput = () => {
     const { cardsAreLoading, cardQuestion } = useCardsSelectors()
     const { setSearchParams, params, setQueryParams } = useCardsParams()
 
-    const [find, setFind] = useState('')
+    const [find, setFind] = useState(cardQuestion || '')
     const debouncedValue = useDebounce(find, 800)
 
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +18,7 @@ export const CardsSearchInput = () => {
     }
 
     useEffect(() => {
+        debugger
         if (cardQuestion === find) return
         setQueryParams({ cardQuestion: debouncedValue })
     }, [debouncedValue])

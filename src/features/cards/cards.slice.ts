@@ -16,7 +16,7 @@ const slice = createSlice({
     initialState: {
         cards: {} as GetCardsResponseType,
         isLoading: false,
-        queryParams: {} as GetCardsParamsType,
+        queryParams: { cardQuestion: '', /* page: 1, */ pageCount: 4, sortCards: '' } as GetCardsParamsType,
         packId: '' as string,
     },
     reducers: {

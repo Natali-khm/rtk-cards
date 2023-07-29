@@ -4,11 +4,11 @@ import IconButton from '@mui/material/IconButton'
 import { usePacksSelectors, usePacksParams } from 'features/packs/hooks'
 
 export const ResetButton = () => {
-    const { maxCards, packsAreLoading } = usePacksSelectors()
+    const { maxCardsResp, packsAreLoading } = usePacksSelectors()
     const { setSearchParams, setQueryParams } = usePacksParams()
     const resetHandler = () => {
         setSearchParams({})
-        setQueryParams({ page: 1, pageCount: 4, min: 0, max: maxCards, packName: '', user_id: '', sortPacks: '' })
+        setQueryParams({ page: 1, pageCount: 4, min: 0, max: maxCardsResp, packName: '', user_id: '', sortPacks: '' })
     }
 
     return (

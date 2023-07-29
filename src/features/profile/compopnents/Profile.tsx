@@ -1,18 +1,18 @@
-import { EditableProfileName } from 'common/components/editable_profile_name/EditableProfileName'
 import LocalSeeOutlinedIcon from '@mui/icons-material/LocalSeeOutlined'
-import { BackspaceLink } from 'common/components/links/BackspaceLink'
-import { useAuth, useAuthSelectors } from '../../auth/hooks'
-import profileAvatar from 'assets/image/profile_avatar.jpg'
 import LogoutIcon from '@mui/icons-material/Logout'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import { paths } from 'common/constants/paths'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Badge from '@mui/material/Badge'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+
+import { BackspaceLink, EditableProfileName } from 'common/components'
+import { useAuth, useAuthSelectors } from 'features/auth/hooks'
+import profileAvatar from 'assets/image/profile_avatar.jpg'
+import { paths } from 'common/constants'
 
 export const Profile = () => {
     const { logoutHandler } = useAuth()

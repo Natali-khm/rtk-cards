@@ -9,15 +9,15 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 
-import { PacksTableHeader, NothingFound } from 'features/packs/components'
 import { packsTableTitles } from 'features/packs/packsConstants'
+import { NothingFound, TableSkeleton } from 'common/components'
+import { PacksTableHeader } from 'features/packs/components'
 import { cardsActions } from 'features/cards/cards.slice'
 import { usePacksSelectors } from 'features/packs/hooks'
 import { packsThunks } from 'features/packs/packs.slice'
 import { CardPackType } from 'features/packs/packs.api'
 import { nameCellSX } from 'features/packs/packsStyles'
 import { useAuthSelectors } from 'features/auth/hooks'
-import { TableSkeleton } from 'common/components'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
@@ -26,10 +26,10 @@ import { toast } from 'react-toastify'
 export const PacksTable = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const { packsCountForPage, packsAreLoading, cardPacks } = usePacksSelectors()
+    const { packsCountResp, packsAreLoading, cardPacks, packName } = usePacksSelectors()
     const { profileId } = useAuthSelectors()
 
-    const rowsForSkeleton = Array.from(Array(packsCountForPage), (_, i) => i++)
+    const rowsForSkeleton = Array.from(Array(packsCountResp), (_, i) => i++)
     const formatedDate = (date: string) => formatDate(date)
 
     const deletePack = (id: string, name: string) => {
@@ -96,7 +96,7 @@ export const PacksTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            {!packsAreLoading && !cardPacks?.length && <NothingFound />}
+            {!packsAreLoading && !cardPacks?.length && <NothingFound query={packName || ''} />}
         </>
     )
 }

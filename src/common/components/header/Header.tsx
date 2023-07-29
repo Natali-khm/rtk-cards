@@ -3,10 +3,10 @@ import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
 
-import { HeaderProfile } from '../header_profile/HeaderProfile'
+import { HeaderProfile } from 'features/profile/compopnents'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { Link, useNavigate } from 'react-router-dom'
-import { paths } from '../../constants/paths'
+import { paths } from 'common/constants'
 import logo from 'assets/image/logo.svg'
 
 export const Header = () => {

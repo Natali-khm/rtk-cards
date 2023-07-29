@@ -11,7 +11,7 @@ export const CardsCountSlider = () => {
     const [max, setMaxValue] = useState(0)
 
     const { setSearchParams, params, setQueryParams } = usePacksParams()
-    const { queryMin, queryMax, maxCards, packsAreLoading } = usePacksSelectors()
+    const { queryMin, queryMax, maxCardsResp, packsAreLoading } = usePacksSelectors()
 
     const handleSliderChange = (e: Event, newValue: number | number[]) => {
         if (Array.isArray(newValue)) {
@@ -27,8 +27,8 @@ export const CardsCountSlider = () => {
 
     useEffect(() => {
         setMinValue(queryMin || 0)
-        setMaxValue(queryMax || maxCards)
-    }, [queryMin, queryMax, maxCards]) // for updating and when the profile is received (know the maxCards value)
+        setMaxValue(queryMax || maxCardsResp || 0)
+    }, [queryMin, queryMax, maxCardsResp]) // for updating and when the profile is received (know the maxCards value)
 
     return (
         <Grid container alignItems={'center'} spacing={1}>
@@ -45,12 +45,12 @@ export const CardsCountSlider = () => {
             </Grid>
             <Grid item>
                 <Slider
-                    value={[min, max]}
+                    value={[+min, +max]}
                     size="small"
                     sx={{ width: '155px', m: '0 12px' }}
                     onChange={handleSliderChange}
                     onChangeCommitted={setRangeValues}
-                    max={maxCards}
+                    max={maxCardsResp}
                     disabled={packsAreLoading}
                 />
             </Grid>

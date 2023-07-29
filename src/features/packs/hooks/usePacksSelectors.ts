@@ -2,11 +2,14 @@ import { useAppSelector } from 'common/hooks'
 import {
     cardPacksS,
     cardPacksTotalCountS,
-    maxCardsS,
+    maxCardsRespS,
+    minCardsRespS,
     packNameS,
     packsAreLoadingS,
-    packsCountForPageS,
-    pageS,
+    packsCountParamsS,
+    packsCountRespS,
+    pageParamsS,
+    pageResponseS,
     queryMaxS,
     queryMinS,
     queryParamsS,
@@ -16,30 +19,38 @@ import {
 
 export const usePacksSelectors = () => {
     const cardPacksTotalCount = useAppSelector(cardPacksTotalCountS)
-    const packsCountForPage = useAppSelector(packsCountForPageS)
-    const pageParams = useAppSelector(pageS)
-    const sortPacks = useAppSelector(sortPacksS)
-    const queryMin = useAppSelector(queryMinS)
-    const queryMax = useAppSelector(queryMaxS)
-    const maxCards = useAppSelector(maxCardsS)
     const userId = useAppSelector(userIdS)
-    const packName = useAppSelector(packNameS)
     const packsAreLoading = useAppSelector(packsAreLoadingS)
     const cardPacks = useAppSelector(cardPacksS)
     const queryParams = useAppSelector(queryParamsS)
 
+    const pageResponse = useAppSelector(pageResponseS)
+    const maxCardsResp = useAppSelector(maxCardsRespS)
+    const minCardsResp = useAppSelector(minCardsRespS)
+    const packsCountResp = useAppSelector(packsCountRespS)
+
+    const pageParams = useAppSelector(pageParamsS)
+    const packName = useAppSelector(packNameS)
+    const sortPacks = useAppSelector(sortPacksS)
+    const queryMin = useAppSelector(queryMinS)
+    const queryMax = useAppSelector(queryMaxS)
+    const packsCountParams = useAppSelector(packsCountParamsS)
+
     return {
         cardPacksTotalCount,
-        packsCountForPage,
-        pageParams,
+        packsCountResp,
+        pageResponse,
         sortPacks,
         queryMin,
         queryMax,
-        maxCards,
+        maxCardsResp,
         userId,
         packName,
         packsAreLoading,
         cardPacks,
         queryParams,
+        pageParams,
+        packsCountParams,
+        minCardsResp,
     }
 }
