@@ -43,7 +43,6 @@ export const EditableProfileName = ({ profileName }: PropsType) => {
                 <TextField
                     fullWidth
                     value={name}
-                    label="Nickname"
                     variant="standard"
                     onBlur={handleBlur}
                     onChange={handleChange}

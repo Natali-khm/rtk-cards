@@ -8,6 +8,6 @@ export const paths = {
     SET_NEW_PASSWORD: '/set-new-password/:token',
     PROFILE: '/profile',
     CARDS: '/cards/:packId',
-    LEARN: '/learn',
+    LEARN: '/learn/:packId',
     SANDBOX: '/sandbox',
 } as const

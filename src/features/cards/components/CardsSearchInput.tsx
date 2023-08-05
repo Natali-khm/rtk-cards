@@ -18,7 +18,6 @@ export const CardsSearchInput = () => {
     }
 
     useEffect(() => {
-        debugger
         if (cardQuestion === find) return
         setQueryParams({ cardQuestion: debouncedValue })
     }, [debouncedValue])

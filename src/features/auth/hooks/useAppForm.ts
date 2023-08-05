@@ -1,5 +1,5 @@
-import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 export const createSchema = (formFields: FormFieldsType[]) => {
@@ -14,6 +14,9 @@ export const createSchema = (formFields: FormFieldsType[]) => {
             .oneOf([yup.ref('password')], 'Passwords do not match')
             .min(8, 'Password must be must be at least 8 characters')
             .required('Password is required'),
+        textInput: yup.string().required('Name is required'),
+        // question: yup.string().optional(),
+        // answer: ,
     }
 
     const validators: ValidatorsType = {}
@@ -26,6 +29,8 @@ export const useAppForm = (formFields: FormFieldsType[]) => {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
+        formState
     } = useForm<FormValidateType>({
         resolver: yupResolver(createSchema(formFields)),
         defaultValues: {},
@@ -35,8 +40,11 @@ export const useAppForm = (formFields: FormFieldsType[]) => {
         register,
         handleSubmit,
         errors,
+        reset,
+        formState
     }
 }
+
 
 // types
 
@@ -45,13 +53,19 @@ export type FormValidateType = {
     password: string
     confirmPassword: string
     rememberMe: boolean
-    name: string
+    textInput: string
+    private: boolean
+    question: string
+    answer: string
 }
 
-type FormFieldsType = 'email' | 'password' | 'confirmPassword'
+export type FormFieldsType = 'email' | 'password' | 'confirmPassword' | 'textInput'
 
 type ValidatorsType = {
     email?: yup.StringSchema<string, yup.AnyObject>
     password?: yup.StringSchema<string, yup.AnyObject>
     confirmPassword?: yup.StringSchema<string, yup.AnyObject>
+    textInput?: yup.StringSchema<string, yup.AnyObject>
+    question?: yup.StringSchema<string, yup.AnyObject>
+    answer?: yup.StringSchema<string, yup.AnyObject>
 }

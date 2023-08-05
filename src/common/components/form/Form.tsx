@@ -1,12 +1,13 @@
-import { FC, FormEventHandler, PropsWithChildren } from 'react'
-import Grid from '@mui/material/Grid'
 import FormControl from '@mui/material/FormControl'
-import FormGroup from '@mui/material/FormGroup'
 import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
+import FormGroup from '@mui/material/FormGroup'
 import Button from '@mui/material/Button'
-import { AppLink } from '../links/AppLink'
-import { useAuthSelectors } from '../../../features/auth/hooks'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+
+import { FC, FormEventHandler, PropsWithChildren } from 'react'
+import { useAuthSelectors } from 'features/auth/hooks'
+import { AppLink } from 'common/components'
 
 type FormPropsType = {
     title: string

@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
 import { toast } from 'react-toastify'
+import { modalActions } from '../../../modals/modals.slice'
 
 export const PacksTable = () => {
     const dispatch = useAppDispatch()
@@ -33,24 +34,23 @@ export const PacksTable = () => {
     const formatedDate = (date: string) => formatDate(date)
 
     const deletePack = (id: string, name: string) => {
-        dispatch(packsThunks.deletePack(id))
-            .unwrap()
-            .then((res) => {
-                toast.success(`'${name}' pack is deleted`)
-            })
+        dispatch(modalActions.openModal())
+        dispatch(modalActions.setModal({ title: 'Delete Pack', data: { id, name } }))
     }
 
-    const updatePack = (id: string, name: string) => {
-        dispatch(packsThunks.updatePack({ _id: id, name: 'updated name' }))
-            .unwrap()
-            .then((res) => {
-                toast.success(`'${name}' pack is updated`)
-            })
+    const updatePack = (id: string, name: string, partial: boolean) => {
+        // FIX
+        dispatch(modalActions.openModal())
+        dispatch(modalActions.setModal({ title: 'Edit Pack', data: { id, name, private: partial } }))
     }
 
-    const navigateTo = (id: string) => {
+    const navigateToCards = (id: string) => {
         dispatch(cardsActions.setPackId(id))
         navigate(`cards/${id}`)
+    }
+
+    const navigateToLearn = (id: string) => {
+        navigate(`learn/${id}`)
     }
 
     return (
@@ -65,20 +65,23 @@ export const PacksTable = () => {
                         ) : (
                             cardPacks?.map((pack: CardPackType) => (
                                 <TableRow hover key={pack._id}>
-                                    <TableCell sx={nameCellSX} onClick={() => navigateTo(pack._id)}>
+                                    <TableCell sx={nameCellSX} onClick={() => navigateToCards(pack._id)}>
                                         {pack.name}
                                     </TableCell>
                                     <TableCell>{pack.cardsCount}</TableCell>
                                     <TableCell>{formatedDate(pack.updated)}</TableCell>
                                     <TableCell>{pack.user_name}</TableCell>
                                     <TableCell>
-                                        <IconButton size="small" disabled={pack.cardsCount === 0}>
+                                        <IconButton
+                                            size="small"
+                                            disabled={pack.cardsCount === 0}
+                                            onClick={() => navigateToLearn(pack._id)}>
                                             <SchoolOutlinedIcon fontSize="small" />
                                         </IconButton>
                                         {pack.user_id === profileId && (
                                             <>
                                                 <IconButton
-                                                    onClick={() => updatePack(pack._id, pack.name)}
+                                                    onClick={() => updatePack(pack._id, pack.name, pack.private)}
                                                     size="small">
                                                     <BorderColorOutlinedIcon fontSize="small" />
                                                 </IconButton>

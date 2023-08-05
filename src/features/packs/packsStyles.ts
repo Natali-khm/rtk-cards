@@ -37,3 +37,10 @@ export const showCardsActiveBtnSX = {
     boxShadow: 0,
     color: 'white',
 }
+
+export const resetBtnSX = {
+    backgroundColor: '#fff',
+    border: ' 1px solid #d1d0d0',
+    borderRadius: '2px',
+    cursor: 'pointer',
+}

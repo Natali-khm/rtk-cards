@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice, isPending, isRejected } from '@reduxjs/toolkit'
 
-import { AddPackParamsType, GetPacksParamsType, GetPackResponseType, packsApi, UpdateParamsPackType } from './packs.api'
+import { AddPackParamsType, GetPacksParamsType, GetPackResponseType, packsApi, UpdateParamsPackType } from 'features/packs/packs.api'
 import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 import { thunkTryCatch } from 'common/utils'
 

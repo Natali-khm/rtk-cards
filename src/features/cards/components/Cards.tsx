@@ -10,6 +10,7 @@ import { useAppDispatch } from 'common/hooks'
 import { paths } from 'common/constants'
 import { toast } from 'react-toastify'
 import { MoreInfo } from './MoreInfo'
+import { modalActions } from '../../modals/modals.slice'
 
 export const Cards = () => {
     const dispatch = useAppDispatch()
@@ -22,12 +23,8 @@ export const Cards = () => {
     const initialization = !Object.keys(cards).length
 
     const addNewCard = () => {
-        packId &&
-            dispatch(cardsThunks.addCard({ cardsPack_id: packId }))
-                .unwrap()
-                .then((res) => {
-                    toast.success(`New card is created`)
-                })
+        dispatch(modalActions.openModal())
+        dispatch(modalActions.setModal( {title: 'Add New Card', data: {id: packId}}))
     }
 
     return (
@@ -46,7 +43,7 @@ export const Cards = () => {
             <Grid item md={12}>
                 {initialization ? (
                     <div>initialization</div>
-                ) : !cardsAreLoading && !cardsTotalCount && !cardQuestion ? (
+                ) : !cardsAreLoading && !cardsTotalCount && !cardQuestion  ? (
                     <EmptyPack />
                 ) : (
                     <CardsFilters>

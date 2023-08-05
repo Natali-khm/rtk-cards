@@ -6,6 +6,7 @@ import { packsThunks } from 'features/packs/packs.slice'
 import { SubHeader } from 'common/components'
 import { useAppDispatch } from 'common/hooks'
 import { toast } from 'react-toastify'
+import { modalActions } from '../../modals/modals.slice'
 
 export const Packs = () => {
     const { packsAreLoading } = usePacksSelectors()
@@ -14,12 +15,8 @@ export const Packs = () => {
     useFetchPacks()
 
     const addNewPack = () => {
-        const name = 'new card4'
-        dispatch(packsThunks.addPack({ name }))
-            .unwrap()
-            .then((res) => {
-                toast.success(`'${name}' pack is created`)
-            })
+        dispatch(modalActions.openModal())
+        dispatch(modalActions.setModal({ title: 'Add New Pack', data: '' }))
     }
 
     return (

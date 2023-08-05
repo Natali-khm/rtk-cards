@@ -21,6 +21,7 @@ import { NothingFound, TableSkeleton } from 'common/components'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
 import { toast } from 'react-toastify'
+import { modalActions } from '../../../modals/modals.slice'
 
 export const CardsTable = () => {
     const dispatch = useAppDispatch()
@@ -30,12 +31,9 @@ export const CardsTable = () => {
     const formatedDate = (date: string) => formatDate(date)
     const rowsForSkeleton = Array.from(Array(cardsCountForPage), (_, i) => i++)
 
-    const updateCard = (id: string, newParams?: CardRequestType) => {
-        dispatch(cardsThunks.updateCard({ _id: id, ...newParams }))
-            .unwrap()
-            .then((res) => {
-                toast.success(`The card question is updated`)
-            })
+    const updateCard = (id: string, question: string, answer: string) => {
+        dispatch(modalActions.openModal())
+        dispatch(modalActions.setModal({ title: 'Edit Card', data: { id, question, answer } }))
     }
 
     const updateCardGrade = (id: string, grade: number) => {
@@ -47,16 +45,13 @@ export const CardsTable = () => {
     }
 
     const deleteCard = (id: string, name: string) => {
-        dispatch(cardsThunks.deleteCard(id))
-            .unwrap()
-            .then((res) => {
-                toast.success(`'${name}' card is deleted`)
-            })
+        dispatch(modalActions.openModal())
+        dispatch(modalActions.setModal({ title: 'Delete Card', data: { id, name } }))
     }
 
     return (
         <>
-            <TableContainer component={Paper} >
+            <TableContainer component={Paper}>
                 <Table>
                     <CardsTableHeader />
 
@@ -81,9 +76,7 @@ export const CardsTable = () => {
                                             {packUserId === profileId && (
                                                 <Box>
                                                     <IconButton
-                                                        onClick={() =>
-                                                            updateCard(c._id, { question: 'updated question' })
-                                                        }
+                                                        onClick={() => updateCard(c._id, c.question, c.answer)}
                                                         size="small">
                                                         <BorderColorOutlinedIcon fontSize="small" />
                                                     </IconButton>

@@ -17,7 +17,7 @@ export const ShowPacksCards = () => {
             delete params.packs // if userId = ''
             setSearchParams(params)
         }
-        setQueryParams({ user_id: value === 'my' ? profileId : '' })
+        setQueryParams({ user_id: value === 'my' ? profileId : '', max: 0, min: 0 })
     }
 
     return (
