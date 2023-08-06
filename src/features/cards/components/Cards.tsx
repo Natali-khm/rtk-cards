@@ -4,11 +4,9 @@ import Box from '@mui/material/Box'
 import { CardsTable, CardsFilters, EmptyPack } from 'features/cards/components'
 import { useCardsSelectors, useFetchCards } from 'features/cards/hooks'
 import { BackspaceLink, SubHeader } from 'common/components'
-import { cardsThunks } from 'features/cards/cards.slice'
 import { useAuthSelectors } from 'features//auth/hooks'
 import { useAppDispatch } from 'common/hooks'
 import { paths } from 'common/constants'
-import { toast } from 'react-toastify'
 import { MoreInfo } from './MoreInfo'
 import { modalActions } from '../../modals/modals.slice'
 
@@ -24,7 +22,7 @@ export const Cards = () => {
 
     const addNewCard = () => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal( {title: 'Add New Card', data: {id: packId}}))
+        dispatch(modalActions.setModal({ modalAction: 'Add New Card', data: { id: packId } }))
     }
 
     return (
@@ -43,7 +41,7 @@ export const Cards = () => {
             <Grid item md={12}>
                 {initialization ? (
                     <div>initialization</div>
-                ) : !cardsAreLoading && !cardsTotalCount && !cardQuestion  ? (
+                ) : !cardsAreLoading && !cardsTotalCount && !cardQuestion ? (
                     <EmptyPack />
                 ) : (
                     <CardsFilters>

@@ -2,10 +2,8 @@ import Box from '@mui/material/Box'
 
 import { usePacksSelectors, useFetchPacks } from 'features/packs/hooks'
 import { PacksFilters, PacksTable } from 'features/packs/components'
-import { packsThunks } from 'features/packs/packs.slice'
 import { SubHeader } from 'common/components'
 import { useAppDispatch } from 'common/hooks'
-import { toast } from 'react-toastify'
 import { modalActions } from '../../modals/modals.slice'
 
 export const Packs = () => {
@@ -16,7 +14,7 @@ export const Packs = () => {
 
     const addNewPack = () => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ title: 'Add New Pack', data: '' }))
+        dispatch(modalActions.setModal({ modalAction: 'Add New Pack', data: {} }))
     }
 
     return (

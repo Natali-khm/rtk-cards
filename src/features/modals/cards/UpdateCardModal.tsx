@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
-import { ModalsForm } from '../ModalsForm'
-import Box from '@mui/material/Box'
-import MenuItem from '@mui/material/MenuItem'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import TextField from '@mui/material/TextField'
+import { SelectChangeEvent } from '@mui/material/Select'
+
+import { useState } from 'react'
 import { useAppForm } from '../../auth/hooks'
 import { useModalsSelectors } from '../useModalsSelectors'
 import { SubmitHandler } from 'react-hook-form'
@@ -12,9 +9,10 @@ import { useAppDispatch } from '../../../common/hooks'
 import { modalActions } from '../modals.slice'
 import { toast } from 'react-toastify'
 import { cardsThunks } from '../../cards/cards.slice'
+import { CardModal } from './CardModal'
 
 export const UpdateCardModal = () => {
-    const { register, handleSubmit, errors, reset, formState } = useAppForm([])
+    const { register, handleSubmit } = useAppForm([])
     const [value, setValue] = useState('text')
     const { id, question, answer } = useModalsSelectors()
     const dispatch = useAppDispatch()
@@ -33,32 +31,14 @@ export const UpdateCardModal = () => {
     }
 
     return (
-        <ModalsForm onSubmit={handleSubmit(updateCard)} btnTitle={'Save Changes'}>
-            <Box  sx={{  mb: '8px' , color: '#949494' }}>Choose a question format</Box>
-
-            <Select fullWidth size="small" value={value} onChange={handleChange}>
-                <MenuItem value={'text'}>Text</MenuItem>
-                <MenuItem value={'picture'}>Picture</MenuItem>
-            </Select>
-
-            <TextField
-                fullWidth
-                size="small"
-                type="text"
-                label={'Question'}
-                margin="normal"
-                {...register('question')}
-                defaultValue={question}
-            />
-            <TextField
-                fullWidth
-                size="small"
-                type="text"
-                label={'Answer'}
-                margin="normal"
-                {...register('answer')}
-                defaultValue={answer}
-            />
-        </ModalsForm>
+        <CardModal
+            onSubmit={handleSubmit(updateCard)}
+            submitBtnTitle="Save Changes"
+            selectValue={value}
+            onChange={handleChange}
+            register={register}
+            defQuestionValue={question}
+            defAnswerValue={answer}
+        />
     )
 }

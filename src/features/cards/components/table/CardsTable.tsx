@@ -11,7 +11,7 @@ import Table from '@mui/material/Table'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import { CardRequestType, CardType } from 'features/cards/cards.api'
+import { CardType } from 'features/cards/cards.api'
 import { cardsTableTitles } from 'features/cards/cardsConstants'
 import { CardsTableHeader } from 'features/cards/components'
 import { useCardsSelectors } from 'features/cards/hooks'
@@ -33,7 +33,7 @@ export const CardsTable = () => {
 
     const updateCard = (id: string, question: string, answer: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ title: 'Edit Card', data: { id, question, answer } }))
+        dispatch(modalActions.setModal({ modalAction: 'Edit Card', data: { id, question, answer } }))
     }
 
     const updateCardGrade = (id: string, grade: number) => {
@@ -46,7 +46,7 @@ export const CardsTable = () => {
 
     const deleteCard = (id: string, name: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ title: 'Delete Card', data: { id, name } }))
+        dispatch(modalActions.setModal({ modalAction: 'Delete Card', data: { id, name } }))
     }
 
     return (

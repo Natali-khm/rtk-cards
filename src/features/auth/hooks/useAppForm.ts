@@ -15,8 +15,6 @@ export const createSchema = (formFields: FormFieldsType[]) => {
             .min(8, 'Password must be must be at least 8 characters')
             .required('Password is required'),
         textInput: yup.string().required('Name is required'),
-        // question: yup.string().optional(),
-        // answer: ,
     }
 
     const validators: ValidatorsType = {}

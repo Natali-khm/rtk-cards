@@ -4,7 +4,7 @@ const slice = createSlice({
     name: 'modals',
     initialState: {
         isOpen: false,
-        title: '' as string,
+        modalAction: '' as string,
         data: {} as any, // FIX
     },
     reducers: {
@@ -14,10 +14,10 @@ const slice = createSlice({
         closeModal: (state) => {
             state.isOpen = false
         },
-        setModal: (state, action: PayloadAction<{title: string, data: any}>) => {
+        setModal: (state, action: PayloadAction<{modalAction: string, data: any}>) => {
             // FIX
             state.data = action.payload.data
-            state.title = action.payload.title
+            state.modalAction = action.payload.modalAction
         },
     },
 })

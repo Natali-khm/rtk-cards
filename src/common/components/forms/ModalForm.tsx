@@ -1,44 +1,39 @@
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
-import { useModalsSelectors } from './useModalsSelectors'
-import { modalActions } from './modals.slice'
-import { useAppDispatch } from '../../common/hooks'
-import { cancelBtnSX } from './modalsStyles'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
-import { FC, FormEventHandler } from 'react'
 import FormGroup from '@mui/material/FormGroup'
+
+import { FC, FormEventHandler } from 'react'
+import { modalActions } from '../../../features/modals/modals.slice'
+import { useModalsSelectors } from '../../../features/modals/useModalsSelectors'
+import { cancelBtnSX } from '../../../features/modals/modalsStyles'
+import { useAppDispatch } from '../../hooks'
 
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    // width: 542,
     width: 440,
     bgcolor: 'background.paper',
     boxShadow: 24,
-    // pt: 2,
-    // px: 4,
-    // pb: 3,
     borderRadius: '3px',
 }
 
 type PropsType = {
-    // callBack: ()=>void
-    // color: string
     children?: React.ReactNode
     onSubmit?: FormEventHandler
-    btnTitle: string
+    submitBtnTitle: string
     btnColor?: string
 }
 
-export const ModalsForm: FC<PropsType> = ({ children, onSubmit, btnTitle, btnColor }) => {
+export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, btnColor }) => {
     const dispatch = useAppDispatch()
-    const { isOpenModal, title } = useModalsSelectors()
+    const { isOpenModal, modalAction } = useModalsSelectors()
 
     const handleClose = () => {
         dispatch(modalActions.closeModal())
@@ -54,7 +49,7 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, btnTitle, btnCol
                         alignItems="center"
                         sx={{ p: '18px 24px', borderBottom: '1px solid #d1d0d0', backgroundColor: '#faf7f7' }}>
                         <Typography variant="h3" sx={{ m: '0' }}>
-                            {title}
+                            {modalAction}
                         </Typography>
                         <IconButton size="small" onClick={handleClose}>
                             <CloseIcon />
@@ -76,7 +71,7 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, btnTitle, btnCol
                                             backgroundColor: btnColor,
                                         },
                                     }}>
-                                    {btnTitle}
+                                    {submitBtnTitle}
                                 </Button>
                             </Grid>
                         </FormGroup>

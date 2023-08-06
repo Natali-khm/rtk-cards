@@ -1,18 +1,15 @@
-import { TextInput } from 'common/components/inputs/TextInput'
+import { SelectChangeEvent } from '@mui/material/Select'
+
 import { useAppForm } from '../../auth/hooks'
-import { ModalsForm } from '../ModalsForm'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
 import { useEffect, useState } from 'react'
-import Box from '@mui/material/Box'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from 'common/hooks'
 import { cardsThunks } from '../../cards/cards.slice'
 import { useModalsSelectors } from '../useModalsSelectors'
 import { FormValidateType } from '../../auth/hooks/useAppForm'
 import { SubmitHandler } from 'react-hook-form'
-import TextField from '@mui/material/TextField'
 import { modalActions } from '../modals.slice'
+import { CardModal } from './CardModal'
 
 export const AddCardModal = () => {
     const { register, handleSubmit, errors, reset, formState } = useAppForm([])
@@ -38,28 +35,15 @@ export const AddCardModal = () => {
         if (formState.isSubmitSuccessful) {
             reset({ textInput: '' })
         }
-    }, [formState, /* submittedData, */ reset])
+    }, [formState, reset])
 
     return (
-        <ModalsForm onSubmit={handleSubmit(addCard)} btnTitle={'Add New Card'}>
-            <Box sx={{ mb: '8px', color: '#949494' }}>
-                Choose a question format
-            </Box>
-
-            <Select size="small" value={value} onChange={handleChange} fullWidth>
-                <MenuItem value={'text'}>Text</MenuItem>
-                <MenuItem value={'picture'}>Picture</MenuItem>
-            </Select>
-
-            <TextField
-                size="small"
-                type="text"
-                label={'Question'}
-                margin="normal"
-                {...register('question')}
-                fullWidth
-            />
-            <TextField size="small" type="text" label={'Answer'} margin="normal" {...register('answer')} fullWidth />
-        </ModalsForm>
+        <CardModal
+            onSubmit={handleSubmit(addCard)}
+            submitBtnTitle="Add New Card"
+            selectValue={value}
+            onChange={handleChange}
+            register={register}
+        />
     )
 }

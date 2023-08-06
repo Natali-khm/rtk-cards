@@ -1,5 +1,5 @@
 import React from 'react'
-import { ModalsForm } from '../ModalsForm'
+import { ModalsForm } from 'common/components'
 import Box from '@mui/material/Box'
 import { useAppDispatch } from '../../../common/hooks'
 import { SubmitHandler } from 'react-hook-form'
@@ -22,7 +22,7 @@ export const DeleteCardModal = () => {
             })
     }
     return (
-        <ModalsForm onSubmit={handleSubmit(deleteCard)} btnTitle={'Delete Card'} btnColor="red">
+        <ModalsForm onSubmit={handleSubmit(deleteCard)} submitBtnTitle={'Delete Card'} btnColor="red">
             <Box sx={{ mb: '5px', textAlign: 'center' }}>
                 Do you really want to remove <b>"{name}"</b> card?
             </Box>

@@ -14,14 +14,12 @@ import { NothingFound, TableSkeleton } from 'common/components'
 import { PacksTableHeader } from 'features/packs/components'
 import { cardsActions } from 'features/cards/cards.slice'
 import { usePacksSelectors } from 'features/packs/hooks'
-import { packsThunks } from 'features/packs/packs.slice'
 import { CardPackType } from 'features/packs/packs.api'
 import { nameCellSX } from 'features/packs/packsStyles'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
-import { toast } from 'react-toastify'
 import { modalActions } from '../../../modals/modals.slice'
 
 export const PacksTable = () => {
@@ -35,13 +33,13 @@ export const PacksTable = () => {
 
     const deletePack = (id: string, name: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ title: 'Delete Pack', data: { id, name } }))
+        dispatch(modalActions.setModal({ modalAction: 'Delete Pack', data: { id, name } }))
     }
 
     const updatePack = (id: string, name: string, partial: boolean) => {
         // FIX
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ title: 'Edit Pack', data: { id, name, private: partial } }))
+        dispatch(modalActions.setModal({ modalAction: 'Edit Pack', data: { id, name, private: partial } }))
     }
 
     const navigateToCards = (id: string) => {
