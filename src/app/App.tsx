@@ -7,11 +7,13 @@ import { useAppDispatch } from 'common/hooks'
 import { Header } from 'common/components'
 import { AppOutlet } from './AppOutlet'
 import { useEffect } from 'react'
-import { CommonAppModal } from '../features/modals/CommonAppModal'
+import { CommonAppModal } from 'features/modals/CommonAppModal'
+import { useAppSelectors } from './hooks/useAppSelectors'
 
 export function App() {
     const dispatch = useAppDispatch()
-    const { isInitialized, isLoggedIn, isLoading } = useAuthSelectors()
+    const { isLoggedIn } = useAuthSelectors()
+    const { appInitialized, isAppLoading } = useAppSelectors()
 
     useEffect(() => {
         dispatch(authThunks.isAuth())
@@ -20,9 +22,9 @@ export function App() {
     return (
         <>
             <Header />
-            <Box sx={{ height: '4px' }}>{isLoading && <LinearProgress />}</Box>
-            {!isInitialized && 'Initialization'}
-            {isInitialized && isLoggedIn !== null && <AppOutlet />}
+            <Box sx={{ height: '4px' }}>{isAppLoading && <LinearProgress />}</Box>
+            {!appInitialized && 'Initialization'}
+            {appInitialized && isLoggedIn !== null && <AppOutlet />}
             <CommonAppModal />
         </>
     )

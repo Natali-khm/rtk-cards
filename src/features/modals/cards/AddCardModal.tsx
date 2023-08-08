@@ -6,13 +6,13 @@ import { toast } from 'react-toastify'
 import { useAppDispatch } from 'common/hooks'
 import { cardsThunks } from '../../cards/cards.slice'
 import { useModalsSelectors } from '../useModalsSelectors'
-import { FormValidateType } from '../../auth/hooks/useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { SubmitHandler } from 'react-hook-form'
 import { modalActions } from '../modals.slice'
 import { CardModal } from './CardModal'
 
 export const AddCardModal = () => {
-    const { register, handleSubmit, errors, reset, formState } = useAppForm([])
+    const { register, handleSubmit, reset, formState } = useAppForm([])
     const dispatch = useAppDispatch()
     const { id } = useModalsSelectors()
 

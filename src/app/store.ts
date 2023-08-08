@@ -5,6 +5,7 @@ import { authReducer } from 'features/auth/auth.slice'
 import { packsReducer } from 'features/packs/packs.slice'
 import { cardsReducer } from 'features/cards/cards.slice'
 import { modalReducer } from 'features/modals/modals.slice'
+import { learnReducer } from 'features/learn/learn.slice'
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
         auth: authReducer,
         packs: packsReducer,
         cards: cardsReducer,
-        modals: modalReducer
+        modals: modalReducer,
+        learn: learnReducer
     },
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunkMiddleware),
 })

@@ -1,7 +1,7 @@
 import { passwordRecovMess } from '../components/forgot_password/constants'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SubmitHandler } from 'react-hook-form'
-import { FormValidateType } from './useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { useAppDispatch } from 'common/hooks'
 import { authThunks } from '../auth.slice'
 import { paths } from 'common/constants'

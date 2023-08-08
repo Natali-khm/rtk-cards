@@ -12,7 +12,7 @@ export const Packs = () => {
 
     useFetchPacks()
 
-    const addNewPack = () => {
+    const addPack = () => {
         dispatch(modalActions.openModal())
         dispatch(modalActions.setModal({ modalAction: 'Add New Pack', data: {} }))
     }
@@ -23,7 +23,7 @@ export const Packs = () => {
                 <SubHeader
                     showBtn={true}
                     title={'Packs list'}
-                    onClick={addNewPack}
+                    onClick={addPack}
                     buttonTitle="Add new pack"
                     disabled={packsAreLoading}
                 />

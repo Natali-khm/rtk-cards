@@ -5,9 +5,10 @@ import { useAppDispatch } from '../../../common/hooks'
 import { packsThunks } from '../../packs/packs.slice'
 import { useModalsSelectors } from '../useModalsSelectors'
 import { toast } from 'react-toastify'
-import { FormValidateType } from '../../auth/hooks/useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { SubmitHandler } from 'react-hook-form'
 import { ModalsForm } from 'common/components'
+import { modalActions } from '../modals.slice'
 
 export const DeletePackModal = () => {
     const { handleSubmit } = useAppForm([])
@@ -20,6 +21,7 @@ export const DeletePackModal = () => {
             .then((res) => {
                 toast.success(`'${name}' pack is deleted`)
             })
+        dispatch(modalActions.closeModal())
     }
 
     return (

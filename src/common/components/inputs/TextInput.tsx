@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField'
 
-import { FormFieldsType, FormValidateType } from 'features/auth/hooks/useAppForm'
+import { FormFieldsType, FormValidateType } from 'common/hooks/useAppForm'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
 import { FC } from 'react'
 
@@ -18,7 +18,7 @@ export const TextInput: FC<PropsType> = ({ register, errors, defaultValue, label
             fullWidth
             type="text"
             label={label}
-            sx={{height: '36px'}}
+            sx={{ height: '36px' }}
             margin="normal"
             variant="standard"
             {...register(name)}

@@ -4,7 +4,7 @@ import { useAppDispatch } from 'common/hooks'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
-export const useFetchCards = () => {
+export const useFetchCards = (count?: number) => {
     const dispatch = useAppDispatch()
     const { setQueryParams, params } = useCardsParams()
 
@@ -13,7 +13,7 @@ export const useFetchCards = () => {
     const { cardQuestion, sortCards, pageParams, cardsCountQuery } = useCardsSelectors()
 
     useEffect(() => {
-        setQueryParams({ ...params, cardsPack_id: packId, page: +params.page || 1 })
+        setQueryParams({ ...params, cardsPack_id: packId, page: +params.page || 1, pageCount: count || 4  })
         packId && dispatch(cardsActions.setPackId(packId))
         return () => {
             dispatch(cardsActions.clearState())

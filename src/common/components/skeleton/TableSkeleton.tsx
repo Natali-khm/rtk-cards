@@ -1,12 +1,14 @@
-import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
 import Skeleton from '@mui/material/Skeleton'
+
 import { FC } from 'react'
 
 type PropsType = {
     rowsNumb: number[]
     colNumb: any[]
 }
+
 export const TableSkeleton: FC<PropsType> = ({ rowsNumb, colNumb }) => {
     return (
         <>

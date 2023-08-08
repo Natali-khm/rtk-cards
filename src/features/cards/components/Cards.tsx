@@ -4,26 +4,20 @@ import Box from '@mui/material/Box'
 import { CardsTable, CardsFilters, EmptyPack } from 'features/cards/components'
 import { useCardsSelectors, useFetchCards } from 'features/cards/hooks'
 import { BackspaceLink, SubHeader } from 'common/components'
-import { useAuthSelectors } from 'features//auth/hooks'
-import { useAppDispatch } from 'common/hooks'
+import { useAuthSelectors } from 'features/auth/hooks'
 import { paths } from 'common/constants'
 import { MoreInfo } from './MoreInfo'
-import { modalActions } from '../../modals/modals.slice'
+import { useAddCard } from '../hooks/useAddCard'
 
 export const Cards = () => {
-    const dispatch = useAppDispatch()
-    const { packName, cardsList, cards, packUserId, cardsAreLoading, cardQuestion, cardsTotalCount, packId } =
+    const { packName, cardsList, cards, packUserId, cardsAreLoading, cardQuestion, cardsTotalCount } =
         useCardsSelectors()
     const { profileId } = useAuthSelectors()
+    const { addCard } = useAddCard()
 
     useFetchCards()
 
     const initialization = !Object.keys(cards).length
-
-    const addNewCard = () => {
-        dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Add New Card', data: { id: packId } }))
-    }
 
     return (
         <Grid justifyContent="center">
@@ -31,7 +25,7 @@ export const Cards = () => {
             <Box sx={{ m: '24px 0 34px' }}>
                 <SubHeader
                     title={packName}
-                    onClick={addNewCard}
+                    onClick={addCard}
                     disabled={cardsAreLoading}
                     showBtn={!!cardsList?.length}
                     buttonTitle={packUserId === profileId ? 'Add new card' : 'Learn to Pack'}>

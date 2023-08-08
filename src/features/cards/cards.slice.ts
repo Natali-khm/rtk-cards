@@ -11,14 +11,17 @@ import {
 import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 import { thunkTryCatch } from 'common/utils'
 
+const initialState = {
+    cards: {} as GetCardsResponseType,
+    isLoading: false,
+    queryParams: { cardQuestion: '', /* page: 1, */ pageCount: 4, sortCards: '' } as GetCardsParamsType,
+    packId: '' as string,
+    // packName: '' as string
+}
+
 const slice = createSlice({
     name: 'cards',
-    initialState: {
-        cards: {} as GetCardsResponseType,
-        isLoading: false,
-        queryParams: { cardQuestion: '', /* page: 1, */ pageCount: 4, sortCards: '' } as GetCardsParamsType,
-        packId: '' as string,
-    },
+    initialState,
     reducers: {
         setQueryParams: (state, action: PayloadAction<{ params: GetCardsParamsType }>) => {
             state.queryParams = { ...state.queryParams, ...action.payload.params }
@@ -27,8 +30,7 @@ const slice = createSlice({
             state.packId = action.payload
         },
         clearState: (state) => {
-            state.queryParams = {}
-            state.cards = {} as GetCardsResponseType
+            return initialState
         },
     },
     extraReducers: (builder) => {
@@ -36,6 +38,7 @@ const slice = createSlice({
             .addCase(getCards.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.cards = action.payload
+                // state.packName = action.payload.packName
             })
             .addMatcher(pending, (state) => {
                 state.isLoading = true
@@ -47,6 +50,7 @@ const slice = createSlice({
 })
 
 const getCards = createAppAsyncThunk<GetCardsResponseType>('cards/getCards', (arg, thunkAPI) => {
+    
     const { getState } = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
         const params = getState().cards.queryParams
@@ -79,17 +83,10 @@ const updateCard = createAppAsyncThunk<void, UpdateCartRequestType>('cards/updat
     })
 })
 
-const updateCardGrade = createAppAsyncThunk<void, GradeType>('cards/updateGrade', (arg, thunkAPI) => {
-    const { dispatch } = thunkAPI
-    return thunkTryCatch(thunkAPI, async () => {
-        await cardsApi.updateCardGrade(arg)
-        dispatch(cardsThunks.getCards())
-    })
-})
 
-const pending = isPending(getCards)
+const pending = isPending(getCards) // FIX
 const rejected = isRejected(getCards)
 
 export const cardsReducer = slice.reducer
 export const cardsActions = slice.actions
-export const cardsThunks = { getCards, deleteCard, addCard, updateCard, updateCardGrade }
+export const cardsThunks = { getCards, deleteCard, addCard, updateCard }

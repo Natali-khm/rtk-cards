@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 
 import { FC, FormEventHandler, PropsWithChildren } from 'react'
-import { useAuthSelectors } from 'features/auth/hooks'
 import { AppLink } from 'common/components'
+import { useAppSelectors } from '../../../app/hooks/useAppSelectors'
 
 type FormPropsType = {
     title: string
@@ -30,7 +30,7 @@ export const Form: FC<FormPropsType & PropsWithChildren> = ({
     marginBottom,
     onSubmit,
 }) => {
-    const { isLoading } = useAuthSelectors()
+    const { isAppLoading } = useAppSelectors()
 
     return (
         <Paper sx={{ width: '413px', m: '60px auto 0' }}>
@@ -39,7 +39,7 @@ export const Form: FC<FormPropsType & PropsWithChildren> = ({
                     <Typography variant="h1"> {title} </Typography>
                     <form style={{ width: '347px' }} onSubmit={onSubmit}>
                         <FormGroup sx={{ marginBottom: marginBottom || '40px' }}>{children}</FormGroup>
-                        <Button type={'submit'} variant={'contained'} fullWidth={true} disabled={isLoading}>
+                        <Button type={'submit'} variant={'contained'} fullWidth={true} disabled={isAppLoading}>
                             {btnTitle}
                         </Button>
                     </form>

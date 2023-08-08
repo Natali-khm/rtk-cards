@@ -5,7 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import { UseFormRegister } from 'react-hook-form'
-import { FormValidateType } from '../../auth/hooks/useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 
 type PropsType = {
     onSubmit: () => void

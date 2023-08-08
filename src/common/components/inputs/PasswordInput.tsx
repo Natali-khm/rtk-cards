@@ -7,7 +7,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import { FormValidateType } from '../../../features/auth/hooks/useAppForm'
+import { FormValidateType } from '../../hooks/useAppForm'
 
 type PropsType = {
     label: string

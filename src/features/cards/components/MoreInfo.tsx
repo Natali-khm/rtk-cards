@@ -10,10 +10,15 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
 import { menuIconSX, menuTypographySX } from 'common/styles/commonStyles'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useCardsSelectors } from '../hooks'
 
 export const MoreInfo = () => {
+    const {packId} = useCardsSelectors()
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const navigate = useNavigate()
 
     const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget)
@@ -21,6 +26,11 @@ export const MoreInfo = () => {
 
     const handleCloseMenu = () => {
         setAnchorEl(null)
+        navigateToLearn(packId)
+    }
+
+    const navigateToLearn = (id: string) => {
+        navigate(`learn/${id}`)
     }
 
     return (
@@ -32,7 +42,7 @@ export const MoreInfo = () => {
                 <Box>
                     <MenuItem onClick={handleCloseMenu}>
                         <PlayArrowOutlinedIcon sx={menuIconSX} />
-                        <Typography sx={menuTypographySX} textAlign="center" onClick={() => {}}>
+                        <Typography sx={menuTypographySX} textAlign="center">
                             Learn
                         </Typography>
                     </MenuItem>

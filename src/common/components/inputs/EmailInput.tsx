@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField'
 
-import { FormValidateType } from 'features/auth/hooks/useAppForm'
+import { FormValidateType } from 'common/hooks/useAppForm'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
 import { FC } from 'react'
 

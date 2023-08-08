@@ -15,12 +15,10 @@ import { CardType } from 'features/cards/cards.api'
 import { cardsTableTitles } from 'features/cards/cardsConstants'
 import { CardsTableHeader } from 'features/cards/components'
 import { useCardsSelectors } from 'features/cards/hooks'
-import { cardsThunks } from 'features/cards/cards.slice'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { NothingFound, TableSkeleton } from 'common/components'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
-import { toast } from 'react-toastify'
 import { modalActions } from '../../../modals/modals.slice'
 
 export const CardsTable = () => {
@@ -34,14 +32,6 @@ export const CardsTable = () => {
     const updateCard = (id: string, question: string, answer: string) => {
         dispatch(modalActions.openModal())
         dispatch(modalActions.setModal({ modalAction: 'Edit Card', data: { id, question, answer } }))
-    }
-
-    const updateCardGrade = (id: string, grade: number) => {
-        dispatch(cardsThunks.updateCardGrade({ card_id: id, grade }))
-            .unwrap()
-            .then((res) => {
-                toast.success(`The card grade is updated`)
-            })
     }
 
     const deleteCard = (id: string, name: string) => {
@@ -66,13 +56,7 @@ export const CardsTable = () => {
                                     <TableCell>{formatedDate(c.updated)}</TableCell>
                                     <TableCell>
                                         <Grid container alignItems="center" justifyContent="space-between">
-                                            <Rating
-                                                size="small"
-                                                value={c.grade}
-                                                onChange={(event, newValue) => {
-                                                    newValue && updateCardGrade(c._id, newValue)
-                                                }}
-                                            />
+                                            <Rating size="small" value={c.grade} precision={0.1} readOnly />
                                             {packUserId === profileId && (
                                                 <Box>
                                                     <IconButton

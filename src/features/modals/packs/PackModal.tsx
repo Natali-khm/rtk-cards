@@ -4,7 +4,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import { EmailInput, ModalsForm } from 'common/components'
 import { TextInput } from '../../../common/components/inputs/TextInput'
 import { FC } from 'react'
-import { FormValidateType } from '../../auth/hooks/useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
 
 type PropsType = {
@@ -15,13 +15,7 @@ type PropsType = {
     defaultInputValue?: string
 }
 
-export const PackModal: FC<PropsType> = ({
-    onSubmit,
-    submitBtnTitle,
-    errors,
-    register,
-    defaultInputValue,
-}) => {
+export const PackModal: FC<PropsType> = ({ onSubmit, submitBtnTitle, errors, register, defaultInputValue }) => {
     return (
         <ModalsForm onSubmit={onSubmit} submitBtnTitle={submitBtnTitle}>
             <TextInput

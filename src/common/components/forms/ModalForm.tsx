@@ -9,7 +9,7 @@ import FormGroup from '@mui/material/FormGroup'
 
 import { FC, FormEventHandler } from 'react'
 import { modalActions } from '../../../features/modals/modals.slice'
-import { useModalsSelectors } from '../../../features/modals/useModalsSelectors'
+import { useModalsSelectors } from 'features/modals/useModalsSelectors'
 import { cancelBtnSX } from '../../../features/modals/modalsStyles'
 import { useAppDispatch } from '../../hooks'
 

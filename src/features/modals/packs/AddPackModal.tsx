@@ -1,7 +1,7 @@
 import { useAppForm } from '../../auth/hooks'
 import { packsThunks } from '../../packs/packs.slice'
 import { useAppDispatch } from '../../../common/hooks'
-import { FormValidateType } from '../../auth/hooks/useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { modalActions } from '../modals.slice'

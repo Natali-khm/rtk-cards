@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
 import { modalActions } from '../../../modals/modals.slice'
+import { learnActions } from '../../../learn/learn.slice'
 
 export const PacksTable = () => {
     const dispatch = useAppDispatch()

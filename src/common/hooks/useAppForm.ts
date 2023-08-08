@@ -55,6 +55,7 @@ export type FormValidateType = {
     private: boolean
     question: string
     answer: string
+    radio: string
 }
 
 export type FormFieldsType = 'email' | 'password' | 'confirmPassword' | 'textInput'
@@ -64,6 +65,4 @@ type ValidatorsType = {
     password?: yup.StringSchema<string, yup.AnyObject>
     confirmPassword?: yup.StringSchema<string, yup.AnyObject>
     textInput?: yup.StringSchema<string, yup.AnyObject>
-    question?: yup.StringSchema<string, yup.AnyObject>
-    answer?: yup.StringSchema<string, yup.AnyObject>
 }

@@ -1,7 +1,8 @@
-import { FC } from 'react'
-import { Link } from 'react-router-dom'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import Grid from '@mui/material/Grid'
+
+import { Link } from 'react-router-dom'
+import { FC } from 'react'
 
 type BackLinkPropsType = {
     link: string

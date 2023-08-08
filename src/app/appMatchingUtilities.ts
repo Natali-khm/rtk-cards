@@ -1,7 +1,9 @@
 import { isFulfilled, isPending, isRejected } from '@reduxjs/toolkit'
-import { authThunks } from '../features/auth/auth.slice'
-import { packsThunks } from '../features/packs/packs.slice'
-import { cardsThunks } from '../features/cards/cards.slice'
+
+import { packsThunks } from 'features/packs/packs.slice'
+import { cardsThunks } from 'features/cards/cards.slice'
+import { authThunks } from 'features/auth/auth.slice'
+import { learnThunks } from '../features/learn/learn.slice'
 
 const pending = isPending(
     authThunks.register,
@@ -14,11 +16,10 @@ const pending = isPending(
     packsThunks.deletePack,
     packsThunks.updatePack,
     packsThunks.addPack,
-    cardsThunks.getCards,
+    // cardsThunks.getCards,
     cardsThunks.addCard,
     cardsThunks.deleteCard,
     cardsThunks.updateCard,
-    cardsThunks.updateCardGrade
 )
 
 const fulfilled = isFulfilled(
@@ -32,11 +33,10 @@ const fulfilled = isFulfilled(
     packsThunks.deletePack,
     packsThunks.updatePack,
     packsThunks.addPack,
-    cardsThunks.getCards,
+    // cardsThunks.getCards,
     cardsThunks.addCard,
     cardsThunks.deleteCard,
     cardsThunks.updateCard,
-    cardsThunks.updateCardGrade
 )
 
 const rejected = isRejected(
@@ -50,11 +50,10 @@ const rejected = isRejected(
     packsThunks.deletePack,
     packsThunks.updatePack,
     packsThunks.addPack,
-    cardsThunks.getCards,
+    // cardsThunks.getCards,
     cardsThunks.addCard,
     cardsThunks.deleteCard,
     cardsThunks.updateCard,
-    cardsThunks.updateCardGrade
 )
 
 export { pending, fulfilled, rejected }

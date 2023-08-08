@@ -5,9 +5,10 @@ import { useAppDispatch } from '../../../common/hooks'
 import { SubmitHandler } from 'react-hook-form'
 import { useModalsSelectors } from '../useModalsSelectors'
 import { useAppForm } from '../../auth/hooks'
-import { FormValidateType } from '../../auth/hooks/useAppForm'
+import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { toast } from 'react-toastify'
 import { cardsThunks } from '../../cards/cards.slice'
+import { modalActions } from '../modals.slice'
 
 export const DeleteCardModal = () => {
     const { register, handleSubmit, errors, reset, formState } = useAppForm([])
@@ -20,6 +21,7 @@ export const DeleteCardModal = () => {
             .then((res) => {
                 toast.success(`'${name}' card is deleted`)
             })
+        dispatch(modalActions.closeModal())
     }
     return (
         <ModalsForm onSubmit={handleSubmit(deleteCard)} submitBtnTitle={'Delete Card'} btnColor="red">
