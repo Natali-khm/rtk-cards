@@ -1,5 +1,5 @@
 import { useAppSelector } from 'common/hooks'
-import { isOpenModalS, idS, nameS, privateS, modalActionS, questionS, answerS } from './modals.selectors'
+import { isOpenModalS, idS, nameS, privateS, modalActionS, questionS, answerS, currPageS } from './modals.selectors'
 
 export const useModalsSelectors = () => {
     const isOpenModal = useAppSelector(isOpenModalS)
@@ -9,6 +9,7 @@ export const useModalsSelectors = () => {
     const name = useAppSelector(nameS)
     const question = useAppSelector(questionS)
     const answer = useAppSelector(answerS)
+    const currPage = useAppSelector(currPageS)
 
     return {
         isOpenModal,
@@ -18,5 +19,6 @@ export const useModalsSelectors = () => {
         partial,
         question,
         answer,
+        currPage,
     }
 }

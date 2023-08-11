@@ -7,10 +7,10 @@ import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import FormGroup from '@mui/material/FormGroup'
 
-import { FC, FormEventHandler } from 'react'
-import { modalActions } from '../../../features/modals/modals.slice'
+import { FC, FormEventHandler, useEffect } from 'react'
+import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/useModalsSelectors'
-import { cancelBtnSX } from '../../../features/modals/modalsStyles'
+import { cancelBtnSX } from 'features/modals/modalsStyles'
 import { useAppDispatch } from '../../hooks'
 
 const style = {
@@ -38,6 +38,7 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
     const handleClose = () => {
         dispatch(modalActions.closeModal())
     }
+    
 
     return (
         <Modal open={isOpenModal} onClose={handleClose}>
@@ -45,8 +46,8 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
                 <form onSubmit={onSubmit}>
                     <Grid
                         container
-                        justifyContent="space-between"
                         alignItems="center"
+                        justifyContent="space-between"
                         sx={{ p: '18px 24px', borderBottom: '1px solid #d1d0d0', backgroundColor: '#faf7f7' }}>
                         <Typography variant="h3" sx={{ m: '0' }}>
                             {modalAction}
@@ -64,8 +65,8 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
                                     Cancel
                                 </Button>
                                 <Button
-                                    variant={'contained'}
                                     type={'submit'}
+                                    variant={'contained'}
                                     sx={{
                                         '&:hover': {
                                             backgroundColor: btnColor,

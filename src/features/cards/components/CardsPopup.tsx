@@ -8,17 +8,24 @@ import { CustomMenu } from 'common/components'
 import MenuItem from '@mui/material/MenuItem'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 
 import { menuIconSX, menuTypographySX } from 'common/styles/commonStyles'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useCardsSelectors } from '../hooks'
+import { useCardsParams, useCardsSelectors } from '../hooks'
+import { usePackActions } from '../../packs/hooks/usePackActions'
 
-export const MoreInfo = () => {
-    const {packId} = useCardsSelectors()
+export const CardsPopup = () => {
+    const navigate = useNavigate()
+
+    const { setQueryParams } = useCardsParams()
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-    const navigate = useNavigate()
+
+    const { updatePack, deletePack } = usePackActions()
+
+    const { packName, privatePack, packIdFromState, cardsList } = useCardsSelectors()
 
     const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget)
@@ -26,11 +33,11 @@ export const MoreInfo = () => {
 
     const handleCloseMenu = () => {
         setAnchorEl(null)
-        navigateToLearn(packId)
     }
 
-    const navigateToLearn = (id: string) => {
-        navigate(`learn/${id}`)
+    const learnHandle = () => {
+        setQueryParams({ pageCount: 1000 })
+        navigate(`/learn/${packIdFromState}`)
     }
 
     return (
@@ -40,21 +47,31 @@ export const MoreInfo = () => {
             </IconButton>
             <CustomMenu anchorEl={anchorEl} onClose={handleCloseMenu}>
                 <Box>
-                    <MenuItem onClick={handleCloseMenu}>
+                    <MenuItem onClick={handleCloseMenu} disabled={!cardsList.length}>
                         <PlayArrowOutlinedIcon sx={menuIconSX} />
-                        <Typography sx={menuTypographySX} textAlign="center">
+                        <Typography sx={menuTypographySX} textAlign="center" onClick={learnHandle}>
                             Learn
                         </Typography>
                     </MenuItem>
+                    <Divider />
+
                     <MenuItem onClick={handleCloseMenu}>
                         <BorderColorOutlinedIcon sx={menuIconSX} />
-                        <Typography sx={menuTypographySX} textAlign="center" onClick={() => {}}>
+                        <Typography
+                            sx={menuTypographySX}
+                            textAlign="center"
+                            onClick={() => updatePack(packIdFromState, packName, privatePack)}>
                             Edit
                         </Typography>
                     </MenuItem>
+                    <Divider />
+
                     <MenuItem onClick={handleCloseMenu}>
                         <DeleteOutlinedIcon sx={menuIconSX} />
-                        <Typography sx={menuTypographySX} textAlign="center" onClick={() => {}}>
+                        <Typography
+                            sx={menuTypographySX}
+                            textAlign="center"
+                            onClick={() => deletePack(packIdFromState, packName, 'cards')}>
                             Delete
                         </Typography>
                     </MenuItem>

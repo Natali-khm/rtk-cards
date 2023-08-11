@@ -3,19 +3,22 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 
 import { FC } from 'react'
+import { useCardsSelectors } from 'features/cards/hooks'
 
 type PropsType = {
     title: string
-    onClick: () => void
+    onClick: (id: string) => void
     buttonTitle: string
     disabled: boolean
-    showBtn: boolean
+    hideBtn?: boolean
     children?: JSX.Element
 }
 
-export const SubHeader: FC<PropsType> = ({ title, onClick, buttonTitle, disabled, showBtn, children }) => {
+export const SubHeader: FC<PropsType> = ({ title, onClick, buttonTitle, disabled, children, hideBtn }) => {
+    const { packIdFromState } = useCardsSelectors()
+
     return (
-        <Grid container alignItems="center" direction="row" sx={{height: '36px'}}>
+        <Grid container alignItems="center" direction="row" sx={{ height: '36px' }}>
             <Grid item>
                 <Typography variant="h1" sx={{ m: '0' }}>
                     {title}
@@ -23,11 +26,15 @@ export const SubHeader: FC<PropsType> = ({ title, onClick, buttonTitle, disabled
             </Grid>
             <Grid item>{children}</Grid>
             <Grid item sx={{ ml: 'auto' }}>
-                {showBtn && (
-                    <Button variant={'contained'} sx={{ pl: '28px', pr: '28px' }} onClick={onClick} disabled={disabled}>
+                {!hideBtn &&
+                    <Button
+                        variant={'contained'}
+                        sx={{ pl: '28px', pr: '28px' }}
+                        onClick={() => onClick(packIdFromState)}
+                        disabled={disabled}>
                         {buttonTitle}
                     </Button>
-                )}
+                }
             </Grid>
         </Grid>
     )

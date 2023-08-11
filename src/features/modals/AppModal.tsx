@@ -5,10 +5,13 @@ import { AddCardModal } from './cards/AddCardModal'
 import { UpdateCardModal } from './cards/UpdateCardModal'
 import { DeletePackModal } from './packs/DeletePackModal'
 import { DeleteCardModal } from './cards/DeleteCardModal'
+import { useEffect } from 'react'
+import { useAppDispatch } from '../../common/hooks'
+import { modalActions } from './modals.slice'
 
-export const CommonAppModal = () => {
+export const AppModal = () => {
+
     const { modalAction } = useModalsSelectors()
-
     const modalSet = () => {
         switch (modalAction) {
             case 'Add New Pack':

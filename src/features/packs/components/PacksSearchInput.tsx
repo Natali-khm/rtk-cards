@@ -4,8 +4,9 @@ import { SearchInput } from 'common/components'
 import { useDebounce } from 'common/hooks'
 
 export const PacksSearchInput = () => {
-    const { packName, packsAreLoading } = usePacksSelectors()
+    const { packName, packsAreLoading, cardPacks } = usePacksSelectors()
     const { setSearchParams, params, setQueryParams } = usePacksParams()
+
 
     const [find, setFind] = useState(packName || '')
     const debouncedValue = useDebounce(find, 800)
@@ -17,7 +18,7 @@ export const PacksSearchInput = () => {
     }
 
     useEffect(() => {
-        if (packName === find) return
+        if (!cardPacks || packName === find) return
         setQueryParams({ packName: debouncedValue })
     }, [debouncedValue])
 

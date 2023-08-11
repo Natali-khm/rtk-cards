@@ -3,12 +3,12 @@ import { modalActions } from '../../modals/modals.slice'
 import { useCardsSelectors } from './useCardsSelectors'
 
 export const useAddCard = () => {
-    const { packId } = useCardsSelectors()
+    // const { packIdFromState } = useCardsSelectors()
     const dispatch = useAppDispatch()
 
-    const addCard = () => {
+    const addCard = (id: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Add New Card', data: { id: packId } }))
+        dispatch(modalActions.setModal({ modalAction: 'Add New Card', data: { id } }))
     }
 
     return { addCard }

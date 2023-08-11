@@ -12,6 +12,7 @@ export const useFetchPacks = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        // debugger
         setQueryParams({
             ...params,
             page: +params.page || 1,

@@ -12,6 +12,7 @@ import {
     packUserIdS,
     pageParamsS,
     pageResponseS,
+    privatePackS,
     queryParamsS,
     sortCardsS,
 } from './cards.selectors'
@@ -24,7 +25,8 @@ export const useCardsSelectors = () => {
     const cardsTotalCount = useAppSelector(cardsTotalCountS)
     const cardsAreLoading = useAppSelector(cardsAreLoadingS)
     const packUserId = useAppSelector(packUserIdS)
-    const packId = useAppSelector(packIdS)
+    const packIdFromState = useAppSelector(packIdS)
+    const privatePack = useAppSelector(privatePackS)
 
     const cardsCountForPage = useAppSelector(cardsCountForPageS)
     const pageResponse = useAppSelector(pageResponseS)
@@ -46,8 +48,9 @@ export const useCardsSelectors = () => {
         sortCards,
         cards,
         packUserId,
-        packId,
+        packIdFromState,
         cardsCountQuery,
         pageResponse,
+        privatePack,
     }
 }

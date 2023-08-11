@@ -29,6 +29,10 @@ const slice = createSlice({
         setPackId: (state, action: PayloadAction<string>) => {
             state.packId = action.payload
         },
+        updatePack:  (state, action: PayloadAction<{packName: string, privatePack: boolean}>) => {
+            state.cards.packName = action.payload.packName
+            state.cards.packPrivate = action.payload.privatePack
+        },
         clearState: (state) => {
             return initialState
         },
@@ -38,6 +42,7 @@ const slice = createSlice({
             .addCase(getCards.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.cards = action.payload
+                // debugger
                 // state.packName = action.payload.packName
             })
             .addMatcher(pending, (state) => {
@@ -50,7 +55,6 @@ const slice = createSlice({
 })
 
 const getCards = createAppAsyncThunk<GetCardsResponseType>('cards/getCards', (arg, thunkAPI) => {
-    
     const { getState } = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
         const params = getState().cards.queryParams

@@ -77,15 +77,15 @@ export const theme = createTheme({
             }
           }
         },
-        MuiFormLabel: {
-            styleOverrides: {
-                root: {
-                    fontFamily: 'Montserrat, sans-serif',
-                    color: 'rgba(0, 0, 0, 0.87)',
-                    fontWeight: 'bold'
-                }
-              } 
-        },
+        // MuiFormLabel: {
+        //     styleOverrides: {
+        //         root: {
+        //             fontFamily: 'Montserrat, sans-serif',
+        //             color: 'rgba(0, 0, 0, 0.87)',
+        //             fontWeight: 'bold'
+        //         }
+        //       } 
+        // },
         MuiButton: {
             variants: [
                 // {

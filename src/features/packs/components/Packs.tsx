@@ -21,7 +21,7 @@ export const Packs = () => {
         <Box>
             <Box sx={{ m: '40px 0' }}>
                 <SubHeader
-                    showBtn={true}
+                    // showBtn={true}
                     title={'Packs list'}
                     onClick={addPack}
                     buttonTitle="Add new pack"

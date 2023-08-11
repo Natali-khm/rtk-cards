@@ -3,22 +3,29 @@ import { cardsActions, cardsThunks } from 'features/cards/cards.slice'
 import { useAppDispatch } from 'common/hooks'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
+import { usePacksSelectors } from '../../packs/hooks'
 
 export const useFetchCards = (count?: number) => {
+
     const dispatch = useAppDispatch()
-    const { setQueryParams, params } = useCardsParams()
 
     const { packId } = useParams<{ packId: string }>()
 
-    const { cardQuestion, sortCards, pageParams, cardsCountQuery } = useCardsSelectors()
+    const { setQueryParams, params } = useCardsParams()
+
+    const { cardQuestion, sortCards, pageParams, cardsCountQuery, packIdFromState } = useCardsSelectors()
+    const { cardPacks } = usePacksSelectors()
+
 
     useEffect(() => {
         setQueryParams({ ...params, cardsPack_id: packId, page: +params.page || 1, pageCount: count || 4  })
         packId && dispatch(cardsActions.setPackId(packId))
+
         return () => {
             dispatch(cardsActions.clearState())
         }
     }, [])
+
 
     useEffect(() => {
         if (!pageParams) return // initialization

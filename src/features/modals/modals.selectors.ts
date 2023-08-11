@@ -7,5 +7,6 @@ const nameS = (state: RootState) => state.modals.data.name
 const privateS = (state: RootState) => state.modals.data.private
 const questionS = (state: RootState) => state.modals.data.question
 const answerS = (state: RootState) => state.modals.data.answer
+const currPageS = (state: RootState) => state.modals.data.currPage
 
-export { isOpenModalS, modalActionS, idS, nameS, privateS, questionS, answerS }
+export { isOpenModalS, modalActionS, idS, nameS, privateS, questionS, answerS, currPageS }

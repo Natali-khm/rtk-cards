@@ -7,7 +7,7 @@ import { useAppDispatch } from 'common/hooks'
 import { Header } from 'common/components'
 import { AppOutlet } from './AppOutlet'
 import { useEffect } from 'react'
-import { CommonAppModal } from 'features/modals/CommonAppModal'
+import { AppModal } from 'features/modals/AppModal'
 import { useAppSelectors } from './hooks/useAppSelectors'
 
 export function App() {
@@ -25,7 +25,7 @@ export function App() {
             <Box sx={{ height: '4px' }}>{isAppLoading && <LinearProgress />}</Box>
             {!appInitialized && 'Initialization'}
             {appInitialized && isLoggedIn !== null && <AppOutlet />}
-            <CommonAppModal />
+            <AppModal />
         </>
     )
 }

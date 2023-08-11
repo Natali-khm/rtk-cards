@@ -1,13 +1,13 @@
-import React from 'react'
-import { ModalsForm } from 'common/components'
 import Box from '@mui/material/Box'
-import { useAppDispatch } from '../../../common/hooks'
+
+import { ModalsForm } from 'common/components'
+import { useAppDispatch } from 'common/hooks'
 import { SubmitHandler } from 'react-hook-form'
 import { useModalsSelectors } from '../useModalsSelectors'
 import { useAppForm } from '../../auth/hooks'
-import { FormValidateType } from '../../../common/hooks/useAppForm'
+import { FormValidateType } from 'common/hooks/useAppForm'
 import { toast } from 'react-toastify'
-import { cardsThunks } from '../../cards/cards.slice'
+import { cardsActions, cardsThunks } from '../../cards/cards.slice'
 import { modalActions } from '../modals.slice'
 
 export const DeleteCardModal = () => {
@@ -23,6 +23,7 @@ export const DeleteCardModal = () => {
             })
         dispatch(modalActions.closeModal())
     }
+    
     return (
         <ModalsForm onSubmit={handleSubmit(deleteCard)} submitBtnTitle={'Delete Card'} btnColor="red">
             <Box sx={{ mb: '5px', textAlign: 'center' }}>

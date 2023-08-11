@@ -10,7 +10,7 @@ import { useLearnSelectors } from './useLearnSelectors'
 import { useAppForm } from '../auth/hooks'
 import { SubmitHandler } from 'react-hook-form'
 import { FormValidateType } from 'common/hooks/useAppForm'
-import { useAppDispatch } from '../../common/hooks'
+import { useAppDispatch } from 'common/hooks'
 import { learnThunks } from './learn.slice'
 import { FC } from 'react'
 

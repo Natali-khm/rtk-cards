@@ -22,7 +22,8 @@ export const Learn = () => {
 
     const [showAnswer, setShowAnswer] = useState(false)
 
-    const initialization = !Object.keys(card).length
+    // const initialization = !Object.keys(card).length
+    const initialization = !packName
 
     useFetchCards(1000)
 
@@ -35,11 +36,13 @@ export const Learn = () => {
 
     useEffect(() => {
         return () => {
-            console.log('clear state')
+            // debugger
             dispatch(learnActions.clearState())
         }
     }, [])
 
+console.log(initialization);
+// debugger
     return (
         <>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />

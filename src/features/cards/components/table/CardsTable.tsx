@@ -79,7 +79,7 @@ export const CardsTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            {cardQuestion && !cardsList?.length && <NothingFound query={cardQuestion || ''} />}
+            {!cardsAreLoading && !cardsList?.length && <NothingFound query={cardQuestion || ''} value="Cards" />}
         </>
     )
 }

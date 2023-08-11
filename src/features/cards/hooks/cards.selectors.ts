@@ -8,6 +8,7 @@ const cardsTotalCountS = (state: RootState) => state.cards.cards.cardsTotalCount
 const cardsAreLoadingS = (state: RootState) => state.cards.isLoading
 const packUserIdS = (state: RootState) => state.cards.cards.packUserId
 const packIdS = (state: RootState) => state.cards.packId
+const privatePackS = (state: RootState) => state.cards.cards.packPrivate
 
 const cardsCountForPageS = (state: RootState) => state.cards.cards.pageCount
 const pageResponseS = (state: RootState) => state.cards.cards.page
@@ -31,5 +32,6 @@ export {
     packUserIdS,
     packIdS,
     cardsCountQueryS,
-    pageResponseS
+    pageResponseS,
+    privatePackS,
 }

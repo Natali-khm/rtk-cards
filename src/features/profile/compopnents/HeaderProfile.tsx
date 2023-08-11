@@ -28,7 +28,7 @@ export const HeaderProfile = () => {
         setAnchorElUser(event.currentTarget)
     }
 
-    const redirToProfileHandler = () => {
+    const redirectToProfile = () => {
         navigate(paths.PROFILE)
     }
 
@@ -44,7 +44,7 @@ export const HeaderProfile = () => {
                 <Box>
                     <MenuItem onClick={handleCloseUserMenu}>
                         <PermIdentityIcon sx={menuIconSX} />
-                        <Typography sx={menuTypographySX} textAlign="center" onClick={redirToProfileHandler}>
+                        <Typography sx={menuTypographySX} textAlign="center" onClick={redirectToProfile}>
                             Profile
                         </Typography>
                     </MenuItem>

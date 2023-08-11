@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice, isPending, isRejected } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit'
 
 import {
     AddPackParamsType,
@@ -9,6 +9,7 @@ import {
 } from 'features/packs/packs.api'
 import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 import { thunkTryCatch } from 'common/utils'
+import { cardsThunks } from '../cards/cards.slice'
 
 const initialState = {
     packs: {} as GetPackResponseType,
@@ -35,6 +36,9 @@ const slice = createSlice({
             })
             .addMatcher(pending, (state, action) => {
                 state.isLoading = true
+            })
+            .addMatcher(fulfilled, (state, action) => {
+                state.isLoading = false
             })
             .addMatcher(rejected, (state, action) => {
                 state.isLoading = false
@@ -63,7 +67,7 @@ const deletePack = createAppAsyncThunk<void, string>('packs/deletePack', async (
     const { dispatch } = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
         await packsApi.deletePack(arg)
-        dispatch(packsThunks.getPacks())
+        // dispatch(packsThunks.getPacks())
     })
 })
 
@@ -72,9 +76,11 @@ const updatePack = createAppAsyncThunk<void, UpdateParamsPackType>('packs/update
     return thunkTryCatch(thunkAPI, async () => {
         await packsApi.updatePack(arg)
         dispatch(packsThunks.getPacks())
+        // dispatch(cardsThunks.getCards())
     })
 })
 
+const fulfilled = isFulfilled( deletePack)
 const pending = isPending(getPacks, addPack, deletePack, updatePack)
 const rejected = isRejected(getPacks, addPack, deletePack, updatePack)
 
