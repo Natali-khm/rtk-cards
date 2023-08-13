@@ -1,9 +1,10 @@
-import { passwordRecovMess } from '../components/forgot_password/constants'
+import { passwordRecovMess } from 'features/auth/components/forgot_password/constants'
+import { FormValidateType } from 'common/hooks/useAppForm'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useAuthSelectors } from 'features/auth/hooks'
+import { authThunks } from 'features/auth/auth.slice'
 import { SubmitHandler } from 'react-hook-form'
-import { FormValidateType } from '../../../common/hooks/useAppForm'
 import { useAppDispatch } from 'common/hooks'
-import { authThunks } from '../auth.slice'
 import { paths } from 'common/constants'
 import { toast } from 'react-toastify'
 
@@ -11,6 +12,7 @@ export const useAuth = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { token } = useParams()
+    const {userName} = useAuthSelectors()
 
     const onRegisterSubmit: SubmitHandler<FormValidateType> = (data) => {
         dispatch(authThunks.register(data))
@@ -52,6 +54,10 @@ export const useAuth = () => {
     }
     const logoutHandler = () => {
         dispatch(authThunks.logout())
+            .unwrap()
+            .then((res) => {
+                toast.success(`Bye, ${userName}`)
+            })
     }
 
     return {

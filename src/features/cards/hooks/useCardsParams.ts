@@ -1,6 +1,6 @@
+import { GetCardsParamsType } from 'features/cards/cards.api'
+import { cardsActions } from 'features/cards/cards.slice'
 import { useSearchParams } from 'react-router-dom'
-import { GetCardsParamsType } from '../cards.api'
-import { cardsActions } from '../cards.slice'
 import { useDispatch } from 'react-redux'
 
 export const useCardsParams = () => {

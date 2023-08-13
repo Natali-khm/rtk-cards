@@ -1,15 +1,14 @@
 import { SelectChangeEvent } from '@mui/material/Select'
 
-import { useAppForm } from '../../auth/hooks'
+import { modalActions } from 'features/modals/modals.slice'
+import { FormValidateType } from 'common/hooks/useAppForm'
+import { useModalsSelectors } from 'features/modals/hooks'
+import { useAppDispatch, useAppForm } from 'common/hooks'
+import { cardsThunks } from 'features/cards/cards.slice'
+import { CardModal } from 'features/modals/components'
+import { SubmitHandler } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useAppDispatch } from 'common/hooks'
-import { cardsThunks } from '../../cards/cards.slice'
-import { useModalsSelectors } from '../useModalsSelectors'
-import { FormValidateType } from '../../../common/hooks/useAppForm'
-import { SubmitHandler } from 'react-hook-form'
-import { modalActions } from '../modals.slice'
-import { CardModal } from './CardModal'
 
 export const AddCardModal = () => {
     const { register, handleSubmit, reset, formState } = useAppForm([])
@@ -23,11 +22,12 @@ export const AddCardModal = () => {
     }
 
     const addCard: SubmitHandler<FormValidateType> = (data) => {
-        dispatch(cardsThunks.addCard({ cardsPack_id: id, question: data.question, answer: data.answer }))
-            .unwrap()
-            .then((res) => {
-                toast.success(data.question ? `"${data.question}" card is created` : 'New card is created')
-            })
+        id &&
+            dispatch(cardsThunks.addCard({ cardsPack_id: id, question: data.question, answer: data.answer }))
+                .unwrap()
+                .then((res) => {
+                    toast.success(data.question ? `"${data.question}" card is created` : 'New card is created')
+                })
         dispatch(modalActions.closeModal())
     }
 

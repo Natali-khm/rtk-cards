@@ -66,7 +66,6 @@ export type ForgotPasswordResponseType = {
 }
 
 export type ProfileType = {
-    avatar: string
     created: string
     email: string
     isAdmin: boolean

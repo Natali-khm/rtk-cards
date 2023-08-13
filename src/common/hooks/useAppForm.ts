@@ -28,7 +28,7 @@ export const useAppForm = (formFields: FormFieldsType[]) => {
         handleSubmit,
         formState: { errors },
         reset,
-        formState
+        formState,
     } = useForm<FormValidateType>({
         resolver: yupResolver(createSchema(formFields)),
         defaultValues: {},
@@ -39,10 +39,9 @@ export const useAppForm = (formFields: FormFieldsType[]) => {
         handleSubmit,
         errors,
         reset,
-        formState
+        formState,
     }
 }
-
 
 // types
 

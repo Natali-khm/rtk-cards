@@ -6,12 +6,11 @@ import Button from '@mui/material/Button'
 import Radio from '@mui/material/Radio'
 import Box from '@mui/material/Box'
 
-import { useLearnSelectors } from './useLearnSelectors'
-import { useAppForm } from '../auth/hooks'
-import { SubmitHandler } from 'react-hook-form'
 import { FormValidateType } from 'common/hooks/useAppForm'
-import { useAppDispatch } from 'common/hooks'
-import { learnThunks } from './learn.slice'
+import { useAppDispatch, useAppForm } from 'common/hooks'
+import { useLearnSelectors } from 'features/learn/hooks'
+import { learnThunks } from 'features/learn/learn.slice'
+import { SubmitHandler } from 'react-hook-form'
 import { FC } from 'react'
 
 type PropsType = {
@@ -20,12 +19,11 @@ type PropsType = {
 
 export const LearnAnswer: FC<PropsType> = ({ closeAnswer }) => {
     const { card } = useLearnSelectors()
-    const { register, handleSubmit, reset, formState } = useAppForm([])
+    const { register, handleSubmit } = useAppForm([])
 
     const dispatch = useAppDispatch()
 
     const updateCardGrade: SubmitHandler<FormValidateType> = (data) => {
-        debugger
         dispatch(learnThunks.updateCardGrade({ card_id: card._id, grade: +data.radio }))
         closeAnswer()
     }

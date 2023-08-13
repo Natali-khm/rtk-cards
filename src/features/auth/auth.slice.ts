@@ -1,15 +1,15 @@
+import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
 import { createSlice } from '@reduxjs/toolkit'
+import { thunkTryCatch } from 'common/utils'
 import {
     ArgLoginType,
     ArgRegisterType,
     PasswordRecovDataType,
-    ProfileType,
     SetNewPasswordDataType,
     UpdateProfileDataType,
+    ProfileType,
     authApi,
 } from './auth.api'
-import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
-import { thunkTryCatch } from 'common/utils'
 
 const slice = createSlice({
     name: 'auth',
@@ -21,7 +21,6 @@ const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(register.rejected, (state, action) => {})  // ??
             .addCase(isAuth.fulfilled, (state, action) => {
                 state.isLoggedIn = true
                 state.profile = action.payload.profile
@@ -40,6 +39,7 @@ const slice = createSlice({
             .addCase(forgotPassword.fulfilled, (state, action) => {
                 state.passwordRecovery.isMailSent = action.payload.isMailSent
                 state.passwordRecovery.email = action.payload.email
+                debugger
             })
             .addCase(setNewPassword.fulfilled, (state) => {
                 state.passwordRecovery.isPasswordSet = true

@@ -6,5 +6,6 @@ const authEmail = (state: RootState) => state.auth.passwordRecovery.email
 const authPasswordIsSet = (state: RootState) => state.auth.passwordRecovery.isPasswordSet
 const profile = (state: RootState) => state.auth.profile
 const profileIdS = (state: RootState) => state.auth.profile?._id
+const userNameS = (state: RootState) => state.auth.profile?.name
 
-export { authLoggedIn, authMailSent, authEmail, authPasswordIsSet, profile, profileIdS }
+export { authLoggedIn, authMailSent, authEmail, authPasswordIsSet, profile, profileIdS, userNameS }

@@ -1,11 +1,12 @@
-import React, { FC } from 'react'
-import { ModalsForm } from '../../../common/components'
-import Box from '@mui/material/Box'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import Box from '@mui/material/Box'
+
+import { FormValidateType } from 'common/hooks/useAppForm'
 import { UseFormRegister } from 'react-hook-form'
-import { FormValidateType } from '../../../common/hooks/useAppForm'
+import { ModalsForm } from 'common/components'
+import  { FC } from 'react'
 
 type PropsType = {
     onSubmit: () => void

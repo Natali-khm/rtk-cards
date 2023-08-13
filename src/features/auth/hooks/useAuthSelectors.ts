@@ -1,5 +1,13 @@
-import { authLoggedIn, authMailSent, authEmail, authPasswordIsSet, profile, profileIdS } from './auth.selectors'
 import { useAppSelector } from 'common/hooks'
+import {
+    authLoggedIn,
+    authMailSent,
+    authEmail,
+    authPasswordIsSet,
+    profile,
+    profileIdS,
+    userNameS,
+} from './auth.selectors'
 
 export const useAuthSelectors = () => {
     const email = useAppSelector(authEmail)
@@ -8,6 +16,7 @@ export const useAuthSelectors = () => {
     const isPasswordSet = useAppSelector(authPasswordIsSet)
     const userProfile = useAppSelector(profile)
     const profileId = useAppSelector(profileIdS)
+    const userName = useAppSelector(userNameS)
 
     return {
         isLoggedIn,
@@ -16,5 +25,6 @@ export const useAuthSelectors = () => {
         isPasswordSet,
         userProfile,
         profileId,
+        userName,
     }
 }

@@ -6,15 +6,15 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { CustomMenu } from 'common/components'
 import MenuItem from '@mui/material/MenuItem'
+import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
 
 import { menuIconSX, menuTypographySX } from 'common/styles/commonStyles'
+import { useCardsParams, useCardsSelectors } from 'features/cards/hooks'
+import { usePacksActions } from 'features/packs/hooks'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useCardsParams, useCardsSelectors } from '../hooks'
-import { usePackActions } from '../../packs/hooks/usePackActions'
 
 export const CardsPopup = () => {
     const navigate = useNavigate()
@@ -23,7 +23,7 @@ export const CardsPopup = () => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
-    const { updatePack, deletePack } = usePackActions()
+    const { updatePack, deletePack } = usePacksActions()
 
     const { packName, privatePack, packIdFromState, cardsList } = useCardsSelectors()
 

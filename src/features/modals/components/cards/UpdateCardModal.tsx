@@ -1,15 +1,14 @@
 import { SelectChangeEvent } from '@mui/material/Select'
 
-import { useState } from 'react'
-import { useAppForm } from '../../auth/hooks'
-import { useModalsSelectors } from '../useModalsSelectors'
+import { modalActions } from 'features/modals/modals.slice'
+import { useModalsSelectors } from 'features/modals/hooks'
+import { FormValidateType } from 'common/hooks/useAppForm'
+import { useAppDispatch, useAppForm } from 'common/hooks'
+import { cardsThunks } from 'features/cards/cards.slice'
+import { CardModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
-import { FormValidateType } from '../../../common/hooks/useAppForm'
-import { useAppDispatch } from '../../../common/hooks'
-import { modalActions } from '../modals.slice'
 import { toast } from 'react-toastify'
-import { cardsThunks } from '../../cards/cards.slice'
-import { CardModal } from './CardModal'
+import { useState } from 'react'
 
 export const UpdateCardModal = () => {
     const { register, handleSubmit } = useAppForm([])
@@ -22,11 +21,12 @@ export const UpdateCardModal = () => {
     }
 
     const updateCard: SubmitHandler<FormValidateType> = (data) => {
-        dispatch(cardsThunks.updateCard({ _id: id, question: data.question, answer: data.answer }))
-            .unwrap()
-            .then((res) => {
-                toast.success(data.question ? `"${data.question}" card is updated` : `The card is updated`)
-            })
+        id &&
+            dispatch(cardsThunks.updateCard({ _id: id, question: data.question, answer: data.answer }))
+                .unwrap()
+                .then((res) => {
+                    toast.success(data.question ? `"${data.question}" card is updated` : `The card is updated`)
+                })
         dispatch(modalActions.closeModal())
     }
 

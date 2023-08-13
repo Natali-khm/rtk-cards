@@ -1,12 +1,11 @@
-import { useAppForm } from '../../auth/hooks'
-import { packsThunks } from '../../packs/packs.slice'
-import { useAppDispatch } from '../../../common/hooks'
-import { FormValidateType } from '../../../common/hooks/useAppForm'
+import { modalActions } from 'features/modals/modals.slice'
+import { FormValidateType } from 'common/hooks/useAppForm'
+import { useAppDispatch, useAppForm } from 'common/hooks'
+import { packsThunks } from 'features/packs/packs.slice'
+import { PackModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { modalActions } from '../modals.slice'
 import { useEffect } from 'react'
-import { PackModal } from './PackModal'
 
 export const AddPackModal = () => {
     const { register, handleSubmit, errors, reset, formState } = useAppForm(['textInput'])

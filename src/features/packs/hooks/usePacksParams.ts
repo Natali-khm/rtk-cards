@@ -1,7 +1,7 @@
+import { GetPacksParamsType } from 'features/packs/packs.api'
+import { packsActions } from 'features/packs/packs.slice'
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { GetPacksParamsType } from '../packs.api'
-import { packsActions } from '../packs.slice'
 
 export const usePacksParams = () => {
     const dispatch = useDispatch()

@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
+import Skeleton from '@mui/material/Skeleton'
 
 import { FC } from 'react'
 import { useCardsSelectors } from 'features/cards/hooks'
@@ -15,18 +16,22 @@ type PropsType = {
 }
 
 export const SubHeader: FC<PropsType> = ({ title, onClick, buttonTitle, disabled, children, hideBtn }) => {
-    const { packIdFromState } = useCardsSelectors()
+    const { packIdFromState, cardsAreLoading } = useCardsSelectors()
 
     return (
         <Grid container alignItems="center" direction="row" sx={{ height: '36px' }}>
             <Grid item>
-                <Typography variant="h1" sx={{ m: '0' }}>
-                    {title}
-                </Typography>
+                {cardsAreLoading ? (
+                    <Skeleton width={150} height={40} animation='wave'/>
+                ) : (
+                    <Typography variant="h1" sx={{ m: '0' }}>
+                        {title}
+                    </Typography>
+                )}
             </Grid>
             <Grid item>{children}</Grid>
             <Grid item sx={{ ml: 'auto' }}>
-                {!hideBtn &&
+                {!hideBtn && (
                     <Button
                         variant={'contained'}
                         sx={{ pl: '28px', pr: '28px' }}
@@ -34,7 +39,7 @@ export const SubHeader: FC<PropsType> = ({ title, onClick, buttonTitle, disabled
                         disabled={disabled}>
                         {buttonTitle}
                     </Button>
-                }
+                )}
             </Grid>
         </Grid>
     )

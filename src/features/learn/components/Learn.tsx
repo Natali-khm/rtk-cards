@@ -1,28 +1,26 @@
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Skeleton from '@mui/material/Skeleton'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Box from '@mui/material/Box'
 
-import { useCardsSelectors, useFetchCards } from '../cards/hooks'
+import { useCardsSelectors, useFetchCards } from 'features//cards/hooks'
+import { LearnQuestion, LearnAnswer } from 'features/learn/components'
+import { getRandomCard } from 'common/utils/getRandomCard'
+import { learnActions } from 'features/learn/learn.slice'
+import { useLearnSelectors } from 'features/learn/hooks'
+import { BackspaceLink } from 'common/components'
 import { useAppDispatch } from 'common/hooks'
 import { useEffect, useState } from 'react'
-import { learnActions /* , learnThunks */ } from './learn.slice'
-import { useLearnSelectors } from './useLearnSelectors'
-import { LearnAnswer } from './LearnAnswer'
-import { getRandomCard } from 'common/utils/getRandomCard'
-import { BackspaceLink } from 'common/components'
 import { paths } from 'common/constants'
-import { LearnQuestion } from './LearnQuestion'
 
 export const Learn = () => {
     const { packName, cardsList } = useCardsSelectors()
-    const { /* learnCards, */ card, isLoading } = useLearnSelectors()
+    const { isLoading } = useLearnSelectors()
     const dispatch = useAppDispatch()
 
     const [showAnswer, setShowAnswer] = useState(false)
 
-    // const initialization = !Object.keys(card).length
     const initialization = !packName
 
     useFetchCards(1000)
@@ -36,13 +34,10 @@ export const Learn = () => {
 
     useEffect(() => {
         return () => {
-            // debugger
             dispatch(learnActions.clearState())
         }
     }, [])
 
-console.log(initialization);
-// debugger
     return (
         <>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />

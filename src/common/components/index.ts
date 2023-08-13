@@ -1,3 +1,4 @@
+export { TextInput } from './inputs/TextInput'
 export { ModalsForm } from './forms/ModalForm'
 export { AppLink } from './links/AppLink'
 export { NothingFound } from './nothing_found/NothingFound'

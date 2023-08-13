@@ -1,17 +1,17 @@
-import Box from '@mui/material/Box'
-import Modal from '@mui/material/Modal'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
+import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import FormGroup from '@mui/material/FormGroup'
+import Button from '@mui/material/Button'
+import Modal from '@mui/material/Modal'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
-import { FC, FormEventHandler, useEffect } from 'react'
 import { modalActions } from 'features/modals/modals.slice'
-import { useModalsSelectors } from 'features/modals/useModalsSelectors'
+import { useModalsSelectors } from 'features/modals/hooks'
 import { cancelBtnSX } from 'features/modals/modalsStyles'
-import { useAppDispatch } from '../../hooks'
+import { useAppDispatch } from 'common/hooks'
+import { FC, FormEventHandler } from 'react'
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -38,7 +38,6 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
     const handleClose = () => {
         dispatch(modalActions.closeModal())
     }
-    
 
     return (
         <Modal open={isOpenModal} onClose={handleClose}>

@@ -1,22 +1,19 @@
 import { PayloadAction, createSlice, isPending, isRejected } from '@reduxjs/toolkit'
-
+import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
+import { thunkTryCatch } from 'common/utils'
 import {
     AddCardRequestType,
     GetCardsParamsType,
     GetCardsResponseType,
-    GradeType,
     UpdateCartRequestType,
     cardsApi,
 } from './cards.api'
-import { createAppAsyncThunk } from 'common/types/createAppAsyncThunk'
-import { thunkTryCatch } from 'common/utils'
 
 const initialState = {
     cards: {} as GetCardsResponseType,
     isLoading: false,
-    queryParams: { cardQuestion: '', /* page: 1, */ pageCount: 4, sortCards: '' } as GetCardsParamsType,
+    queryParams: { cardQuestion: '', pageCount: 4, sortCards: '' } as GetCardsParamsType,
     packId: '' as string,
-    // packName: '' as string
 }
 
 const slice = createSlice({
@@ -29,11 +26,11 @@ const slice = createSlice({
         setPackId: (state, action: PayloadAction<string>) => {
             state.packId = action.payload
         },
-        updatePack:  (state, action: PayloadAction<{packName: string, privatePack: boolean}>) => {
+        updatePack: (state, action: PayloadAction<{ packName: string; privatePack: boolean }>) => {
             state.cards.packName = action.payload.packName
             state.cards.packPrivate = action.payload.privatePack
         },
-        clearState: (state) => {
+        clearState: () => {
             return initialState
         },
     },
@@ -42,8 +39,6 @@ const slice = createSlice({
             .addCase(getCards.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.cards = action.payload
-                // debugger
-                // state.packName = action.payload.packName
             })
             .addMatcher(pending, (state) => {
                 state.isLoading = true
@@ -87,8 +82,7 @@ const updateCard = createAppAsyncThunk<void, UpdateCartRequestType>('cards/updat
     })
 })
 
-
-const pending = isPending(getCards) // FIX
+const pending = isPending(getCards)
 const rejected = isRejected(getCards)
 
 export const cardsReducer = slice.reducer

@@ -1,5 +1,6 @@
 import { EmailInput, Form, InfoMessage } from 'common/components'
-import { useAppForm, useAuth } from 'features/auth/hooks'
+import { useAuth } from 'features/auth/hooks'
+import { useAppForm } from 'common/hooks'
 import { paths } from 'common/constants'
 
 export const ForgotPassword = () => {

@@ -1,3 +1,4 @@
+export { PacksActions } from './table/PacksActions'
 export { PacksTableHeader } from './table/PacksTableHeader'
 export { PacksSearchInput } from './PacksSearchInput'
 export { ShowPacksCards } from './ShowPacksCards'

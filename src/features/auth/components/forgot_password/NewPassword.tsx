@@ -1,5 +1,6 @@
 import { InfoMessage, Form, PasswordInput } from 'common/components'
-import { useAppForm, useAuth } from 'features/auth/hooks'
+import { useAuth } from 'features/auth/hooks'
+import { useAppForm } from 'common/hooks'
 
 export const NewPassword = () => {
     const { register, handleSubmit, errors } = useAppForm(['password'])

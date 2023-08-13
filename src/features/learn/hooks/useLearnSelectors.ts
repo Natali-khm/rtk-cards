@@ -1,10 +1,9 @@
-import { isLoadingS, learnCardS } from './learn.selectors'
+import { isLoadingS, learnCardS } from 'features/learn/hooks/learn.selectors'
 import { useAppSelector } from 'common/hooks'
 
 export const useLearnSelectors = () => {
-    // const learnCards = useAppSelector(learnCardsS)
     const card = useAppSelector(learnCardS)
     const isLoading = useAppSelector(isLoadingS)
 
-    return { /* learnCards, */ card, isLoading }
+    return { card, isLoading }
 }

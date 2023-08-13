@@ -1,11 +1,10 @@
-import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 
-import { EmailInput, ModalsForm } from 'common/components'
-import { TextInput } from 'common/components/inputs/TextInput'
-import { FC } from 'react'
-import { FormValidateType } from 'common/hooks/useAppForm'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
+import { FormValidateType } from 'common/hooks/useAppForm'
+import { ModalsForm, TextInput } from 'common/components'
+import { FC } from 'react'
 
 type PropsType = {
     onSubmit: () => void
@@ -16,7 +15,14 @@ type PropsType = {
     privatePack?: boolean
 }
 
-export const PackModal: FC<PropsType> = ({ onSubmit, submitBtnTitle, errors, register, defaultInputValue, privatePack }) => {
+export const PackModal: FC<PropsType> = ({
+    onSubmit,
+    submitBtnTitle,
+    errors,
+    register,
+    defaultInputValue,
+    privatePack,
+}) => {
     return (
         <ModalsForm onSubmit={onSubmit} submitBtnTitle={submitBtnTitle}>
             <TextInput
@@ -32,7 +38,7 @@ export const PackModal: FC<PropsType> = ({ onSubmit, submitBtnTitle, errors, reg
                 control={
                     <Checkbox
                         {...register('private')}
-                        defaultChecked = {privatePack}
+                        defaultChecked={privatePack}
                         sx={{ color: '#00000099', '&.Mui-checked': { color: '#366EFF' } }}
                     />
                 }

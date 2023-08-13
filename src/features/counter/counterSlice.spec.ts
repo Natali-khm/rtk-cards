@@ -28,6 +28,7 @@ describe('counter reducer', () => {
     })
 
     it('should handle incrementByAmount', () => {
+        
         const actual = counterReducer(initialState, incrementByAmount(2))
         expect(actual.value).toEqual(5)
     })

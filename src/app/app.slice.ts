@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fulfilled, pending, rejected } from './appMatchingUtilities'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const slice = createSlice({
     name: 'app',
@@ -15,12 +15,6 @@ const slice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addMatcher(pending, (state) => {
-                state.isLoading = true
-            })
-            .addMatcher(fulfilled, (state) => {
-                state.isLoading = false
-            })
             .addMatcher(
                 (action) => {
                     return action.type.endsWith('/isAuth/fulfilled') || action.type.endsWith('/isAuth/rejected')
@@ -29,8 +23,14 @@ const slice = createSlice({
                     state.isAppInitialized = true
                 }
             )
+            .addMatcher(pending, (state) => {
+                state.isLoading = true
+            })
+            .addMatcher(fulfilled, (state) => {
+                state.isLoading = false
+            })
             .addMatcher(rejected, (state, action) => {
-                if (action.payload) state.error = action.payload /// TODO
+                if (action.payload) state.error = action.payload
                 state.isLoading = false
             })
     },

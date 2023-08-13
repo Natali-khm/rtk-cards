@@ -6,7 +6,7 @@ import { Cards } from 'features/cards/components'
 import { ProtectedRoute } from 'common/routes'
 import { paths } from 'common/constants'
 import { App } from 'app'
-import { Learn } from 'features/learn/Learn'
+import { Learn } from 'features/learn/components/Learn'
 
 export const router = createHashRouter([
     {

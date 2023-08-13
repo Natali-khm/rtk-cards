@@ -3,25 +3,23 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import IconButton from '@mui/material/IconButton'
 
-import { CardPackType } from '../../packs.api'
-import { usePackActions } from '../../hooks/usePackActions'
+import { CardPackType } from 'features/packs/packs.api'
+import { usePacksActions } from 'features/packs/hooks'
+import { useAuthSelectors } from 'features/auth/hooks'
 import { FC } from 'react'
-import { useAuthSelectors } from '../../../auth/hooks'
 
 type PropsType = {
     pack: CardPackType
 }
 
-export const IconsGroup: FC<PropsType> = ({ pack }) => {
-
+export const PacksActions: FC<PropsType> = ({ pack }) => {
     const { profileId } = useAuthSelectors()
 
-    const { navigateToLearn, updatePack, deletePack } = usePackActions()
-
+    const { goToLearn, updatePack, deletePack } = usePacksActions()
 
     return (
         <>
-            <IconButton size="small" disabled={pack.cardsCount === 0} onClick={() => navigateToLearn(pack._id)}>
+            <IconButton size="small" disabled={pack.cardsCount === 0} onClick={() => goToLearn(pack._id)}>
                 <SchoolOutlinedIcon fontSize="small" />
             </IconButton>
             {pack.user_id === profileId && (

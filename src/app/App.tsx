@@ -3,12 +3,12 @@ import Box from '@mui/material/Box'
 
 import { useAuthSelectors } from 'features/auth/hooks'
 import { authThunks } from 'features/auth/auth.slice'
+import { AppModal } from 'features/modals/components'
 import { useAppDispatch } from 'common/hooks'
+import { useAppSelectors } from 'app/hooks'
 import { Header } from 'common/components'
 import { AppOutlet } from './AppOutlet'
 import { useEffect } from 'react'
-import { AppModal } from 'features/modals/AppModal'
-import { useAppSelectors } from './hooks/useAppSelectors'
 
 export function App() {
     const dispatch = useAppDispatch()
@@ -23,7 +23,6 @@ export function App() {
         <>
             <Header />
             <Box sx={{ height: '4px' }}>{isAppLoading && <LinearProgress />}</Box>
-            {!appInitialized && 'Initialization'}
             {appInitialized && isLoggedIn !== null && <AppOutlet />}
             <AppModal />
         </>

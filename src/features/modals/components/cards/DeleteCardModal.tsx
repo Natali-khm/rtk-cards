@@ -1,29 +1,29 @@
 import Box from '@mui/material/Box'
 
-import { ModalsForm } from 'common/components'
-import { useAppDispatch } from 'common/hooks'
-import { SubmitHandler } from 'react-hook-form'
-import { useModalsSelectors } from '../useModalsSelectors'
-import { useAppForm } from '../../auth/hooks'
+import { modalActions } from 'features/modals/modals.slice'
+import { useModalsSelectors } from 'features/modals/hooks'
 import { FormValidateType } from 'common/hooks/useAppForm'
+import { useAppDispatch, useAppForm } from 'common/hooks'
+import { cardsThunks } from 'features/cards/cards.slice'
+import { SubmitHandler } from 'react-hook-form'
+import { ModalsForm } from 'common/components'
 import { toast } from 'react-toastify'
-import { cardsActions, cardsThunks } from '../../cards/cards.slice'
-import { modalActions } from '../modals.slice'
 
 export const DeleteCardModal = () => {
-    const { register, handleSubmit, errors, reset, formState } = useAppForm([])
+    const { handleSubmit } = useAppForm([])
     const dispatch = useAppDispatch()
     const { id, name } = useModalsSelectors()
 
     const deleteCard: SubmitHandler<FormValidateType> = (data) => {
-        dispatch(cardsThunks.deleteCard(id))
-            .unwrap()
-            .then((res) => {
-                toast.success(`'${name}' card is deleted`)
-            })
+        id &&
+            dispatch(cardsThunks.deleteCard(id))
+                .unwrap()
+                .then((res) => {
+                    toast.success(`'${name}' card is deleted`)
+                })
         dispatch(modalActions.closeModal())
     }
-    
+
     return (
         <ModalsForm onSubmit={handleSubmit(deleteCard)} submitBtnTitle={'Delete Card'} btnColor="red">
             <Box sx={{ mb: '5px', textAlign: 'center' }}>

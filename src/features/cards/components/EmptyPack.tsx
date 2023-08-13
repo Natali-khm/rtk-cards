@@ -2,11 +2,10 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import { useAddCard } from '../hooks/useAddCard'
-import { useCardsSelectors } from '../hooks'
+import { useCardsActions, useCardsSelectors } from 'features/cards/hooks'
 
 export const EmptyPack = () => {
-    const { addCard } = useAddCard()
+    const { addCard } = useCardsActions()
     const { packIdFromState } = useCardsSelectors()
 
     return (
