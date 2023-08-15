@@ -1,3 +1,5 @@
+export { HeaderProfile } from './profile/HeaderProfile'
+export { Profile } from './profile/Profile'
 export { ForgotPassword } from './forgot_password/ForgotPassword'
 export { NewPassword } from './forgot_password/NewPassword'
 export { CheckEmail } from './forgot_password/CheckEmail'

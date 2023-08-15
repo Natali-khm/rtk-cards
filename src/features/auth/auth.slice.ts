@@ -39,7 +39,6 @@ const slice = createSlice({
             .addCase(forgotPassword.fulfilled, (state, action) => {
                 state.passwordRecovery.isMailSent = action.payload.isMailSent
                 state.passwordRecovery.email = action.payload.email
-                debugger
             })
             .addCase(setNewPassword.fulfilled, (state) => {
                 state.passwordRecovery.isPasswordSet = true

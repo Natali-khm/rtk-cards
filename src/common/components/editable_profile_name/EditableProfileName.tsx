@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
 import { authThunks } from 'features/auth/auth.slice'
@@ -17,7 +18,7 @@ export const EditableProfileName = ({ profileName }: PropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [name, setName] = useState('')
     const dispatch = useAppDispatch()
-    
+
     const setEditorOpen = () => {
         setEditMode(true)
         setName(profileName)
@@ -38,10 +39,9 @@ export const EditableProfileName = ({ profileName }: PropsType) => {
     }
 
     return (
-        <Box sx={{ mt: '17px', width: '100%' }}>
+        <Box sx={{ mt: '17px', width: '100%', textAlign: 'center' }}>
             {editMode ? (
                 <TextField
-                    fullWidth
                     value={name}
                     variant="standard"
                     onBlur={handleBlur}
@@ -55,12 +55,15 @@ export const EditableProfileName = ({ profileName }: PropsType) => {
                     }}
                 />
             ) : (
-                <Typography variant="h3">
-                    {profileName}
+                <Grid container justifyContent="center" alignItems="center">
+                    <Typography variant="h3">{profileName}</Typography>
                     <IconButton sx={{ verticalAlign: 'baseline' }} onClick={setEditorOpen}>
-                        <BorderColorOutlinedIcon htmlColor={'black'} fontSize={'small'} />
+                        <BorderColorOutlinedIcon
+                            htmlColor={'black'}
+                            sx={{ height: '16px', color: 'rgba(0, 0, 0, 0.87)' }}
+                        />
                     </IconButton>
-                </Typography>
+                </Grid>
             )}
         </Box>
     )

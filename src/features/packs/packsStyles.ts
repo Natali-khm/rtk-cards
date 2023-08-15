@@ -1,5 +1,5 @@
 export const valuesStyle = {
-    backgroundColor: 'white',
+    bgcolor: 'white',
     maxWidth: '64px',
     input: {
         fontFamily: 'Montserrat',
@@ -20,7 +20,7 @@ export const nameCellSX = {
 
 export const showCardsBtnSX = {
     borderRadius: '3px',
-    backgroundColor: 'white',
+    bgcolor: 'white',
     width: '100px',
     boxShadow: 0,
     border: ' 1px solid #d1d0d0',
@@ -32,14 +32,14 @@ export const showCardsBtnSX = {
 
 export const showCardsActiveBtnSX = {
     borderRadius: '3px',
-    backgroundColor: '#366EFF',
+    bgcolor: '#366EFF',
     width: '100px',
     boxShadow: 0,
     color: 'white',
 }
 
 export const resetBtnSX = {
-    backgroundColor: '#fff',
+    bgcolor: '#fff',
     border: ' 1px solid #d1d0d0',
     borderRadius: '2px',
     cursor: 'pointer',

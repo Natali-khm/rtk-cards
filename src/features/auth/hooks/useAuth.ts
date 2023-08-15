@@ -12,7 +12,7 @@ export const useAuth = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { token } = useParams()
-    const {userName} = useAuthSelectors()
+    const { userName } = useAuthSelectors()
 
     const onRegisterSubmit: SubmitHandler<FormValidateType> = (data) => {
         dispatch(authThunks.register(data))

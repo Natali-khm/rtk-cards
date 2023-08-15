@@ -68,7 +68,7 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
                                     variant={'contained'}
                                     sx={{
                                         '&:hover': {
-                                            backgroundColor: btnColor,
+                                            bgcolor: btnColor,
                                         },
                                     }}>
                                     {submitBtnTitle}

@@ -3,7 +3,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
 
-import { HeaderProfile } from 'features/profile/compopnents'
+import { HeaderProfile } from 'features/auth/components'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { paths } from 'common/constants'

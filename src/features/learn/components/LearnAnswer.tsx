@@ -35,7 +35,7 @@ export const LearnAnswer: FC<PropsType> = ({ closeAnswer }) => {
             </Box>
             <form onSubmit={handleSubmit(updateCardGrade)}>
                 <FormControl sx={{ m: '30px 0' }}>
-                    <FormLabel>Rate yourself:</FormLabel>
+                    <FormLabel sx={{color: 'rgba(0, 0, 0, 0.87)', fontWeight: 'bold', fontFamily: 'Montserrat'}}>Rate yourself:</FormLabel>
                     <RadioGroup defaultValue={1}>
                         <FormControlLabel
                             value="1"

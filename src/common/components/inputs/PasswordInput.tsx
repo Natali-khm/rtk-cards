@@ -1,13 +1,14 @@
-import FormControl from '@mui/material/FormControl'
-import InputAdornment from '@mui/material/InputAdornment'
-import IconButton from '@mui/material/IconButton'
-import { useState } from 'react'
-import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { UseFormRegister, FieldErrors } from 'react-hook-form'
-import Box from '@mui/material/Box'
+import InputAdornment from '@mui/material/InputAdornment'
+import Visibility from '@mui/icons-material/Visibility'
+import FormControl from '@mui/material/FormControl'
+import IconButton from '@mui/material/IconButton'
 import TextField from '@mui/material/TextField'
-import { FormValidateType } from '../../hooks/useAppForm'
+import Box from '@mui/material/Box'
+
+import { UseFormRegister, FieldErrors } from 'react-hook-form'
+import { FormValidateType } from 'common/hooks/useAppForm'
+import { useState } from 'react'
 
 type PropsType = {
     label: string

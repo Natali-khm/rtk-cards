@@ -1,6 +1,7 @@
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 import TextField from '@mui/material/TextField'
+
 import { ChangeEvent, FC } from 'react'
 
 type PropsType = {
@@ -20,7 +21,7 @@ export const SearchInput: FC<PropsType> = ({ value, disabled, onChange }) => {
             disabled={disabled}
             placeholder={'Provide your text'}
             sx={{
-                backgroundColor: 'white',
+                bgcolor: 'white',
                 input: {
                     fontFamily: 'Montserrat',
                     fontSize: '14px',

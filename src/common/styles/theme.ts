@@ -1,10 +1,5 @@
 import { createTheme } from '@mui/material'
 
-// declare module '@mui/material/Button' {
-//     interface ButtonPropsVariantOverrides {
-//         radius: true
-//     }
-// }
 
 export const theme = createTheme({
     palette: {
@@ -70,38 +65,22 @@ export const theme = createTheme({
                 },
             },
         },
-        MuiMenuItem: {
-          styleOverrides: {
-            root: {
-              // opacity: 1
-            }
-          }
-        },
-        // MuiFormLabel: {
-        //     styleOverrides: {
-        //         root: {
-        //             fontFamily: 'Montserrat, sans-serif',
-        //             color: 'rgba(0, 0, 0, 0.87)',
-        //             fontWeight: 'bold'
-        //         }
-        //       } 
-        // },
         MuiButton: {
             variants: [
-                // {
-                //     props: { color: 'secondary' },
-                //     style: {
-                //         fontSize: '12px',
-                //         fontWeight: 400,
-                //         lineHeight: '24px',
-                //         borderRadius: '2px',
-                //         paddingTop: 0,
-                //         paddingBottom: 0,
-                //         '&:hover': {
-                //             backgroundColor: '#1565c0',
-                //         },
-                //     },
-                // },
+                {
+                    props: { color: 'secondary' },
+                    style: {
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '24px',
+                        borderRadius: '2px',
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                        '&:hover': {
+                            backgroundColor: '#0c4ff7',
+                        },
+                    },
+                },
                 {
                     props: { color: 'primary' },
                     style: {
@@ -118,29 +97,11 @@ export const theme = createTheme({
                         },
                     },
                 },
-                // {
-                //     props: { variant: 'radius' },
-                //     style: {
-                //         borderRadius: 30,
-                //     },
-                // },
             ],
             styleOverrides: {
                 root: ({ ownerState }) => ({
                     fontFamily: 'Montserrat, sans-serif',
                     backgroundColor: '#366EFF',
-                    // padding: '0',
-
-                    // ...(ownerState.variant === 'contained' &&
-                    //     ownerState.color === 'primary' && {
-                    //         textTransform: 'none',
-                    //         borderRadius: '30px',
-                    //         fontSize: '16px',
-                    //         lineHeight: '20px',
-                    //         letterSpacing: '0.01em',
-                    //         boxShadow:
-                    //             '0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3)',
-                    //     }),
                 }),
             },
         },
