@@ -8,3 +8,18 @@ export const cancelBtnSX = {
         bgcolor: 'rgba(0, 0, 0, 0.2)',
     },
 }
+
+export const coverBoxSX = {
+    bgcolor: '#f1e9e9',
+    height: '140px',
+    fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}
+
+export const coverBtnSX = {
+    height: '30px',
+    borderRadius: 0,
+    color: 'white',
+}

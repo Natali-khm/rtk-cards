@@ -5,6 +5,8 @@ import { UseFormRegister, FieldErrors } from 'react-hook-form'
 import { FormValidateType } from 'common/hooks/useAppForm'
 import { ModalsForm, TextInput } from 'common/components'
 import { FC } from 'react'
+import { SetCoverBox } from '../../../../common/components/cover_box/SetCoverBox'
+import { checkBoxSX } from '../../../../common/styles/commonStyles'
 
 type PropsType = {
     onSubmit: () => void
@@ -13,6 +15,8 @@ type PropsType = {
     register: UseFormRegister<FormValidateType>
     defaultInputValue?: string
     privatePack?: boolean
+    cover: string
+    setPhoto: (photo: string) => void
 }
 
 export const PackModal: FC<PropsType> = ({
@@ -22,9 +26,12 @@ export const PackModal: FC<PropsType> = ({
     register,
     defaultInputValue,
     privatePack,
+    cover,
+    setPhoto,
 }) => {
     return (
         <ModalsForm onSubmit={onSubmit} submitBtnTitle={submitBtnTitle}>
+            <SetCoverBox title={"Set pack's cover"} cover={cover} setCover={setPhoto} />
             <TextInput
                 errors={errors}
                 label={'Pack Name'}
@@ -35,13 +42,7 @@ export const PackModal: FC<PropsType> = ({
             <FormControlLabel
                 sx={{ mt: '30px', color: 'black' }}
                 label={'Private Pack'}
-                control={
-                    <Checkbox
-                        {...register('private')}
-                        defaultChecked={privatePack}
-                        sx={{ color: '#00000099', '&.Mui-checked': { color: '#366EFF' } }}
-                    />
-                }
+                control={<Checkbox {...register('private')} defaultChecked={privatePack} sx={checkBoxSX} />}
             />
         </ModalsForm>
     )

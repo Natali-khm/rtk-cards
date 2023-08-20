@@ -16,32 +16,30 @@ import { logOutBtnSX } from './profileStyles'
 import { useAppSelectors } from 'app/hooks'
 import { paths } from 'common/constants'
 import { ChangeEvent } from 'react'
+import { authThunks } from '../../auth.slice'
+import { useAppDispatch } from 'common/hooks'
+import { convertFileToBase64 } from 'common/utils'
 
 export const Profile = () => {
     const { logoutHandler } = useAuth()
     const { userProfile } = useAuthSelectors()
     const { isAppLoading } = useAppSelectors()
+    const dispatch = useAppDispatch()
 
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             const file = e.target.files[0]
-            console.log('file: ', file)
 
             if (file.size < 4000000) {
-                // https://developer.mozilla.org/ru/docs/Web/API/FileReader/FileReader
-                const reader = new FileReader();
-
-                reader.onloadend = () => {
-                    const file64 = reader.result as string
-                    console.log('file64: ', file64)
-                }
-                // https://developer.mozilla.org/ru/docs/Web/API/FileReader/readAsDataURL
-                reader.readAsDataURL(file)
+                convertFileToBase64(file, (file64: string) => {
+                    dispatch(authThunks.updateProfile({ avatar: file64 }))
+                })
             } else {
                 console.error('Error: ', 'Файл слишком большого размера')
             }
         }
     }
+
     return (
         <Box>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />
@@ -55,6 +53,7 @@ export const Profile = () => {
                             <IconButton
                                 component="label"
                                 disableRipple={true}
+                                disabled={isAppLoading}
                                 sx={{
                                     width: '28px',
                                     height: '28px',
@@ -65,7 +64,11 @@ export const Profile = () => {
                                 <input type="file" onChange={uploadHandler} style={{ display: 'none' }} />
                             </IconButton>
                         }>
-                        <Avatar alt="user avatar" src={profileAvatar} sx={{ width: 96, height: 96, mt: '30px' }} />
+                        <Avatar
+                            alt="user avatar"
+                            src={userProfile?.avatar}
+                            sx={{ width: 96, height: 96, mt: '30px' }}
+                        />
                     </Badge>
                     <EditableProfileName profileName={userProfile?.name || ''} />
                     <Typography variant="body2">{userProfile?.email}</Typography>

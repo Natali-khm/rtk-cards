@@ -40,7 +40,7 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
     }
 
     return (
-        <Modal open={isOpenModal} onClose={handleClose}>
+        <Modal open={isOpenModal} onClose={handleClose} sx={{ overflow: 'scroll' }}>
             <Box sx={style}>
                 <form onSubmit={onSubmit}>
                     <Grid

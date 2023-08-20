@@ -13,14 +13,24 @@ export const LearnQuestion: FC<PropsType> = ({ initialization }) => {
     const { card, isLoading } = useLearnSelectors()
 
     return (
-        <Box sx={{ mb: '30px' }}>
+        <Box sx={{ mb: '10px', textAlign: 'center' }}>
             <Box sx={{ mb: '3px' }}>
                 {isLoading || initialization ? (
                     <Skeleton variant="rounded" height={23} />
                 ) : (
                     <Box sx={{ mr: '5px' }}>
-                        <b>Question: </b>
-                        {card.question}
+                        <Box sx={{ mb: '10px', fontWeight: 'bold' }}>Question:</Box>
+
+                        {card.question && card.question !== 'no question' ? (
+                            <>{card.question}</>
+                        ) : (
+                            <Box
+                                component="img"
+                                sx={{ maxWidth: '392px', maxHeight: '150px' }}
+                                alt="cover"
+                                src={card.questionImg}
+                            />
+                        )}
                     </Box>
                 )}
             </Box>
@@ -28,7 +38,7 @@ export const LearnQuestion: FC<PropsType> = ({ initialization }) => {
                 {isLoading || initialization ? (
                     <Skeleton variant="rounded" height={20} />
                 ) : (
-                    <Typography variant="body2" sx={{ m: '0', mr: '5px' }}>
+                    <Typography variant="body2" sx={{ m: '0', mr: '5px', fontSize: '12px' }}>
                         Number of attempts to answer the question: {card.shots}
                     </Typography>
                 )}

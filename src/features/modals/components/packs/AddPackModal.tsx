@@ -4,15 +4,18 @@ import { useAppDispatch, useAppForm } from 'common/hooks'
 import { packsThunks } from 'features/packs/packs.slice'
 import { PackModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useEffect } from 'react'
 
 export const AddPackModal = () => {
     const { register, handleSubmit, errors, reset, formState } = useAppForm(['textInput'])
+
     const dispatch = useAppDispatch()
 
+    const [photo, setPhoto] = useState('')
+
     const addNewPack: SubmitHandler<FormValidateType> = (data) => {
-        dispatch(packsThunks.addPack({ name: data.textInput, private: data.private }))
+        dispatch(packsThunks.addPack({ name: data.textInput, private: data.private, deckCover: photo }))
             .unwrap()
             .then((res) => {
                 toast.success(`'${data.textInput}' pack is created`)
@@ -32,6 +35,8 @@ export const AddPackModal = () => {
             submitBtnTitle={'Add New Pack'}
             errors={errors}
             register={register}
+            cover={photo}
+            setPhoto={setPhoto}
         />
     )
 }

@@ -41,7 +41,7 @@ export const Learn = () => {
     return (
         <>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />
-            <Paper sx={{ width: '420px', m: '36px auto 0' }}>
+            <Paper sx={{ width: '420px', m: '36px auto 36px' }}>
                 <Box sx={{ p: '33px 36px 38px' }}>
                     {initialization ? (
                         <Skeleton height={62} animation="wave" />

@@ -43,6 +43,7 @@ export type GetCardsResponseType = {
     maxGrade: number
     token: string
     tokenDeathTime: number
+    packDeckCover: string
 }
 
 export type CardType = {
@@ -59,8 +60,8 @@ export type CardType = {
     more_id: string
     created: string
     updated: string
-    answerImg?: string
-    questionImg?: string
+    answerImg: string
+    questionImg: string
     answerVideo: string
     questionVideo: string
     __v: number

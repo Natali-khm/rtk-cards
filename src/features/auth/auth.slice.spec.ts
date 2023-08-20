@@ -28,6 +28,7 @@ describe('auth reducer', () => {
             __v: 43,
             token: 'token',
             tokenDeathTime: 242,
+            avatar: ''
         }
 
         const loginData = {
@@ -97,6 +98,7 @@ describe('auth reducer', () => {
             __v: 43,
             token: 'token',
             tokenDeathTime: 242,
+            avatar: ''
         }
 
         const action = authThunks.updateProfile.fulfilled({ profile }, 'requestId', updateProfileData)

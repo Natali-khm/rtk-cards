@@ -7,4 +7,7 @@ export const tableHeadSX = {
 }
 
 export const menuTypographySX = { m: 0, opacity: 1, color: 'black', fontWeight: 500, verticalAlign: 'middle' }
+
 export const menuIconSX = { mr: '14px', verticalAlign: 'text-bottom' }
+
+export const checkBoxSX = { color: '#00000099', '&.Mui-checked': { color: '#366EFF' } }

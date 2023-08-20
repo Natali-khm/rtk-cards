@@ -15,14 +15,14 @@ export const usePacksActions = () => {
         navigate(`/learn/${id}`)
     }
 
-    const updatePack = (id: string, name: string, privatePack: boolean) => {
+    const updatePack = (id: string, packName: string, privatePack: boolean, cover: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Edit Pack', data: { id, name, private: privatePack } }))
+        dispatch(modalActions.setModal({ modalAction: 'Edit Pack', data: { id, packName, private: privatePack, cover } }))
     }
 
-    const deletePack = (id: string, name: string, currPage: 'packs' | 'cards') => {
+    const deletePack = (id: string, packName: string, currPage: 'packs' | 'cards', cover: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Delete Pack', data: { id, name, currPage } }))
+        dispatch(modalActions.setModal({ modalAction: 'Delete Pack', data: { id, packName, currPage, cover } }))
     }
 
     return { addPack, goToLearn, updatePack, deletePack }

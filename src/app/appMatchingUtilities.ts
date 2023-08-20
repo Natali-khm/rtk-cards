@@ -39,7 +39,6 @@ const fulfilled = isFulfilled(
 )
 
 const rejected = isRejected(
-    authThunks.isAuth,
     authThunks.register,
     authThunks.login,
     authThunks.logout,

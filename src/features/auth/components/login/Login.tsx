@@ -1,10 +1,13 @@
-import { PasswordInput, EmailInput, Form } from 'common/components'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { useAuth } from 'features/auth/hooks'
 import Checkbox from '@mui/material/Checkbox'
+
+import { PasswordInput, EmailInput, Form } from 'common/components'
+import { checkBoxSX } from 'common/styles/commonStyles'
+import { useAuth } from 'features/auth/hooks'
 import { useAppForm } from 'common/hooks'
 import { paths } from 'common/constants'
 import { Link } from 'react-router-dom'
+import { forgotPassSX } from '../../authStyles'
 
 export const Login = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password'])
@@ -29,23 +32,9 @@ export const Login = () => {
             <FormControlLabel
                 label={'Remember me'}
                 sx={{ mt: '20px', color: 'black' }}
-                control={
-                    <Checkbox
-                        {...register('rememberMe')}
-                        sx={{ color: '#00000099', '&.Mui-checked': { color: '#366EFF' } }}
-                    />
-                }
+                control={<Checkbox {...register('rememberMe')} sx={checkBoxSX} />}
             />
-            <Link
-                to={paths.FORGOT_PASSWORD}
-                style={{
-                    color: 'black',
-                    marginLeft: 'auto',
-                    textDecoration: 'none',
-                    fontWeight: 500,
-                    fontSize: '14px',
-                    lineHeight: '17px',
-                }}>
+            <Link to={paths.FORGOT_PASSWORD} style={forgotPassSX}>
                 Forgot password?
             </Link>
         </Form>

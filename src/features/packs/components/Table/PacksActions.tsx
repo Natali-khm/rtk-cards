@@ -24,10 +24,12 @@ export const PacksActions: FC<PropsType> = ({ pack }) => {
             </IconButton>
             {pack.user_id === profileId && (
                 <>
-                    <IconButton onClick={() => updatePack(pack._id, pack.name, pack.private)} size="small">
+                    <IconButton
+                        onClick={() => updatePack(pack._id, pack.name, pack.private, pack.deckCover)}
+                        size="small">
                         <BorderColorOutlinedIcon fontSize="small" />
                     </IconButton>
-                    <IconButton onClick={() => deletePack(pack._id, pack.name, 'packs')} size="small">
+                    <IconButton onClick={() => deletePack(pack._id, pack.name, 'packs', pack.deckCover)} size="small">
                         <DeleteOutlinedIcon fontSize="small" />
                     </IconButton>
                 </>

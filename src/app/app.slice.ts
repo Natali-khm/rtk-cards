@@ -21,6 +21,7 @@ const slice = createSlice({
                 },
                 (state) => {
                     state.isAppInitialized = true
+                    state.isLoading = false
                 }
             )
             .addMatcher(pending, (state) => {

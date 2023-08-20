@@ -6,11 +6,13 @@ import { Packs } from 'features/packs/Packs'
 import { Cards } from 'features/cards/Cards'
 import { paths } from 'common/constants'
 import { App } from 'app'
+import { PageNotFound } from '../components/page_not_found/PageNotFound'
 
 export const router = createHashRouter([
     {
         path: paths.PACKS,
         element: <App />,
+        errorElement: <PageNotFound />,
         children: [
             {
                 path: paths.LOGIN,

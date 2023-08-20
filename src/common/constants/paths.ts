@@ -1,6 +1,6 @@
 export const paths = {
     PACKS: '/',
-    PAGE_NOT_FOUND: '404',
+    // PAGE_NOT_FOUND: '404',
     REGISTER: '/register',
     LOGIN: '/login',
     FORGOT_PASSWORD: '/forgot-password',

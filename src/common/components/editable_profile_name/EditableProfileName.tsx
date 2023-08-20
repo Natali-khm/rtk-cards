@@ -9,6 +9,7 @@ import Box from '@mui/material/Box'
 import { authThunks } from 'features/auth/auth.slice'
 import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from 'common/hooks'
+import { useAppSelectors } from 'app/hooks'
 
 type PropsType = {
     profileName: string
@@ -18,6 +19,7 @@ export const EditableProfileName = ({ profileName }: PropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [name, setName] = useState('')
     const dispatch = useAppDispatch()
+    const { isAppLoading } = useAppSelectors()
 
     const setEditorOpen = () => {
         setEditMode(true)
@@ -57,10 +59,10 @@ export const EditableProfileName = ({ profileName }: PropsType) => {
             ) : (
                 <Grid container justifyContent="center" alignItems="center">
                     <Typography variant="h3">{profileName}</Typography>
-                    <IconButton sx={{ verticalAlign: 'baseline' }} onClick={setEditorOpen}>
+                    <IconButton sx={{ verticalAlign: 'baseline' }} onClick={setEditorOpen} disabled={isAppLoading}>
                         <BorderColorOutlinedIcon
                             htmlColor={'black'}
-                            sx={{ height: '16px', color: 'rgba(0, 0, 0, 0.87)' }}
+                            sx={{ color: 'rgba(0, 0, 0, 0.87)', fontSize: '16px' }}
                         />
                     </IconButton>
                 </Grid>

@@ -3,8 +3,8 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Skeleton from '@mui/material/Skeleton'
 
-import { FC } from 'react'
 import { useCardsSelectors } from 'features/cards/hooks'
+import { FC } from 'react'
 
 type PropsType = {
     title: string
@@ -22,7 +22,7 @@ export const SubHeader: FC<PropsType> = ({ title, onClick, buttonTitle, disabled
         <Grid container alignItems="center" direction="row" sx={{ height: '36px' }}>
             <Grid item>
                 {cardsAreLoading ? (
-                    <Skeleton width={150} height={40} animation='wave'/>
+                    <Skeleton width={150} height={40} animation="wave" />
                 ) : (
                     <Typography variant="h1" sx={{ m: '0' }}>
                         {title}

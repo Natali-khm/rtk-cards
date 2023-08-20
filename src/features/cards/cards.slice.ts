@@ -26,9 +26,10 @@ const slice = createSlice({
         setPackId: (state, action: PayloadAction<string>) => {
             state.packId = action.payload
         },
-        updatePack: (state, action: PayloadAction<{ packName: string; privatePack: boolean }>) => {
+        updatePack: (state, action: PayloadAction<{ packName: string; privatePack: boolean, cover: string }>) => {
             state.cards.packName = action.payload.packName
             state.cards.packPrivate = action.payload.privatePack
+            state.cards.packDeckCover = action.payload.cover
         },
         clearState: () => {
             return initialState

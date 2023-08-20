@@ -9,6 +9,7 @@ export const GlobalError = () => {
     const dispatch = useAppDispatch()
 
     if (error !== null) {
+        
         toast.error(error)
     }
 

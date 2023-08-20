@@ -4,6 +4,8 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
 import { PacksTableHeader, PacksActions } from 'features/packs/components'
 import { packsTableTitles } from 'features/packs/packsConstants'
@@ -15,6 +17,7 @@ import { nameCellSX } from 'features/packs/packsStyles'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
+import { CoverBox } from '../../../../common/components/cover_box/CoverBox'
 
 export const PacksTable = () => {
     const dispatch = useAppDispatch()
@@ -45,7 +48,12 @@ export const PacksTable = () => {
                             cardPacks?.map((pack: CardPackType) => (
                                 <TableRow hover key={pack._id}>
                                     <TableCell sx={nameCellSX} onClick={() => goToCards(pack._id)}>
-                                        {pack.name}
+                                        <Grid container gap="10px" alignItems="center">
+                                            {pack.deckCover && pack.deckCover.startsWith('data:image') && (
+                                                <CoverBox alt="cover" src={pack.deckCover} />
+                                            )}
+                                            <Box>{pack.name}</Box>
+                                        </Grid>
                                     </TableCell>
                                     <TableCell>{pack.cardsCount}</TableCell>
                                     <TableCell>{formatedDate(pack.updated)}</TableCell>

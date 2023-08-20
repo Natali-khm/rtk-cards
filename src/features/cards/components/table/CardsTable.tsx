@@ -11,9 +11,13 @@ import { NothingFound, TableSkeleton } from 'common/components'
 import { useCardsSelectors } from 'features/cards/hooks'
 import { CardType } from 'features/cards/cards.api'
 import { formatDate } from 'common/utils'
+import { cardsCellSX } from '../../cardsStyles'
+import { CoverBox } from '../../../../common/components/cover_box/CoverBox'
+import { useAppSelectors } from '../../../../app/hooks'
 
 export const CardsTable = () => {
     const { cardsList, cardsAreLoading, cardsCountForPage, cardQuestion } = useCardsSelectors()
+    const { isAppLoading } = useAppSelectors()
 
     const formatedDate = (date: string) => formatDate(date)
 
@@ -26,13 +30,19 @@ export const CardsTable = () => {
                     <CardsTableHeader />
 
                     <TableBody>
-                        {cardsAreLoading ? (
+                        {cardsAreLoading || isAppLoading ? (
                             <TableSkeleton rowsNumb={rowsForSkeleton} colNumb={cardsTableTitles} />
                         ) : (
                             cardsList?.map((c: CardType) => (
                                 <TableRow key={c._id} sx={{ cursor: 'pointer' }} hover>
-                                    <TableCell>{c.question}</TableCell>
-                                    <TableCell>{c.answer}</TableCell>
+                                    <TableCell sx={cardsCellSX}>
+                                        {c.questionImg && <CoverBox alt="question" src={c.questionImg} />}
+                                        {c.question && c.question !== 'no question' && c.question}
+                                    </TableCell>
+                                    <TableCell sx={cardsCellSX}>
+                                        {c.answerImg && <CoverBox alt="answer" src={c.answerImg} />}
+                                        {c.answer && c.answer !== 'no answer' && c.answer}
+                                    </TableCell>
                                     <TableCell>{formatedDate(c.updated)}</TableCell>
                                     <TableCell>
                                         <CardsActions card={c} />

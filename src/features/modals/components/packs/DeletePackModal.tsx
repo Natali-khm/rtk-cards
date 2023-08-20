@@ -10,6 +10,7 @@ import { ModalsForm } from 'common/components'
 import { useNavigate } from 'react-router-dom'
 import { paths } from 'common/constants'
 import { toast } from 'react-toastify'
+import { CoverBox } from '../../../../common/components/cover_box/CoverBox'
 
 export const DeletePackModal = () => {
     const { handleSubmit } = useAppForm([])
@@ -18,14 +19,14 @@ export const DeletePackModal = () => {
 
     const navigate = useNavigate()
 
-    const { id, name, currPage } = useModalsSelectors()
+    const { id, packName, currPage, cover } = useModalsSelectors()
 
     const deletePack: SubmitHandler<FormValidateType> = (data) => {
         id &&
             dispatch(packsThunks.deletePack(id))
                 .unwrap()
                 .then((res) => {
-                    toast.success(`'${name}' pack is deleted`)
+                    toast.success(`'${packName}' pack is deleted`)
 
                     if (currPage === 'packs') {
                         dispatch(packsThunks.getPacks())
@@ -39,7 +40,8 @@ export const DeletePackModal = () => {
     return (
         <ModalsForm onSubmit={handleSubmit(deletePack)} submitBtnTitle={'Delete Pack'} btnColor="red">
             <Box sx={{ mb: '5px', textAlign: 'center' }}>
-                Do you really want to remove <b>"{name}"</b> pack? All cards will be deleted.
+                <Box>{cover && <CoverBox alt="cover" src={cover} />}</Box>
+                Do you really want to remove <b>"{packName}"</b> pack? All cards will be deleted.
             </Box>
         </ModalsForm>
     )

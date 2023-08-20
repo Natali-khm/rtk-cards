@@ -7,6 +7,7 @@ import {
     cardsListS,
     cardsS,
     cardsTotalCountS,
+    coverS,
     packIdS,
     packNameS,
     packUserIdS,
@@ -27,6 +28,7 @@ export const useCardsSelectors = () => {
     const packUserId = useAppSelector(packUserIdS)
     const packIdFromState = useAppSelector(packIdS)
     const privatePack = useAppSelector(privatePackS)
+    const cover = useAppSelector(coverS)
 
     const cardsCountForPage = useAppSelector(cardsCountForPageS)
     const pageResponse = useAppSelector(pageResponseS)
@@ -52,5 +54,6 @@ export const useCardsSelectors = () => {
         cardsCountQuery,
         pageResponse,
         privatePack,
+        cover,
     }
 }

@@ -1,5 +1,4 @@
 import { instance } from 'common/api/common.api'
-import axios from 'axios'
 
 export const authApi = {
     register: (arg: ArgRegisterType) => {
@@ -18,12 +17,12 @@ export const authApi = {
         return instance.put<{ updatedUser: ProfileType }>('auth/me', arg)
     },
     forgotPassword: (arg: PasswordRecovDataType) => {
-        return axios.post<ForgotPasswordResponseType>('https://neko-back.herokuapp.com/2.0/auth/forgot', arg, {
+        return instance.post<ForgotPasswordResponseType>('auth/forgot', arg, {
             withCredentials: true,
         })
     },
     setnewPassword: (arg: SetNewPasswordDataType) => {
-        return axios.post<AuthResponseType>('https://neko-back.herokuapp.com/2.0/auth/set-new-password', arg, {
+        return instance.post<AuthResponseType>('auth/set-new-password', arg, {
             withCredentials: true,
         })
     },
@@ -33,7 +32,7 @@ export const authApi = {
             // id пользователя, которого хотите забанить
             blockReason: 'Контент ненормативного характера',
         }
-        return axios.post<AuthResponseType>('https://neko-back.herokuapp.com/2.0/auth/block', arg, {
+        return instance.post<AuthResponseType>('auth/block', arg, {
             withCredentials: true,
         })
     },
@@ -74,6 +73,7 @@ export type ProfileType = {
     rememberMe: boolean
     token: string
     tokenDeathTime: number
+    avatar: string
     updated: string
     verified: boolean
     __v: number

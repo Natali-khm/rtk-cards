@@ -49,6 +49,7 @@ describe('app slice', () => {
             __v: 43,
             token: 'token',
             tokenDeathTime: 242,
+            avatar: ''
         }
         const action = { type: authThunks.login.fulfilled.type, payload: profile }
         const nextState = appReducer(initialState, action)

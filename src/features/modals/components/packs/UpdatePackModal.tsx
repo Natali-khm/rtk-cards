@@ -7,25 +7,26 @@ import { packsThunks } from 'features/packs/packs.slice'
 import { PackModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 export const UpdatePackModal = () => {
     const { register, handleSubmit, errors } = useAppForm(['textInput'])
 
     const dispatch = useAppDispatch()
 
-    const { id, name } = useModalsSelectors()
+    const { id, packName, partial, cover } = useModalsSelectors()
 
-    const { partial } = useModalsSelectors()
+    const [photo, setPhoto] = useState(cover || '')
 
     const updatePack: SubmitHandler<FormValidateType> = (data) => {
         id &&
-            dispatch(packsThunks.updatePack({ _id: id, name: data.textInput, private: data.private }))
+            dispatch(packsThunks.updatePack({ _id: id, name: data.textInput, private: data.private, deckCover: photo }))
                 .unwrap()
                 .then((res) => {
                     toast.success(`'${data.textInput}' pack is updated`)
                 })
         dispatch(modalActions.closeModal())
-        dispatch(cardsActions.updatePack({ packName: data.textInput, privatePack: data.private }))
+        dispatch(cardsActions.updatePack({ packName: data.textInput, privatePack: data.private, cover: photo }))
     }
 
     return (
@@ -34,8 +35,10 @@ export const UpdatePackModal = () => {
             submitBtnTitle={'Save Changes'}
             errors={errors}
             register={register}
-            defaultInputValue={name}
+            defaultInputValue={packName}
             privatePack={partial}
+            cover={photo}
+            setPhoto={setPhoto}
         />
     )
 }

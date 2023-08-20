@@ -30,11 +30,14 @@ export const modalActions = slice.actions
 
 export type ModalDataType = {
     id?: string
-    name?: string
+    packName?: string
     private?: boolean
     currPage?: 'packs' | 'cards'
     question?: string
     answer?: string
+    cover?: string
+    questionImg?: string
+    answerImg?: string
 }
 
 export type ModalsActionType =

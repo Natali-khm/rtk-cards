@@ -10,6 +10,7 @@ describe('cards reducer', () => {
             isLoading: false,
             queryParams: { cardQuestion: '', pageCount: 4, sortCards: '' },
             packId: '',
+            packDeckCover: '',
         }
     })
 
@@ -33,7 +34,7 @@ describe('cards reducer', () => {
     })
 
     it('should update pack correctly', () => {
-        const data = { packName: 'new name', privatePack: true }
+        const data = { packName: 'new name', privatePack: true, cover: '' }
 
         const nextState = cardsReducer(initialState, cardsActions.updatePack(data))
         expect(nextState.cards.packName).toEqual(data.packName)
@@ -73,6 +74,7 @@ describe('cards reducer', () => {
                 maxGrade: 6,
                 token: 'a6d5d9a0-39e9-11ee-bada-8d3822633c86',
                 tokenDeathTime: 1691949418426,
+                packDeckCover: '',
             },
             isLoading: false,
             queryParams: {
@@ -123,6 +125,7 @@ describe('cards reducer', () => {
             maxGrade: 6,
             token: 'a6d5d9a0-39e9-11ee-bada-8d3822633c86',
             tokenDeathTime: 1691949418426,
+            packDeckCover: '',
         }
 
         const action = cardsThunks.getCards.fulfilled(cardsPage, 'requestId')

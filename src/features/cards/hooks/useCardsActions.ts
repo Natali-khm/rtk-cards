@@ -15,14 +15,16 @@ export const useCardsActions = () => {
         dispatch(modalActions.setModal({ modalAction: 'Add New Card', data: { id } }))
     }
 
-    const updateCard = (id: string, question: string, answer: string) => {
+    const updateCard = (id: string, question: string, answer: string, questionImg: string, answerImg: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Edit Card', data: { id, question, answer } }))
+        dispatch(
+            modalActions.setModal({ modalAction: 'Edit Card', data: { id, question, answer, questionImg, answerImg } })
+        )
     }
 
-    const deleteCard = (id: string, name: string) => {
+    const deleteCard = (id: string, question: string, questionImg: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Delete Card', data: { id, name } }))
+        dispatch(modalActions.setModal({ modalAction: 'Delete Card', data: { id, question, questionImg } }))
     }
 
     return { goToLearn, addCard, updateCard, deleteCard }
