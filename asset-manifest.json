@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Natali-khm.github.io/rtk-cards/static/css/main.8a1dc88d.css",
+    "main.js": "/Natali-khm.github.io/rtk-cards/static/js/main.fa82ea9e.js",
+    "static/js/787.5089830e.chunk.js": "/Natali-khm.github.io/rtk-cards/static/js/787.5089830e.chunk.js",
+    "static/media/400.svg": "/Natali-khm.github.io/rtk-cards/static/media/400.8baa1b795048b6fa13ff8d30800aa1b1.svg",
+    "static/media/email.svg": "/Natali-khm.github.io/rtk-cards/static/media/email.352823548fed002956a4ae76e5ee459f.svg",
+    "static/media/logo.svg": "/Natali-khm.github.io/rtk-cards/static/media/logo.eb69407f5ef9e283c564e57b716d6291.svg",
+    "index.html": "/Natali-khm.github.io/rtk-cards/index.html",
+    "main.8a1dc88d.css.map": "/Natali-khm.github.io/rtk-cards/static/css/main.8a1dc88d.css.map",
+    "main.fa82ea9e.js.map": "/Natali-khm.github.io/rtk-cards/static/js/main.fa82ea9e.js.map",
+    "787.5089830e.chunk.js.map": "/Natali-khm.github.io/rtk-cards/static/js/787.5089830e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8a1dc88d.css",
+    "static/js/main.fa82ea9e.js"
+  ]
+}
