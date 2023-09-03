@@ -16,7 +16,9 @@ import { paths } from 'common/constants'
 
 export const Learn = () => {
     const { packName, cardsList } = useCardsSelectors()
+
     const { isLoading } = useLearnSelectors()
+
     const dispatch = useAppDispatch()
 
     const [showAnswer, setShowAnswer] = useState(false)

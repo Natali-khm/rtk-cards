@@ -1,12 +1,12 @@
+import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/hooks'
-import { useAppDispatch } from 'common/hooks'
 import { cardsThunks } from 'features/cards/cards.slice'
 import { CardModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
+import { useAppDispatch } from 'common/hooks'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 
 export const AddCardModal = () => {
     const { register, handleSubmit, reset, formState } = useAppForm([])
@@ -19,7 +19,6 @@ export const AddCardModal = () => {
     const [ansCover, setAnsCover] = useState('')
 
     const addCard: SubmitHandler<Inputs> = (data) => {
-        debugger
         id &&
             dispatch(
                 cardsThunks.addCard({

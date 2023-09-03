@@ -7,7 +7,6 @@ export const PacksSearchInput = () => {
     const { packName, packsAreLoading, cardPacks } = usePacksSelectors()
     const { setSearchParams, params, setQueryParams } = usePacksParams()
 
-
     const [find, setFind] = useState(packName || '')
     const debouncedValue = useDebounce(find, 800)
 

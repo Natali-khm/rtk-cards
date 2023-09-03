@@ -1,8 +1,8 @@
 import TextField from '@mui/material/TextField'
 
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
+import { Inputs } from 'common/hooks/useAppForm'
 import { FC } from 'react'
-import { Inputs } from '../../hooks/useAppForm'
 
 type PropsType = {
     register: UseFormRegister<Inputs>

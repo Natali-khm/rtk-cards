@@ -1,11 +1,11 @@
+import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 import { modalActions } from 'features/modals/modals.slice'
-import { useAppDispatch } from 'common/hooks'
 import { packsThunks } from 'features/packs/packs.slice'
 import { PackModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
+import { useAppDispatch } from 'common/hooks'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 
 export const AddPackModal = () => {
     const { register, handleSubmit, errors, reset, formState } = useAppForm([])

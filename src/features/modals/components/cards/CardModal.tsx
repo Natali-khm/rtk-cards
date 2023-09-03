@@ -1,14 +1,13 @@
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 
+import { ModalsForm, SetCoverBox } from 'common/components'
 import { UseFormRegister } from 'react-hook-form'
-import { ModalsForm } from 'common/components'
+import { Inputs } from 'common/hooks/useAppForm'
 import { FC, useState } from 'react'
-import { SetCoverBox } from '../../../../common/components/cover_box/SetCoverBox'
-import { Inputs } from '../../../../common/hooks/useAppForm'
 
 type PropsType = {
     onSubmit: () => void

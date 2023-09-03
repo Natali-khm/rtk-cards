@@ -8,8 +8,8 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
 import { PacksTableHeader, PacksActions } from 'features/packs/components'
+import { NothingFound, TableSkeleton, CoverBox } from 'common/components'
 import { packsTableTitles } from 'features/packs/packsConstants'
-import { NothingFound, TableSkeleton } from 'common/components'
 import { cardsActions } from 'features/cards/cards.slice'
 import { usePacksSelectors } from 'features/packs/hooks'
 import { CardPackType } from 'features/packs/packs.api'
@@ -17,7 +17,6 @@ import { nameCellSX } from 'features/packs/packsStyles'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'common/hooks'
 import { formatDate } from 'common/utils'
-import { CoverBox } from '../../../../common/components/cover_box/CoverBox'
 
 export const PacksTable = () => {
     const dispatch = useAppDispatch()

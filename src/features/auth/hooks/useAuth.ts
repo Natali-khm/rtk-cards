@@ -2,12 +2,11 @@ import { passwordRecovMess } from 'features/auth/components/forgot_password/cons
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { authThunks } from 'features/auth/auth.slice'
+import { Inputs } from 'common/hooks/useAppForm'
 import { SubmitHandler } from 'react-hook-form'
 import { useAppDispatch } from 'common/hooks'
 import { paths } from 'common/constants'
 import { toast } from 'react-toastify'
-import { ArgRegisterType, ArgLoginType } from '../auth.api'
-import { Inputs } from '../../../common/hooks/useAppForm'
 
 export const useAuth = () => {
     const dispatch = useAppDispatch()
@@ -16,7 +15,6 @@ export const useAuth = () => {
     const { userName } = useAuthSelectors()
 
     const onRegisterSubmit: SubmitHandler<Inputs> = (data) => {
-        debugger
         dispatch(authThunks.register(data))
             .unwrap()
             .then((res) => {
@@ -26,11 +24,10 @@ export const useAuth = () => {
     }
 
     const onLoginSubmit: SubmitHandler<Inputs> = (data) => {
-        debugger
         dispatch(authThunks.login(data))
             .unwrap()
             .then((res) => {
-                toast.success(`Hello, ${res.profile.name}`)
+                toast.success(`Hello, ${res.profile.name}!`)
                 navigate(paths.PACKS)
             })
     }
@@ -59,7 +56,7 @@ export const useAuth = () => {
         dispatch(authThunks.logout())
             .unwrap()
             .then((res) => {
-                toast.success(`Bye, ${userName}`)
+                toast.success(`Bye, ${userName}!`)
             })
     }
 

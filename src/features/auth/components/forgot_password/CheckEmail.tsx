@@ -1,7 +1,7 @@
 import { useAuthSelectors } from 'features/auth/hooks'
 import { Form, InfoMessage } from 'common/components'
 import { useNavigate } from 'react-router-dom'
-import emailImg from 'assets/image/email.svg'
+import emailImg from 'assets/images/email.svg'
 import { paths } from 'common/constants'
 
 export const CheckEmail = () => {

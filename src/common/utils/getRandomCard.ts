@@ -1,4 +1,4 @@
-import { CardType } from "../../features/cards/cards.api";
+import { CardType } from 'features/cards/cards.api'
 
 export const getRandomCard = (cards: CardType[]) => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
@@ -10,7 +10,6 @@ export const getRandomCard = (cards: CardType[]) => {
         },
         { sum: 0, id: -1 }
     )
-    // console.log('test: ', sum, rand, res)
 
     return cards[res.id + 1]
 }

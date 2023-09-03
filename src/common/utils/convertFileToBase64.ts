@@ -6,4 +6,3 @@ export const convertFileToBase64 = (file: File, callBack: (value: string) => voi
     }
     reader.readAsDataURL(file)
 }
-

@@ -1,12 +1,12 @@
 import { ForgotPassword, NewPassword, CheckEmail, Register, Login, Profile } from 'features/auth/components'
 import { createHashRouter } from 'react-router-dom'
+import { PageNotFound } from 'common/components'
 import { ProtectedRoute } from 'common/routes'
 import { Learn } from 'features/learn/Learn'
 import { Packs } from 'features/packs/Packs'
 import { Cards } from 'features/cards/Cards'
 import { paths } from 'common/constants'
 import { App } from 'app'
-import { PageNotFound } from '../components/page_not_found/PageNotFound'
 
 export const router = createHashRouter([
     {

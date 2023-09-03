@@ -1,8 +1,9 @@
-import Box from '@mui/material/Box'
-import { coverBoxSX, coverBtnSX } from '../../../features/modals/modalsStyles'
-import { ChangeEvent, FC } from 'react'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+
+import { coverBoxSX, coverBtnSX } from 'features/modals/modalsStyles'
 import { convertFileToBase64 } from 'common/utils'
+import { ChangeEvent, FC } from 'react'
 
 type PropsType = {
     title: string

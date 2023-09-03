@@ -11,14 +11,13 @@ import Box from '@mui/material/Box'
 
 import { BackspaceLink, EditableProfileName } from 'common/components'
 import { useAuth, useAuthSelectors } from 'features/auth/hooks'
-import profileAvatar from 'assets/image/profile_avatar.jpg'
-import { logOutBtnSX } from './profileStyles'
+import { BadgeSX, boxSX, logOutBtnSX } from './profileStyles'
+import { authThunks } from 'features/auth/auth.slice'
+import { convertFileToBase64 } from 'common/utils'
+import { useAppDispatch } from 'common/hooks'
 import { useAppSelectors } from 'app/hooks'
 import { paths } from 'common/constants'
 import { ChangeEvent } from 'react'
-import { authThunks } from '../../auth.slice'
-import { useAppDispatch } from 'common/hooks'
-import { convertFileToBase64 } from 'common/utils'
 
 export const Profile = () => {
     const { logoutHandler } = useAuth()
@@ -43,23 +42,14 @@ export const Profile = () => {
     return (
         <Box>
             <BackspaceLink link={paths.PACKS} title={'Back to Packs List'} />
-            <Paper sx={{ width: '413px', m: 'auto', p: '27px 33px 44px' }}>
+            <Paper sx={boxSX}>
                 <Grid container alignItems={'center'} direction={'column'}>
                     <Typography variant="h2">Personal Information</Typography>
                     <Badge
                         overlap={'circular'}
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         badgeContent={
-                            <IconButton
-                                component="label"
-                                disableRipple={true}
-                                disabled={isAppLoading}
-                                sx={{
-                                    width: '28px',
-                                    height: '28px',
-                                    border: '1px solid #fff',
-                                    bgcolor: '#808080',
-                                }}>
+                            <IconButton component="label" disableRipple={true} disabled={isAppLoading} sx={BadgeSX}>
                                 <LocalSeeOutlinedIcon sx={{ fontSize: '16px', color: '#FFF' }} />
                                 <input type="file" onChange={uploadHandler} style={{ display: 'none' }} />
                             </IconButton>

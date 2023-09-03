@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
-import { useCardsSelectors,useCardsParams } from 'features/cards/hooks'
+import { useCardsSelectors, useCardsParams } from 'features/cards/hooks'
 import { SearchInput } from 'common/components'
 import { useDebounce } from 'common/hooks'
 

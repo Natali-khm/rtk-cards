@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid'
 
 import { FC, FormEventHandler, PropsWithChildren } from 'react'
 import { AppLink } from 'common/components'
-import { useAppSelectors } from '../../../app/hooks/useAppSelectors'
+import { useAppSelectors } from 'app/hooks'
 
 type FormPropsType = {
     title: string

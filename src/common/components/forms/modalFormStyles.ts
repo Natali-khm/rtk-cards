@@ -9,4 +9,6 @@ export const modalSX = {
     borderRadius: '3px',
 }
 
+export const gridSX = { p: '18px 24px', borderBottom: '1px solid #d1d0d0', backgroundColor: '#faf7f7' }
+
 export const modalHeaderSX = { p: '18px 24px', borderBottom: '1px solid #d1d0d0', backgroundColor: '#faf7f7' }

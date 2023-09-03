@@ -7,10 +7,11 @@ import { HeaderProfile } from 'features/auth/components'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { paths } from 'common/constants'
-import logo from 'assets/image/logo.svg'
+import logo from 'assets/images/logo.svg'
 
 export const Header = () => {
     const { isLoggedIn } = useAuthSelectors()
+
     const navigate = useNavigate()
 
     const redirectHandler = () => {
@@ -22,7 +23,7 @@ export const Header = () => {
             <Container maxWidth={'lg'}>
                 <Toolbar disableGutters={true}>
                     <Link to={paths.PACKS} style={{ flexGrow: 1 }}>
-                        <img src={logo} alt="incubator-logo" style={{height: '34px'}}/>
+                        <img src={logo} alt="incubator-logo" style={{ height: '34px' }} />
                     </Link>
                     {isLoggedIn ? (
                         <HeaderProfile />

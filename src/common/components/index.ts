@@ -1,3 +1,6 @@
+export { GlobalError } from './global_error/GlobalError'
+export { SetCoverBox } from './cover_box/SetCoverBox'
+export { PageNotFound } from './page_not_found/PageNotFound'
 export { CoverBox } from './cover_box/CoverBox'
 export { TextInput } from './inputs/TextInput'
 export { ModalsForm } from './forms/ModalForm'

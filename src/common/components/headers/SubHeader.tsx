@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
+import Skeleton from '@mui/material/Skeleton'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
-import Skeleton from '@mui/material/Skeleton'
 
 import { useCardsSelectors } from 'features/cards/hooks'
 import { FC } from 'react'

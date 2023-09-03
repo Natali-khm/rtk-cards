@@ -6,8 +6,8 @@ import { CardsTable, CardsFilters, EmptyPack, CardsPopup } from 'features/cards/
 import { useCardsSelectors, useFetchCards, useCardsActions } from 'features/cards/hooks'
 import { BackspaceLink, SubHeader } from 'common/components'
 import { useAuthSelectors } from 'features/auth/hooks'
+import { useAppSelectors } from 'app/hooks'
 import { paths } from 'common/constants'
-import { useAppSelectors } from '../../app/hooks'
 
 export const Cards = () => {
     const { profileId } = useAuthSelectors()

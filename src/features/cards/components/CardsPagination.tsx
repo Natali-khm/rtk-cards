@@ -3,7 +3,7 @@ import { SelectChangeEvent } from '@mui/material/Select'
 import { useCardsSelectors, useCardsParams } from 'features/cards/hooks'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { CustomPagination } from 'common/components'
-import { useAppSelectors } from '../../../app/hooks'
+import { useAppSelectors } from 'app/hooks'
 
 export const CardsPagination = () => {
     const { cardsTotalCount, cardsCountForPage, pageResponse, cardsAreLoading, cardsList } = useCardsSelectors()

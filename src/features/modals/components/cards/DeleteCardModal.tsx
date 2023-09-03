@@ -4,9 +4,8 @@ import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/hooks'
 import { useAppDispatch, useAppForm } from 'common/hooks'
 import { cardsThunks } from 'features/cards/cards.slice'
-import { ModalsForm } from 'common/components'
+import { ModalsForm, CoverBox } from 'common/components'
 import { toast } from 'react-toastify'
-import { CoverBox } from 'common/components'
 
 export const DeleteCardModal = () => {
     const { handleSubmit } = useAppForm([])

@@ -6,13 +6,14 @@ import { useEffect } from 'react'
 
 export const useFetchPacks = () => {
     const { pageParams, packName, queryMin, queryMax, sortPacks, packsCountParams, userId } = usePacksSelectors()
+
     const { profileId } = useAuthSelectors()
+
     const { setQueryParams, params } = usePacksParams()
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        // debugger
         setQueryParams({
             ...params,
             page: +params.page || 1,

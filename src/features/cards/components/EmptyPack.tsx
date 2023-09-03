@@ -6,6 +6,7 @@ import { useCardsActions, useCardsSelectors } from 'features/cards/hooks'
 
 export const EmptyPack = () => {
     const { addCard } = useCardsActions()
+
     const { packIdFromState } = useCardsSelectors()
 
     return (

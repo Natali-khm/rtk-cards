@@ -3,11 +3,11 @@ import Checkbox from '@mui/material/Checkbox'
 
 import { PasswordInput, EmailInput, Form } from 'common/components'
 import { checkBoxSX } from 'common/styles/commonStyles'
+import { forgotPassSX } from 'features/auth/authStyles'
 import { useAuth } from 'features/auth/hooks'
+import { useAppForm } from 'common/hooks'
 import { paths } from 'common/constants'
 import { Link } from 'react-router-dom'
-import { forgotPassSX } from '../../authStyles'
-import { useAppForm } from 'common/hooks'
 
 export const Login = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password', 'rememberMe'])

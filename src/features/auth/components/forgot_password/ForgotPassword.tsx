@@ -1,10 +1,11 @@
 import { EmailInput, Form, InfoMessage } from 'common/components'
 import { useAuth } from 'features/auth/hooks'
+import { useAppForm } from 'common/hooks'
 import { paths } from 'common/constants'
-import { useAppForm } from 'common/hooks/'
 
 export const ForgotPassword = () => {
     const { register, handleSubmit, errors } = useAppForm(['email'])
+
     const { onForgotPasswordSubmit } = useAuth()
 
     return (

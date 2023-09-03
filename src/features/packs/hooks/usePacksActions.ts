@@ -17,7 +17,9 @@ export const usePacksActions = () => {
 
     const updatePack = (id: string, packName: string, privatePack: boolean, cover: string) => {
         dispatch(modalActions.openModal())
-        dispatch(modalActions.setModal({ modalAction: 'Edit Pack', data: { id, packName, private: privatePack, cover } }))
+        dispatch(
+            modalActions.setModal({ modalAction: 'Edit Pack', data: { id, packName, private: privatePack, cover } })
+        )
     }
 
     const deletePack = (id: string, packName: string, currPage: 'packs' | 'cards', cover: string) => {

@@ -5,6 +5,7 @@ import { useAppForm } from 'common/hooks'
 
 export const Register = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password', 'confirmPassword'])
+
     const { onRegisterSubmit } = useAuth()
 
     return (

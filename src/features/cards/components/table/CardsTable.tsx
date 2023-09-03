@@ -8,15 +8,16 @@ import Table from '@mui/material/Table'
 import { CardsTableHeader, CardsActions } from 'features/cards/components'
 import { cardsTableTitles } from 'features/cards/cardsConstants'
 import { NothingFound, TableSkeleton } from 'common/components'
+import { cardsCellSX } from 'features/cards/cardsStyles'
 import { useCardsSelectors } from 'features/cards/hooks'
 import { CardType } from 'features/cards/cards.api'
+import { CoverBox } from 'common/components'
+import { useAppSelectors } from 'app/hooks'
 import { formatDate } from 'common/utils'
-import { cardsCellSX } from '../../cardsStyles'
-import { CoverBox } from '../../../../common/components/cover_box/CoverBox'
-import { useAppSelectors } from '../../../../app/hooks'
 
 export const CardsTable = () => {
     const { cardsList, cardsAreLoading, cardsCountForPage, cardQuestion } = useCardsSelectors()
+
     const { isAppLoading } = useAppSelectors()
 
     const formatedDate = (date: string) => formatDate(date)

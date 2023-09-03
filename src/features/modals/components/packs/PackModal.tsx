@@ -1,12 +1,11 @@
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
+import { ModalsForm, TextInput, SetCoverBox } from 'common/components'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
-import { ModalsForm, TextInput } from 'common/components'
+import { checkBoxSX } from 'common/styles/commonStyles'
+import { Inputs } from 'common/hooks/useAppForm'
 import { FC } from 'react'
-import { SetCoverBox } from '../../../../common/components/cover_box/SetCoverBox'
-import { checkBoxSX } from '../../../../common/styles/commonStyles'
-import { Inputs } from '../../../../common/hooks/useAppForm'
 
 type PropsType = {
     onSubmit: () => void

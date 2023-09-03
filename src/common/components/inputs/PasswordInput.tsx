@@ -7,8 +7,8 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
+import { Inputs } from 'common/hooks/useAppForm'
 import { useState } from 'react'
-import { Inputs } from '../../hooks/useAppForm'
 
 type PropsType = {
     label: string
@@ -20,6 +20,7 @@ type PropsType = {
 
 export const PasswordInput = ({ register, name, defaultValue, label, errors }: PropsType) => {
     const [showPassword, setShowPassword] = useState(false)
+
     const handleClickShowPassword = () => setShowPassword((show) => !show)
 
     return (

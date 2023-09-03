@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-export const createSchema = (formFields: FormFieldsType[]) => {
+const createSchema = (formFields: FormFieldsType[]) => {
     const validationObject: ValidatorsType = formFields.reduce((accum: any, item) => {
         switch (item) {
             case 'email':
@@ -37,9 +37,7 @@ export const createSchema = (formFields: FormFieldsType[]) => {
     return validationObject
 }
 
-
 export const useAppForm = (formFields: FormFieldsType[]) => {
-
     const validateSchema = yup.object(createSchema(formFields))
 
     const {
@@ -47,7 +45,7 @@ export const useAppForm = (formFields: FormFieldsType[]) => {
         handleSubmit,
         formState: { errors },
         reset,
-        formState
+        formState,
     } = useForm<Inputs>({ resolver: yupResolver(validateSchema) })
 
     return {
@@ -59,12 +57,9 @@ export const useAppForm = (formFields: FormFieldsType[]) => {
     }
 }
 
-
-
-// types 
+// types
 
 export type FormFieldsType = 'email' | 'password' | 'rememberMe' | 'confirmPassword'
-
 
 export type Inputs = {
     email: string

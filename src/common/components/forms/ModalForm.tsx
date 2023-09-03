@@ -10,19 +10,9 @@ import Box from '@mui/material/Box'
 import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/hooks'
 import { cancelBtnSX } from 'features/modals/modalsStyles'
+import { gridSX, modalSX } from './modalFormStyles'
 import { useAppDispatch } from 'common/hooks'
 import { FC, FormEventHandler } from 'react'
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 440,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    borderRadius: '3px',
-}
 
 type PropsType = {
     children?: React.ReactNode
@@ -41,13 +31,9 @@ export const ModalsForm: FC<PropsType> = ({ children, onSubmit, submitBtnTitle, 
 
     return (
         <Modal open={isOpenModal} onClose={handleClose} sx={{ overflow: 'scroll' }}>
-            <Box sx={style}>
+            <Box sx={modalSX}>
                 <form onSubmit={onSubmit}>
-                    <Grid
-                        container
-                        alignItems="center"
-                        justifyContent="space-between"
-                        sx={{ p: '18px 24px', borderBottom: '1px solid #d1d0d0', backgroundColor: '#faf7f7' }}>
+                    <Grid container alignItems="center" justifyContent="space-between" sx={gridSX}>
                         <Typography variant="h3" sx={{ m: '0' }}>
                             {modalAction}
                         </Typography>

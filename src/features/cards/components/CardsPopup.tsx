@@ -14,8 +14,8 @@ import { menuIconSX, menuTypographySX } from 'common/styles/commonStyles'
 import { useCardsParams, useCardsSelectors } from 'features/cards/hooks'
 import { usePacksActions } from 'features/packs/hooks'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelectors } from 'app/hooks'
 import { useState } from 'react'
-import { useAppSelectors } from '../../../app/hooks'
 
 export const CardsPopup = () => {
     const navigate = useNavigate()
@@ -27,6 +27,7 @@ export const CardsPopup = () => {
     const { updatePack, deletePack } = usePacksActions()
 
     const { packName, privatePack, packIdFromState, cardsList, cover, cardsAreLoading } = useCardsSelectors()
+
     const { isAppLoading } = useAppSelectors()
 
     const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {

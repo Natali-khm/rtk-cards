@@ -1,6 +1,5 @@
 import { createTheme } from '@mui/material'
 
-
 export const theme = createTheme({
     palette: {
         primary: {
@@ -14,7 +13,7 @@ export const theme = createTheme({
                     fontWeight: 500,
                     fontSize: '14px',
                     lineHeight: '17px',
-                    margin: 0
+                    margin: 0,
                 },
             },
         },
