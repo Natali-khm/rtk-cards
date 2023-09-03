@@ -4,16 +4,16 @@ import MenuItem from '@mui/material/MenuItem'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 
-import { FormValidateType } from 'common/hooks/useAppForm'
 import { UseFormRegister } from 'react-hook-form'
 import { ModalsForm } from 'common/components'
 import { FC, useState } from 'react'
 import { SetCoverBox } from '../../../../common/components/cover_box/SetCoverBox'
+import { Inputs } from '../../../../common/hooks/useAppForm'
 
 type PropsType = {
     onSubmit: () => void
     submitBtnTitle: string
-    register: UseFormRegister<FormValidateType>
+    register: UseFormRegister<Inputs>
     defQuestionValue?: string
     defAnswerValue?: string
     questCover: string
@@ -34,9 +34,9 @@ export const CardModal: FC<PropsType> = ({
     setQuestCover,
     ansCover,
     setAnsCover,
-    selectValue, readOnly
+    selectValue,
+    readOnly,
 }) => {
-    
     const [selValue, setSelValue] = useState(selectValue)
 
     const handleSelChange = (event: SelectChangeEvent) => {

@@ -1,7 +1,7 @@
 import { EmailInput, Form, PasswordInput } from 'common/components'
 import { useAuth } from 'features/auth/hooks'
-import { useAppForm } from 'common/hooks'
 import { paths } from 'common/constants'
+import { useAppForm } from 'common/hooks'
 
 export const Register = () => {
     const { register, handleSubmit, errors } = useAppForm(['email', 'password', 'confirmPassword'])

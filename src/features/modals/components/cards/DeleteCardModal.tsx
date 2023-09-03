@@ -2,26 +2,24 @@ import Box from '@mui/material/Box'
 
 import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/hooks'
-import { FormValidateType } from 'common/hooks/useAppForm'
 import { useAppDispatch, useAppForm } from 'common/hooks'
 import { cardsThunks } from 'features/cards/cards.slice'
-import { SubmitHandler } from 'react-hook-form'
 import { ModalsForm } from 'common/components'
 import { toast } from 'react-toastify'
-import { CoverBox } from '../../../../common/components/cover_box/CoverBox'
+import { CoverBox } from 'common/components'
 
 export const DeleteCardModal = () => {
     const { handleSubmit } = useAppForm([])
 
     const dispatch = useAppDispatch()
 
-    const { id, packName, questionImg, question } = useModalsSelectors()
+    const { id, questionImg, question } = useModalsSelectors()
 
-    const deleteCard: SubmitHandler<FormValidateType> = (data) => {
+    const deleteCard = () => {
         id &&
             dispatch(cardsThunks.deleteCard(id))
                 .unwrap()
-                .then((res) => {
+                .then(() => {
                     toast.success('The card is deleted')
                 })
         dispatch(modalActions.closeModal())

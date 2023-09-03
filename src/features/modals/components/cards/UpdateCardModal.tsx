@@ -1,12 +1,12 @@
 import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/hooks'
-import { FormValidateType } from 'common/hooks/useAppForm'
-import { useAppDispatch, useAppForm } from 'common/hooks'
+import { useAppDispatch } from 'common/hooks'
 import { cardsThunks } from 'features/cards/cards.slice'
 import { CardModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 
 export const UpdateCardModal = () => {
     const { register, handleSubmit } = useAppForm([])
@@ -18,7 +18,7 @@ export const UpdateCardModal = () => {
     const [questCover, setQuestCover] = useState(questionImg || '')
     const [ansCover, setAnsCover] = useState(answerImg || '')
 
-    const updateCard: SubmitHandler<FormValidateType> = (data) => {
+    const updateCard: SubmitHandler<Inputs> = (data) => {
         id &&
             dispatch(
                 cardsThunks.updateCard({
@@ -30,7 +30,7 @@ export const UpdateCardModal = () => {
                 })
             )
                 .unwrap()
-                .then((res) => {
+                .then(() => {
                     toast.success(data.question ? `"${data.question}" card is updated` : `The card is updated`)
                 })
         dispatch(modalActions.closeModal())

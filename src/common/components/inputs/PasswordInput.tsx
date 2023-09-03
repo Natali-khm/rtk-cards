@@ -7,15 +7,15 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
-import { FormValidateType } from 'common/hooks/useAppForm'
 import { useState } from 'react'
+import { Inputs } from '../../hooks/useAppForm'
 
 type PropsType = {
     label: string
     defaultValue?: string
     name: 'password' | 'confirmPassword'
-    errors: FieldErrors<FormValidateType>
-    register: UseFormRegister<FormValidateType>
+    errors: FieldErrors<Inputs>
+    register: UseFormRegister<Inputs>
 }
 
 export const PasswordInput = ({ register, name, defaultValue, label, errors }: PropsType) => {
@@ -29,7 +29,6 @@ export const PasswordInput = ({ register, name, defaultValue, label, errors }: P
                     variant="standard"
                     defaultValue={defaultValue}
                     {...register(name)}
-                    id="input-with-icon-password"
                     type={showPassword ? 'text' : 'password'}
                     label={label}
                     helperText={`${errors[name] ? errors[name]?.message : ''}`}

@@ -1,3 +1,4 @@
+export { CoverBox } from './cover_box/CoverBox'
 export { TextInput } from './inputs/TextInput'
 export { ModalsForm } from './forms/ModalForm'
 export { AppLink } from './links/AppLink'

@@ -1,5 +1,4 @@
 import { passwordRecovMess } from 'features/auth/components/forgot_password/constants'
-import { FormValidateType } from 'common/hooks/useAppForm'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthSelectors } from 'features/auth/hooks'
 import { authThunks } from 'features/auth/auth.slice'
@@ -7,6 +6,8 @@ import { SubmitHandler } from 'react-hook-form'
 import { useAppDispatch } from 'common/hooks'
 import { paths } from 'common/constants'
 import { toast } from 'react-toastify'
+import { ArgRegisterType, ArgLoginType } from '../auth.api'
+import { Inputs } from '../../../common/hooks/useAppForm'
 
 export const useAuth = () => {
     const dispatch = useAppDispatch()
@@ -14,7 +15,8 @@ export const useAuth = () => {
     const { token } = useParams()
     const { userName } = useAuthSelectors()
 
-    const onRegisterSubmit: SubmitHandler<FormValidateType> = (data) => {
+    const onRegisterSubmit: SubmitHandler<Inputs> = (data) => {
+        debugger
         dispatch(authThunks.register(data))
             .unwrap()
             .then((res) => {
@@ -23,7 +25,8 @@ export const useAuth = () => {
             })
     }
 
-    const onLoginSubmit: SubmitHandler<FormValidateType> = (data) => {
+    const onLoginSubmit: SubmitHandler<Inputs> = (data) => {
+        debugger
         dispatch(authThunks.login(data))
             .unwrap()
             .then((res) => {
@@ -32,7 +35,7 @@ export const useAuth = () => {
             })
     }
 
-    const onForgotPasswordSubmit: SubmitHandler<FormValidateType> = (data) => {
+    const onForgotPasswordSubmit: SubmitHandler<Inputs> = (data) => {
         dispatch(authThunks.forgotPassword({ email: data.email, message: passwordRecovMess, from: 'Nata' }))
             .unwrap()
             .then((res) => {
@@ -40,7 +43,7 @@ export const useAuth = () => {
             })
     }
 
-    const onNewPasswordSubmit: SubmitHandler<FormValidateType> = (data) => {
+    const onNewPasswordSubmit: SubmitHandler<Inputs> = (data) => {
         dispatch(
             authThunks.setNewPassword({
                 password: data.password,

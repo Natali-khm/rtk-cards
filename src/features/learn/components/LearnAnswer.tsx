@@ -8,13 +8,13 @@ import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 
-import { FormValidateType } from 'common/hooks/useAppForm'
-import { useAppDispatch, useAppForm } from 'common/hooks'
+import { useAppDispatch,  } from 'common/hooks'
 import { useLearnSelectors } from 'features/learn/hooks'
 import { learnThunks } from 'features/learn/learn.slice'
 import { SubmitHandler } from 'react-hook-form'
 import { FC } from 'react'
 import { rateLabelSX } from '../learnStyles'
+import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 
 type PropsType = {
     closeAnswer: () => void
@@ -29,7 +29,8 @@ export const LearnAnswer: FC<PropsType> = ({ closeAnswer }) => {
 
     const answerList = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer']
 
-    const updateCardGrade: SubmitHandler<FormValidateType> = (data) => {
+    const updateCardGrade: SubmitHandler<Inputs> = (data) => {
+        debugger
         dispatch(learnThunks.updateCardGrade({ card_id: card._id, grade: +data.radio }))
         closeAnswer()
     }
@@ -42,7 +43,12 @@ export const LearnAnswer: FC<PropsType> = ({ closeAnswer }) => {
                 {card.answer && card.answer !== 'no answer' ? (
                     <>{card.answer}</>
                 ) : (
-                    <Box component="img" sx={{ maxWidth: '392px', maxHeight: '150px' }} alt="cover" src={card.answerImg} />
+                    <Box
+                        component="img"
+                        sx={{ maxWidth: '392px', maxHeight: '150px' }}
+                        alt="cover"
+                        src={card.answerImg}
+                    />
                 )}
             </Box>
             <Divider />

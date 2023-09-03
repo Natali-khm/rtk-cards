@@ -1,16 +1,16 @@
 import { modalActions } from 'features/modals/modals.slice'
 import { useModalsSelectors } from 'features/modals/hooks'
-import { FormValidateType } from 'common/hooks/useAppForm'
-import { useAppDispatch, useAppForm } from 'common/hooks'
+import { useAppDispatch } from 'common/hooks'
 import { cardsActions } from 'features/cards/cards.slice'
 import { packsThunks } from 'features/packs/packs.slice'
 import { PackModal } from 'features/modals/components'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import { Inputs, useAppForm } from 'common/hooks/useAppForm'
 
 export const UpdatePackModal = () => {
-    const { register, handleSubmit, errors } = useAppForm(['textInput'])
+    const { register, handleSubmit, errors } = useAppForm([])
 
     const dispatch = useAppDispatch()
 
@@ -18,7 +18,7 @@ export const UpdatePackModal = () => {
 
     const [photo, setPhoto] = useState(cover || '')
 
-    const updatePack: SubmitHandler<FormValidateType> = (data) => {
+    const updatePack: SubmitHandler<Inputs> = (data) => {
         id &&
             dispatch(packsThunks.updatePack({ _id: id, name: data.textInput, private: data.private, deckCover: photo }))
                 .unwrap()

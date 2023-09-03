@@ -2,17 +2,17 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
-import { FormValidateType } from 'common/hooks/useAppForm'
 import { ModalsForm, TextInput } from 'common/components'
 import { FC } from 'react'
 import { SetCoverBox } from '../../../../common/components/cover_box/SetCoverBox'
 import { checkBoxSX } from '../../../../common/styles/commonStyles'
+import { Inputs } from '../../../../common/hooks/useAppForm'
 
 type PropsType = {
     onSubmit: () => void
     submitBtnTitle: string
-    errors: FieldErrors<FormValidateType>
-    register: UseFormRegister<FormValidateType>
+    errors: FieldErrors<Inputs>
+    register: UseFormRegister<Inputs>
     defaultInputValue?: string
     privatePack?: boolean
     cover: string
