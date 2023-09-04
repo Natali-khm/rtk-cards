@@ -2,7 +2,7 @@
     "name": "rtk-cards",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https:/Natali-khm.github.io/rtk-cards",
+    "homepage": "https://natali-khm.github.io/rtk-cards",
     "dependencies": {
         "@emotion/react": "^11.10.8",
         "@emotion/styled": "^11.10.8",
